@@ -252,6 +252,7 @@ This profile defines the following additional requirements for IETF SD-JWT VCs a
 |:--- |:--- |:--- |
 | iss | MUST |[@!RFC7519], Section 4.1.1 |
 | iat | MUST |[@!RFC7519], Section 4.1.6 |
+| nbf | SHOULD (at the discretion of the issuer) | [@!RFC7519], Section 4.1.5 |
 | exp | SHOULD (at the discretion of the Issuer) | [@!RFC7519], Section 4.1.4 |
 | cnf | MUST if the corresponding Credential Configuration requires cryptographic holder binding | [@!RFC7800]|
 | vct |	MUST | [@!I-D.ietf-oauth-sd-jwt-vc]|
@@ -303,7 +304,7 @@ When using this profile alongside other hash algorithms, each entity SHOULD make
 
 ## Validity Period of the Signature and the Claim Values
 
-`iat` and `exp` JWT claims express both the validity period of both the signature and the claims about the subject, unless there is a separate claim used to express the validity of the claims.
+`nbf` and `exp` JWT claims express both the validity period of both the signature and the claims about the subject, unless there is a separate claim used to express the validity of the claims.
 
 # Security Considerations {#security_considerations}
 
