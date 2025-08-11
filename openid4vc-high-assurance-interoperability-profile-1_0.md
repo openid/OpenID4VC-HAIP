@@ -93,7 +93,7 @@ Assumptions made are the following:
 * Combined Issuance of IETF SD-JWT VC and ISO mdoc
 * Both issuer-initiated and wallet-initiated issuance
 * Presentation and Issuance of PID and (Q)EAA as defined in Architecture and Reference Framework [@EU.ARF] implementing [@eIDAS2.0].
-* Issuance and presentation of credentials with and without cryptographic holder binding
+* Issuance and presentation of Credentials with and without cryptographic holder binding
 
 ## Standards Requirements
 
