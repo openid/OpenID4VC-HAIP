@@ -237,7 +237,7 @@ This profile defines the following additional requirements for IETF SD-JWT VCs a
 | iss | MUST |[@!RFC7519], Section 4.1.1 |
 | iat | MUST |[@!RFC7519], Section 4.1.6 |
 | exp | SHOULD (at the discretion of the Issuer) | [@!RFC7519], Section 4.1.4 |
-| cnf |	MUST (if credential has cryptographic holder binding) |	[@!RFC7800]|
+| cnf | MUST if the corresponding Credential Configuration requires cryptographic key binding | [@!RFC7800]|
 | vct |	MUST | [@!I-D.ietf-oauth-sd-jwt-vc]|
 |status| SHOULD (at the discretion of the Issuer)| [@!I-D.ietf-oauth-status-list]|
 
