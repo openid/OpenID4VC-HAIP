@@ -295,9 +295,19 @@ When using this profile alongside other hash algorithms, each entity SHOULD make
 
 `iat` and `exp` JWT claims express both the validity period of both the signature and the claims about the subject, unless there is a separate claim used to express the validity of the claims.
 
+## Interoperable Key Attestations
+
+Wallet implementations using the key attestation format specified in Annex D of [@!OIDF.OID4VCI] might need to utilize a transformation (backend) service to create such attestations based on data as provided in other formats by the respective platform or secure key management module. The dependency on such a service might impact the availability of the wallet app as well as the performance of the issuance process. This could be mitigated by creating keys and obtaining the respective key attestations in advance. 
+
 # Security Considerations {#security_considerations}
 
 The security considerations in [@!OIDF.OID4VCI] and [@!OIDF.OID4VP] apply.
+
+# Privacy Considerations
+
+## Interoperable Key Attestations
+
+Wallet implementations using the key attestation format specified in Annex D of [@!OIDF.OID4VCI] might need to utilize a transformation (backend) service to create such attestations based on data as provided in other formats by the respective platform or secure key management module. Such a backend service MUST be designed in a way that it does not use the attestation data to track users, e.g. the service should be stateless and just perform the transformation of the attestation data without binding the process in any way to a unqiue user identifier.  
 
 {backmatter}
 
