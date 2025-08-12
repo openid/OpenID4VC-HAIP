@@ -127,6 +127,9 @@ Both the Wallet and the Credential Issuer:
 
 Both Wallet initiated and Issuer initiated issuance are supported.
 
+The Wallet MUST support batch issuance. For each Credential Configuration, the Issuer MUST indicate whether batch issuance is supported by including or omitting the `batch_credential_issuance` metadata parameter. The Issuer’s decision may be influenced by various factors, including, but not limited to, trust framework requirements, regulatory constraints, applicable laws or internal policies.
+
+
 ## Issuer Metadata
 
 When ecosystem policies require Issuer Authentication to a higher level than possible with TLS alone, signed Credential Issuer Metadata as specified in Section 11.2.3 in [@!OIDF.OID4VCI]
@@ -249,7 +252,7 @@ This profile defines the following additional requirements for IETF SD-JWT VCs a
 
 Any of the flows defined in this specification MUST be used with cryptographic holder binding.
 
-Note: Re-using the same Credential across Verifiers, or re-using the same JWK value across multiple Credentials gives colluding Verifiers a mechanism to correlate the User. There are currently two known ways to address this with SD-JWT VCs. First is to issue multiple instances of the same Credentials with different JWK values, so that if each instance of the Credential is used at only one Verifier, it can be reused multiple times. Another is to use each Credential only once (ephemeral Credentials). It is RECOMMENDED to adopt one of these mechanisms.
+Note: How to prevent correlations by colluding Issuer/Verifier or Verifier/Verifier pairs, or by the same Verifier, see Section 15.4.1 in [@!OIDF.OID4VCI] and Section 15.5 in [@!OIDF.OID4VP].
 
 Note: If there is a requirement to communicate information about the verification status and identity assurance data of the claims about the subject, the syntax defined by [@!OIDF.ekyc-ida] SHOULD be used. It is up to each jurisdiction and ecosystem, whether to require it to the implementers of this profile.
 
