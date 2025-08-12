@@ -121,7 +121,7 @@ defined in [@ISO.18013-7]. For more details, also see Annex B.3 in [@!OIDF.OID4V
 Both the Wallet and the Credential Issuer:
 
 * MUST support the authorization code flow.
-* MUST support at least one of the following Credential Format Profiles defined in (#vc_profiles): SD-JWT VC or ISO mdoc. Ecosystems SHOULD clearly indicate which of these formats, SD-JWT VC, ISO mdoc, or both, are supported.
+* MUST support at least one of the following Credential Format Profiles defined in (#vc_profiles): SD-JWT VC or ISO mdoc. Ecosystems SHOULD clearly indicate which of these formats, SD-JWT VC, ISO mdoc, or both, are required to be supported.
 * MUST support sender-constrained tokens using the mechanism defined in [@!RFC9449].
 * MUST support [@!RFC7636] with `S256` as the code challenge method.
 
