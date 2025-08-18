@@ -123,7 +123,7 @@ Both the Wallet and the Credential Issuer:
 * MUST support the authorization code flow.
 * MUST support protocol extensions for the SD-JWT VC Credential format profile as defined in (#vc_sd_jwt_profile).
 * MUST support sender-constrained tokens using DPoP as defined in [@!RFC9449].
-* MUST follow the [@!FAPI2_Security_Profile], including but not limited to using PKCE [@!RFC7636] with `S256` as the code challenge method, Pushed Authorization Requests (PAR) [@!RFC9126] and the `iss` value in the Authorization response [@!RFC9207]. The following exception to [@!FAPI2_Security_Profile] applies:
+* MUST comply with the [@!FAPI2_Security_Profile], including but not limited to using PKCE [@!RFC7636] with `S256` as the code challenge method, Pushed Authorization Requests (PAR) [@!RFC9126] and the `iss` value in the Authorization response [@!RFC9207]. The following exception to [@!FAPI2_Security_Profile] applies:
   * Client authentication: Wallet Attestation as defined in (#wallet-attestation) in used.
 
 Both Wallet initiated and Issuer initiated issuance are supported.
