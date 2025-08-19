@@ -57,10 +57,12 @@ This specification uses the terms "Holder", "Issuer", "Verifier", "Wallet", "Wal
 This specification enables interoperable implementations of the following flows:
 
 * Issuance of IETF SD-JWT VC using OpenID4VCI
+* Issuance of ISO mdocs using OpenID4VCI
 * Presentation of IETF SD-JWT VC using OpenID4VP
 * Presentation of IETF SD-JWT VC using OpenID4VP over W3C Digital Credentials API
 * Presentation of ISO mdocs using OpenID4VP
 * Presentation of ISO mdocs using OpenID4VP over W3C Digital Credentials API
+* OpenID4VC Credential Format Profiles
 
 Implementations of this specification do not have to implement all of the flows listed above, but they MUST be compliant to all of the requirements for a particular flow they chose to implement.
 
@@ -113,14 +115,13 @@ The following items are out of scope for the current version of this document, b
 
 * Trust Management refers to authorization of an Issuer to issue certain types of credentials, authorization of the Wallet to be issued certain types of credentials, authorization of the Verifier to receive certain types of credentials. Although X.509 PKI is extensively utilized in this profile, the methods for establishing trust or obtaining root certificates are out of the scope of this specification.
 * Protocol for presentation of Verifiable Credentials for offline use-cases, e.g. over BLE.
-* Profile of OpenID4VCI to issue ISO mdoc [@!ISO.18013-5] is defined in ISO 23220-3.
 
 # OpenID for Verifiable Credential Issuance
 
 Both the Wallet and the Credential Issuer:
 
 * MUST support the authorization code flow.
-* MUST support protocol extensions for the SD-JWT VC Credential format profile as defined in (#vc_sd_jwt_profile).
+* MUST support at least one of the following Credential Format Profiles defined in (#vc-profiles): IETF SD-JWT VC or ISO mdoc. Ecosystems SHOULD clearly indicate which of these formats, IETF SD-JWT VC, ISO mdoc, or both, are required to be supported.
 * MUST support sender-constrained tokens using the mechanism defined in [@!RFC9449].
 * MUST support [@!RFC7636] with `S256` as the code challenge method.
 
@@ -154,8 +155,6 @@ Both Issuer and Wallet MUST support Credential Offer in both same-device and cro
 * The Wallets MUST perform client authentication as defined in (#wallet-attestation).
 * Refresh tokens are RECOMMENDED to be supported for Credential refresh. For details, see Section 13.5 in [@!OIDF.OID4VCI].
 
-Note: It is RECOMMENDED to use ephemeral client attestation JWTs for client authentication in order to prevent linkability across Credential Issuers.
-
 Note: Issuers SHOULD be mindful of how long the usage of the refresh token is allowed to refresh a credential, as opposed to starting the issuance flow from the beginning. For example, if the User is trying to refresh a Credential more than a year after its original issuance, the usage of the refresh tokens is NOT RECOMMENDED.
 
 ### Wallet Attestation {#wallet-attestation}
@@ -187,9 +186,9 @@ The Credential Issuer metadata MUST include a scope for every Credential Configu
 
 The following requirements apply to OpenID4VP, irrespective of the flow and Credential Format, unless specified otherwise:
 
-* The Wallet and the Verifier MUST support at least one of the Credential formats defined in (#credential-formats).
+* The Wallet and Verifier MUST support at least one of the following Credential Format Profiles defined in (#vc-profiles): IETF SD-JWT VC or ISO mdoc. Ecosystems SHOULD clearly indicate which of these formats, IETF SD-JWT VC, ISO mdoc, or both, are required to be supported.
 * The Response type MUST be `vp_token`.
-* For signed requests, the Verifier MUST use, and the Wallet MUST support the Client Identifier Prefix `x509_hash` as defined in Section 5.10 of [@!OIDF.OID4VP].
+* For signed requests, the Verifier MUST use, and the Wallet MUST accept the Client Identifier Prefix `x509_hash` as defined in Section 5.9.3 of [@!OIDF.OID4VP].
 * The DCQL query and response as defined in Section 6 of [@!OIDF.OID4VP] MUST be used.
 * Response encryption MUST be performed as specified in [@!OIDF.OID4VP, section 8.3]. The JWE `alg` (algorithm) header parameter (see [@!RFC7516, section 4.1.1])
   value `ECDH-ES` (as defined in [@!RFC7518, section 4.6]), with key agreement utilizing keys on the `P-256` curve (see [@!RFC7518, section 6.2.1.1]) MUST be supported.
@@ -227,23 +226,22 @@ The following requirements apply to all OpenID4VP flows when the mdoc Credential
 * The ISO mdoc Credential Format specific DCQL parameter, `intent_to_retain` defined in Annex B.3.1 of [@!OIDF.OID4VP] MUST be present.
 * When multiple ISO mdocs are being returned, each ISO mdoc MUST be returned in a separate `DeviceResponse` (as defined in 8.3.2.1.2.2 of [@!ISO.18013-5]), each matching to a respective DCQL query. Therefore, the resulting `vp_token` contains multiple `DeviceResponse` instances.
 
-The `SessionTranscript` CBOR structure MUST be used as follows:
-
-* For (#oid4vp-redirects): the `SessionTranscript` CBOR structure defined in Section B.2.6.1 in [@!OIDF.OID4VP].
-* For (#oid4vp-dc-api): the `SessionTranscript` CBOR structure defined in Section B.2.6.2 in [@!OIDF.OID4VP].
-
 ### IETF SD-JWT VC
 
 The following requirements apply to all OpenID4VP flows when the SD-JWT VC Credential Format is used:
 
 * The Credential Format identifier MUST be `dc+sd-jwt`.
 
-# Credential Formats {#credential-formats}
+# OpenID4VC Credential Format Profiles {#vc-profiles}
 
-Credentials MUST use one of the following Credential Formats:
+Credential Format Profiles are defined as follows:
 
-* IETF SD-JWT VC, subject to the additional requirements defined in (#sd-jwt-vc).
-* ISO mdocs
+- IETF SD-JWT VCs (as specified in [@!I-D.ietf-oauth-sd-jwt-vc]), subject to the additional requirements defined in (#sd-jwt-vc):
+  - [@!OIDF.OID4VCI] – Annex A.3
+  - [@!OIDF.OID4VP] – Annex B.3
+- ISO mdocs:
+  - [@!OIDF.OID4VCI] – Annex A.2
+  - [@!OIDF.OID4VP] – Annex B.2
 
 ## IETF SD-JWT VC Profile {#sd-jwt-vc}
 
@@ -285,10 +283,6 @@ This profile mandates the support for X.509 certificate-based key resolution to 
 #### Cryptographic Holder Binding between VC and VP
 
 * For Cryptographic Holder Binding, a KB-JWT, as defined in [@!I-D.ietf-oauth-sd-jwt-vc], MUST always be present when presenting an SD-JWT VC.
-
-### OpenID4VC Credential Format Profile {#vc_sd_jwt_profile}
-
-A Credential Format Profile for Credentials complying with IETF SD-JWT VCs [@!I-D.ietf-oauth-sd-jwt-vc] is defined in Annex A.3 of [@!OIDF.OID4VCI] and Annex A.4 of [@!OIDF.OID4VP].
 
 # Crypto Suites
 
