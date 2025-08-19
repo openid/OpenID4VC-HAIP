@@ -59,6 +59,7 @@ This specification enables interoperable implementations of the following flows:
 * Issuance of IETF SD-JWT VC using OpenID4VCI
 * Presentation of IETF SD-JWT VC using OpenID4VP
 * Presentation of IETF SD-JWT VC using OpenID4VP over W3C Digital Credentials API
+* Presentation of ISO mdocs using OpenID4VP
 * Presentation of ISO mdocs using OpenID4VP over W3C Digital Credentials API
 
 Implementations of this specification do not have to implement all of the flows listed above, but they MUST be compliant to all of the requirements for a particular flow they chose to implement.
@@ -113,8 +114,6 @@ The following items are out of scope for the current version of this document, b
 * Trust Management refers to authorization of an Issuer to issue certain types of credentials, authorization of the Wallet to be issued certain types of credentials, authorization of the Verifier to receive certain types of credentials. Although X.509 PKI is extensively utilized in this profile, the methods for establishing trust or obtaining root certificates are out of the scope of this specification.
 * Protocol for presentation of Verifiable Credentials for offline use-cases, e.g. over BLE.
 * Profile of OpenID4VCI to issue ISO mdoc [@!ISO.18013-5] is defined in ISO 23220-3.
-* Profile of OpenID4VP without using W3C Digital Credentials API to present ISO mdocs is
-defined in [@ISO.18013-7]. For more details, also see Annex B.3 in [@!OIDF.OID4VP].
 
 # OpenID for Verifiable Credential Issuance
 
@@ -186,49 +185,67 @@ The Credential Issuer metadata MUST include a scope for every Credential Configu
 
 # OpenID for Verifiable Presentations
 
-Both the Wallet and the Verifier:
+The following requirements apply to OpenID4VP, irrespective of the flow and Credential Format, unless specified otherwise:
 
-* MUST support at least one of the Credential format profiles and protocol extensions defined in (#vc_sd_jwt_profile).
-
-## OpenID for Verifiable Presentations via Redirects
-
-Requirements for both the Wallet and the Verifier:
-
-* As a way to invoke the Wallet, at least a custom URL scheme `haip://` MUST be supported. Implementations MAY support other ways to invoke the Wallets as agreed by trust frameworks/ecosystems/jurisdictions, not limited to using other custom URL schemes.
-* Response type MUST be `vp_token`.
-* Response mode MUST be `direct_post.jwt`. The Verifier MUST return `redirect_uri` in response to the HTTP POST request from the Wallet, where the Wallet redirects the User to, as defined in Section 8.2 of [@!OIDF.OID4VP]. Implementation considerations for the response mode `direct_post.jwt` are given in Section 14.3 of [@!OIDF.OID4VP].
-* Authorization Request MUST be sent using the `request_uri` parameter as defined in JWT-Secured Authorization Request (JAR) [@!RFC9101].
-* For Client Identifier Prefix as introduced in Section 5.10 of [@!OIDF.OID4VP], `x509_hash` MUST be supported by the Wallet and used by the Verifier.
+* The Wallet and the Verifier MUST support at least one of the Credential formats defined in (#credential-formats).
+* The Response type MUST be `vp_token`.
+* For signed requests, the Verifier MUST use, and the Wallet MUST support the Client Identifier Prefix `x509_hash` as defined in Section 5.10 of [@!OIDF.OID4VP].
 * The DCQL query and response as defined in Section 6 of [@!OIDF.OID4VP] MUST be used.
-
-## OpenID for Verifiable Presentations via W3C Digital Credentials API
-
-The following requirements apply for both, the Wallet and the Verifier, unless specified otherwise:
-
-* MUST support Annex A in [@!OIDF.OID4VP] that defines how to use OpenID4VP over the W3C Digital Credentials API.
-  * The Wallet MUST support both signed and unsigned requests as defined in Annex A.3.1 and A.3.2 of [@!OIDF.OID4VP]. The Verifier MAY support signed requests, unsigned requests, or both.
-* Wallet Invocation is done via the W3C Digital Credentials API or an equivalent platform API. Any other mechanism, including Custom URL schemes, MUST NOT be used.
-* Response Mode MUST be `dc_api.jwt`. The response MUST be encrypted.
 * Response encryption MUST be performed as specified in [@!OIDF.OID4VP, section 8.3]. The JWE `alg` (algorithm) header parameter (see [@!RFC7516, section 4.1.1])
   value `ECDH-ES` (as defined in [@!RFC7518, section 4.6]), with key agreement utilizing keys on the `P-256` curve (see [@!RFC7518, section 6.2.1.1]) MUST be supported.
   The JWE `enc` (encryption algorithm) header parameter (see [@!RFC7516, section 4.1.2]) value `A128GCM` (as defined in [@!RFC7518, section 5.3]) MUST be supported.
 
-## ISO mdoc specific requirements for OpenID for Verifiable Presentations
+Additional requirements for OpenID4VP are defined in (#oid4vp-flows) and (#oid4vp-dc-api).
 
-Requirements for both the Wallet and the Verifier:
+## Requirements specific to Flows {#oid4vp-flows}
 
-* ISO mdoc Credential Format specific DCQL parameter, `intent_to_retain` defined in Annex B.3.1 of [@!OIDF.OID4VP] MUST be present.
+### OpenID for Verifiable Presentations via Redirects {#oid4vp-redirects}
+
+The following requirements apply to OpenID4VP via redirects, unless specified otherwise:
+
+* As a way to invoke the Wallet, at least a custom URL scheme `haip://` MUST be supported by the Wallet and the Verifier. Implementations MAY support other ways to invoke the Wallets as agreed by trust frameworks/ecosystems/jurisdictions, not limited to using other custom URL schemes.
+* The Verifier MUST use signed requests.
+* The Response mode MUST be `direct_post.jwt`. The Verifier MUST return `redirect_uri` in response to the HTTP POST request from the Wallet, where the Wallet redirects the User to, as defined in Section 8.2 of [@!OIDF.OID4VP]. Implementation considerations for the response mode `direct_post.jwt` are given in Section 14.3 of [@!OIDF.OID4VP].
+* The Authorization Request MUST be sent using the `request_uri` parameter as defined in JWT-Secured Authorization Request (JAR) [@!RFC9101].
+
+### OpenID for Verifiable Presentations via W3C Digital Credentials API {#oid4vp-dc-api}
+
+The following requirements apply to OpenID4VP via the W3C Digital Credentials API, unless specified otherwise:
+
+* Wallet Invocation is done via the W3C Digital Credentials API or an equivalent platform API. Any other mechanism, including Custom URL schemes, MUST NOT be used.
+* The Response Mode MUST be `dc_api.jwt`.
+* The Verifier and Wallet MUST use Annex A in [@!OIDF.OID4VP] that defines how to use OpenID4VP over the W3C Digital Credentials API.
+* The Wallet MUST support both signed and unsigned requests as defined in Annex A.3.1 and A.3.2 of [@!OIDF.OID4VP]. The Verifier MAY support signed requests, unsigned requests, or both.
+
+## Requirements specific to Credential Formats
+
+### ISO Mobile Documents or mdocs (ISO/IEC 18013 and ISO/IEC 23220 series)
+
+The following requirements apply to all OpenID4VP flows when the mdoc Credential Format is used:
+
+* The Credential Format identifier MUST be `mso_mdoc`.
+* The ISO mdoc Credential Format specific DCQL parameter, `intent_to_retain` defined in Annex B.3.1 of [@!OIDF.OID4VP] MUST be present.
 * When multiple ISO mdocs are being returned, each ISO mdoc MUST be returned in a separate `DeviceResponse` (as defined in 8.3.2.1.2.2 of [@!ISO.18013-5]), each matching to a respective DCQL query. Therefore, the resulting `vp_token` contains multiple `DeviceResponse` instances.
 
-Note that the Credential Format Identifier and `SessionTranscript` CBOR structures are defined in [@!OIDF.OID4VP].
+The `SessionTranscript` CBOR structure MUST be used as follows:
 
-## IETF SD-JWT VC specific requirements for OpenID for Verifiable Presentations
+* For (#oid4vp-redirects): the `SessionTranscript` CBOR structure defined in Section B.2.6.1 in [@!OIDF.OID4VP].
+* For (#oid4vp-dc-api): the `SessionTranscript` CBOR structure defined in Section B.2.6.2 in [@!OIDF.OID4VP].
 
-Requirements for both the Wallet and the Verifier:
+### IETF SD-JWT VC
+
+The following requirements apply to all OpenID4VP flows when the SD-JWT VC Credential Format is used:
 
 * The Credential Format identifier MUST be `dc+sd-jwt`.
 
-# SD-JWT VCs {#sd-jwt-vc}
+# Credential Formats {#credential-formats}
+
+Credentials MUST use one of the following Credential Formats:
+
+* IETF SD-JWT VC, subject to the additional requirements defined in (#sd-jwt-vc).
+* ISO mdocs
+
+## IETF SD-JWT VC Profile {#sd-jwt-vc}
 
 This profile defines the following additional requirements for IETF SD-JWT VCs as defined in [@!I-D.ietf-oauth-sd-jwt-vc].
 
@@ -261,15 +278,15 @@ Note: If there is a requirement to provide the Subject’s identifier assigned a
 
 Note: In some Credential Types, it is not desirable to include an expiration date (eg: diploma attestation). Therefore, this profile leaves its inclusion to the Issuer, or the body defining the respective Credential Type.
 
-## Issuer identification and key resolution to validate an issued Credential {#issuer-key-resolution}
+### Issuer identification and key resolution to validate an issued Credential {#issuer-key-resolution}
 
 This profile mandates the support for X.509 certificate-based key resolution to validate the issuer signature of an SD-JWT VC. This MUST be supported by all entities (Issuer, Wallet, Verifier). The SD-JWT VC MUST contain the credential issuer's certificate along with a trust chain in the `x5c` JOSE header parameter as described in section 3.5 of [@!I-D.ietf-oauth-sd-jwt-vc].
 
-### Cryptographic Holder Binding between VC and VP
+#### Cryptographic Holder Binding between VC and VP
 
 * For Cryptographic Holder Binding, a KB-JWT, as defined in [@!I-D.ietf-oauth-sd-jwt-vc], MUST always be present when presenting an SD-JWT VC.
 
-## OpenID4VC Credential Format Profile {#vc_sd_jwt_profile}
+### OpenID4VC Credential Format Profile {#vc_sd_jwt_profile}
 
 A Credential Format Profile for Credentials complying with IETF SD-JWT VCs [@!I-D.ietf-oauth-sd-jwt-vc] is defined in Annex A.3 of [@!OIDF.OID4VCI] and Annex A.4 of [@!OIDF.OID4VP].
 
