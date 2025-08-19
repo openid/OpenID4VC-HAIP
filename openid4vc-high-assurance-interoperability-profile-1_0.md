@@ -254,7 +254,7 @@ This profile defines the following additional requirements for IETF SD-JWT VCs a
 
 Any of the flows defined in this specification MUST be used with cryptographic holder binding.
 
-Note: How to prevent correlations by colluding Issuer/Verifier or Verifier/Verifier pairs, or by the same Verifier, see Section 15.4.1 in [@!OIDF.OID4VCI] and Section 15.5 in [@!OIDF.OID4VP].
+Note: For guidance on preventing linkability by colluding parties, such as Issuer/Verifier pairs, multiple Verifiers, or repeated interactions with the same Verifier, see Section 15.4.1 of [@!OIDF.OID4VCI] and Section 15.5 of [@!OIDF.OID4VP].
 
 Note: If there is a requirement to communicate information about the verification status and identity assurance data of the claims about the subject, the syntax defined by [@!OIDF.ekyc-ida] SHOULD be used. It is up to each jurisdiction and ecosystem, whether to require it to the implementers of this profile.
 
