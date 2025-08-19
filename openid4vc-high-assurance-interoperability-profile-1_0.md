@@ -65,9 +65,9 @@ Implementations of this specification do not have to implement all of the flows 
 
 A parameter that is listed as optional to be implemented in a specification that is being profiled (i.e., OpenID4VCI, OpenID4VP, W3C Digital Credentials API, IETF SD-JWT VC, and ISO mdoc) remains optional unless it is stated otherwise in this specification.
 
-Profile of OpenID4VCI defines Wallet Attestation and Key Attestation.
+The Profile of OpenID4VCI defines Wallet Attestation and Key Attestation.
 
-Profile of IETF SD-JWT VC defines the following aspects:
+The Profile of IETF SD-JWT VC defines the following aspects:
 
   * Status management of the Credentials, including revocation
   * Cryptographic Key Binding
@@ -93,6 +93,7 @@ Assumptions made are the following:
 * Combined Issuance of IETF SD-JWT VC and ISO mdoc
 * Both issuer-initiated and wallet-initiated issuance
 * Presentation and Issuance of PID and (Q)EAA as defined in Architecture and Reference Framework [@EU.ARF] implementing [@eIDAS2.0].
+* Issuance and presentation of Credentials with and without cryptographic holder binding
 
 ## Standards Requirements
 
@@ -175,7 +176,7 @@ Individual Wallet Attestations MUST be used for each Issuer and they MUST not co
 
 ### Key Attestation {#key-attestation}
 
-Wallets MUST support key attestations as defined in Annex D of [@!OIDF.OID4VCI]. If batch issuance is used, all public keys used in Credential Request SHOULD be attested within a single key attestation.
+Wallets MUST support key attestations as defined in Annex D of [@!OIDF.OID4VCI]. If batch issuance is used and the Credential Issuer has indicated (via `cryptographic_binding_methods_supported` metadata parameter) that cryptographic holder binding is required, all public keys used in Credential Request SHOULD be attested within a single key attestation.
 
 ## Issuer Metadata
 
@@ -240,7 +241,7 @@ This profile defines the following additional requirements for IETF SD-JWT VCs a
 | iss | MUST |[@!RFC7519], Section 4.1.1 |
 | iat | MUST |[@!RFC7519], Section 4.1.6 |
 | exp | SHOULD (at the discretion of the Issuer) | [@!RFC7519], Section 4.1.4 |
-| cnf |	MUST |	[@!RFC7800]|
+| cnf | MUST if the corresponding Credential Configuration requires cryptographic holder binding | [@!RFC7800]|
 | vct |	MUST | [@!I-D.ietf-oauth-sd-jwt-vc]|
 |status| SHOULD (at the discretion of the Issuer)| [@!I-D.ietf-oauth-status-list]|
 
@@ -250,8 +251,6 @@ This profile defines the following additional requirements for IETF SD-JWT VCs a
 * The `vct` JWT claim as defined in [@!I-D.ietf-oauth-sd-jwt-vc].
 * The `cnf` claim [@!RFC7800] MUST conform to the definition given in [@!I-D.ietf-oauth-sd-jwt-vc]. Implementations conforming to this profile MUST include the JSON Web Key [@!RFC7517] in the `jwk` sub claim.
 * The public key used to validate the signature on the Status List Token MUST be included in the `x5c` JOSE header of the Token.
-
-Any of the flows defined in this specification MUST be used with cryptographic holder binding.
 
 Note: Re-using the same Credential across Verifiers, or re-using the same JWK value across multiple Credentials gives colluding Verifiers a mechanism to correlate the User. There are currently two known ways to address this with SD-JWT VCs. First is to issue multiple instances of the same Credentials with different JWK values, so that if each instance of the Credential is used at only one Verifier, it can be reused multiple times. Another is to use each Credential only once (ephemeral Credentials). It is RECOMMENDED to adopt one of these mechanisms.
 
@@ -267,7 +266,7 @@ This profile mandates the support for X.509 certificate-based key resolution to 
 
 ### Cryptographic Holder Binding between VC and VP
 
-* For Cryptographic Holder Binding, a KB-JWT, as defined in [@!I-D.ietf-oauth-sd-jwt-vc], MUST always be present when presenting an SD-JWT VC.
+* If the credential has cryptographic holder binding, a KB-JWT, as defined in [@!I-D.ietf-oauth-sd-jwt-vc], MUST always be present when presenting an SD-JWT VC.
 
 ## OpenID4VC Credential Format Profile {#vc_profiles}
 
@@ -479,6 +478,7 @@ The technology described in this specification was made available from contribut
 
    -04
 
+   * Added support for credentials without cryptographic holder binding
    * mandate support for aki trusted_authorities method
    * remove presentation exchange reference since it was removed in openid4vp
    * Authorization Server and Credential Issuer must support metadata
