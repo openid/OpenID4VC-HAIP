@@ -121,7 +121,7 @@ defined in [@ISO.18013-7]. For more details, also see Annex B.3 in [@!OIDF.OID4V
 Both the Wallet and the Credential Issuer:
 
 * MUST support the authorization code flow.
-* MUST support protocol extensions for the SD-JWT VC Credential format profile as defined in (#vc_sd_jwt_profile).
+* MUST support at least one of the following Credential Format Profiles defined in (#vc_profiles): SD-JWT VC or ISO mdoc. Ecosystems SHOULD clearly indicate which of these formats, SD-JWT VC, ISO mdoc, or both, are required to be supported.
 * MUST support sender-constrained tokens using the mechanism defined in [@!RFC9449].
 * MUST support [@!RFC7636] with `S256` as the code challenge method.
 
@@ -154,8 +154,6 @@ Both Issuer and Wallet MUST support Credential Offer in both same-device and cro
 
 * The Wallets MUST perform client authentication as defined in (#wallet-attestation).
 * Refresh tokens are RECOMMENDED to be supported for Credential refresh. For details, see Section 13.5 in [@!OIDF.OID4VCI].
-
-Note: It is RECOMMENDED to use ephemeral client attestation JWTs for client authentication in order to prevent linkability across Credential Issuers.
 
 Note: Issuers SHOULD be mindful of how long the usage of the refresh token is allowed to refresh a credential, as opposed to starting the issuance flow from the beginning. For example, if the User is trying to refresh a Credential more than a year after its original issuance, the usage of the refresh tokens is NOT RECOMMENDED.
 
@@ -192,7 +190,7 @@ Requirements for both the Wallet and the Verifier:
 * Response type MUST be `vp_token`.
 * Response mode MUST be `direct_post.jwt`. The Verifier MUST return `redirect_uri` in response to the HTTP POST request from the Wallet, where the Wallet redirects the User to, as defined in Section 8.2 of [@!OIDF.OID4VP]. Implementation considerations for the response mode `direct_post.jwt` are given in Section 14.3 of [@!OIDF.OID4VP].
 * Authorization Request MUST be sent using the `request_uri` parameter as defined in JWT-Secured Authorization Request (JAR) [@!RFC9101].
-* For Client Identifier Prefix as introduced in Section 5.10 of [@!OIDF.OID4VP], `x509_hash` MUST be supported by the Wallet and used by the Verifier.
+* The Client Identifier Prefix `x509_hash` MUST be used by the Verifier and accepted by the Wallet (see Section 5.9.3 of [@!OIDF.OID4VP]).
 * The Authority Key Identifier (`aki`)-based Trusted Authority Query (`trusted_authorities`) for DCQL, as defined in section 6.1.1.1 of [@!OIDF.OID4VP], MUST be supported.
 
 # OpenID for Verifiable Presentations over W3C Digital Credentials API
@@ -268,9 +266,15 @@ This profile mandates the support for X.509 certificate-based key resolution to 
 
 * For Cryptographic Holder Binding, a KB-JWT, as defined in [@!I-D.ietf-oauth-sd-jwt-vc], MUST always be present when presenting an SD-JWT VC.
 
-## OpenID4VC Credential Format Profile {#vc_sd_jwt_profile}
+## OpenID4VC Credential Format Profile {#vc_profiles}
 
-A Credential Format Profile for Credentials complying with IETF SD-JWT VCs [@!I-D.ietf-oauth-sd-jwt-vc] is defined in Annex A.3 of [@!OIDF.OID4VCI] and Annex A.4 of [@!OIDF.OID4VP].
+Credential Format Profiles are defined as follows:
+- SD-JWT VCs (as specified in [@!I-D.ietf-oauth-sd-jwt-vc]):
+  - [@!OIDF.OID4VCI] – Annex A.3
+  - [@!OIDF.OID4VP] – Annex B.3
+- ISO mdocs:
+  - [@!OIDF.OID4VCI] – Annex A.2
+  - [@!OIDF.OID4VP] – Annex B.2
 
 # Crypto Suites
 
