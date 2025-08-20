@@ -246,19 +246,7 @@ Credential Format Profiles are defined as follows:
 This profile defines the following additional requirements for IETF SD-JWT VCs as defined in [@!I-D.ietf-oauth-sd-jwt-vc].
 
 * Compact serialization MUST be supported as defined in [@!I-D.ietf-oauth-selective-disclosure-jwt]. JSON serialization MAY be supported.
-* The following JWT Claims MUST be supported Content (differentiate issuance & presentation)
-
-| Claim | SD-JWT as issued by the Issuer | Normative Definition |
-|:--- |:--- |:--- |
-| iss | MUST |[@!RFC7519], Section 4.1.1 |
-| iat | MUST |[@!RFC7519], Section 4.1.6 |
-| nbf | SHOULD (at the discretion of the issuer) | [@!RFC7519], Section 4.1.5 |
-| exp | SHOULD (at the discretion of the Issuer) | [@!RFC7519], Section 4.1.4 |
-| cnf | MUST if the corresponding Credential Configuration requires cryptographic holder binding | [@!RFC7800]|
-| vct |	MUST | [@!I-D.ietf-oauth-sd-jwt-vc]|
-|status| SHOULD (at the discretion of the Issuer)| [@!I-D.ietf-oauth-status-list]|
-
-* The Issuer MUST NOT make any of the JWT Claims in the table above to be selectively disclosable, so that they are always present in the SD-JWT-VC presented by the Holder.
+* Claims containing time-related information, such as issuance or expiration dates, MUST be either individually randomized within an appropriate time window (e.g., within the last 24 hours), or rounded (e.g., to the start of the day), to avoid unintended correlation factors.
 * It is at the discretion of the Issuer whether to use `exp` claim and/or a `status` claim to express the validity period of an SD-JWT-VC. The Wallet and the verifier  MUST support both mechanisms.
 * The `iss` claim MUST be an HTTPS URL.
 * The `vct` JWT claim as defined in [@!I-D.ietf-oauth-sd-jwt-vc].
