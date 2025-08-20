@@ -302,10 +302,6 @@ When using this profile alongside other hash algorithms, each entity SHOULD make
 
 # Implementations Considerations
 
-## Validity Period of the Signature and the Claim Values
-
-`nbf` and `exp` JWT claims express both the validity period of both the signature and the claims about the subject, unless there is a separate claim used to express the validity of the claims.
-
 # Security Considerations {#security_considerations}
 
 The security considerations in [@!OIDF.OID4VCI] and [@!OIDF.OID4VP] apply.
