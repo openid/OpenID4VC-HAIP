@@ -464,7 +464,7 @@ The security considerations in [@!OIDF.OID4VCI] and [@!OIDF.OID4VP] apply.
 
 # Acknowledgements {#Acknowledgements}
 
-We would like to thank Paul Bastian, Christian Bormann, Mike Jones, Oliver Terbu, Daniel Fett, and Giuseppe De Marco for their valuable feedback and contributions to this specification.
+We would like to thank Paul Bastian, Christian Bormann, Brian Campbell, Mike Jones, Oliver Terbu, Daniel Fett, and Giuseppe De Marco for their valuable feedback and contributions to this specification.
 
 # Notices
 
@@ -496,6 +496,7 @@ The technology described in this specification was made available from contribut
    * Old link in section 8 & clarify a note on claim based binding in OpenID4VP in HAIP #183
    * Clarify clause 4.1 statement #169
    * add a list of all specifications being profiled #145
+   * szy something about DPoP nonces
 
    -03
 
