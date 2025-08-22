@@ -105,6 +105,7 @@ The standards that are being profiled in this specification are:
 * ISO/IEC 18013-5:2021 Personal identification — ISO-compliant driving licence Part 5: Mobile driving licence (mDL) application [@!ISO.18013-5]
 
 Note that these standards in turn build upon other underlying standards, and requirements in those underlying standards also need to be followed.
+One notable such standard is DPoP [@!RFC9449], which, through its inclusion in OpenID for Verifiable Credential Issuance, requires Wallets to be prepared to handle the `DPoP-Nonce` HTTP response header from the Credential Issuer’s Nonce Endpoint, as well as from other applicable endpoints of the Credential Issuer and Authorization Server. 
 
 ## Out of Scope
 
@@ -463,7 +464,7 @@ The security considerations in [@!OIDF.OID4VCI] and [@!OIDF.OID4VP] apply.
 
 # Acknowledgements {#Acknowledgements}
 
-We would like to thank Paul Bastian, Christian Bormann, Mike Jones, Oliver Terbu, Daniel Fett, and Giuseppe De Marco for their valuable feedback and contributions to this specification.
+We would like to thank Paul Bastian, Christian Bormann, Brian Campbell, Mike Jones, Oliver Terbu, Daniel Fett, and Giuseppe De Marco for their valuable feedback and contributions to this specification.
 
 # Notices
 
@@ -495,6 +496,7 @@ The technology described in this specification was made available from contribut
    * Old link in section 8 & clarify a note on claim based binding in OpenID4VP in HAIP #183
    * Clarify clause 4.1 statement #169
    * add a list of all specifications being profiled #145
+   * szy something about DPoP nonces
 
    -03
 
