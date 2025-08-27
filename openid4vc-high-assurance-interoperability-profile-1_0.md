@@ -56,12 +56,8 @@ This specification uses the terms "Holder", "Issuer", "Verifier", "Wallet", "Wal
 
 This specification enables interoperable implementations of the following flows:
 
-* Issuance of IETF SD-JWT VC using OpenID4VCI
-* Issuance of ISO mdocs using OpenID4VCI
-* Presentation of IETF SD-JWT VC using OpenID4VP
-* Presentation of IETF SD-JWT VC using OpenID4VP over W3C Digital Credentials API
-* Presentation of ISO mdocs using OpenID4VP
-* Presentation of ISO mdocs using OpenID4VP over W3C Digital Credentials API
+* Issuance using OpenID4VCI for IETF SD-JWT VC and ISO mdocs
+* Presentation using OpenID4VP via redirects or the W3C Digital Credentials API for IETF SD-JWT VC and ISO mdocs
 * OpenID4VC Credential Format Profiles
 
 Implementations of this specification do not have to implement all of the flows listed above, but they MUST be compliant to all of the requirements for a particular flow they chose to implement.
