@@ -205,7 +205,7 @@ The following requirements apply to OpenID4VP via redirects, unless specified ot
 * Response encryption MUST be used by utilizing response mode `direct_post.jwt`, as defined in Section 8.3 of [@!OIDF.OID4VP]. Security Considerations in Section 14.3 of [@!OIDF.OID4VP] MUST be applied.
 * Same-device flows MUST be used by enforcing `redirect_uri` in response to the HTTP POST request from the Wallet, as defined in Section 8.2 of [@!OIDF.OID4VP]. Implementation considerations in Section 13.3 and Security Considerations in Section 14.2 of [@!OIDF.OID4VP] MUST be applied. Verifiers MUST abort the validation if the `redirect_uri` was not called by the Wallet or could not be matched with the initial browser session.
 
-### OpenID for Verifiable Presentations via W3C Digital Credentials API {#oid4vp-dc-api}
+## OpenID for Verifiable Presentations via W3C Digital Credentials API {#oid4vp-dc-api}
 
 The following requirements apply to OpenID4VP via the W3C Digital Credentials API, unless specified otherwise:
 
