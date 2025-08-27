@@ -248,7 +248,6 @@ This profile defines the following additional requirements for IETF SD-JWT VCs a
 * Compact serialization MUST be supported as defined in [@!I-D.ietf-oauth-selective-disclosure-jwt]. JSON serialization MAY be supported.
 * It is at the discretion of the Issuer whether to use `exp` claim and/or a `status` claim to express the validity period of an SD-JWT-VC. The Wallet and the verifier MUST support both mechanisms.
 * The `iss` claim, if present, MUST be an HTTPS URL.
-* The `vct` JWT claim as defined in [@!I-D.ietf-oauth-sd-jwt-vc].
 * The `cnf` claim [@!RFC7800] MUST conform to the definition given in [@!I-D.ietf-oauth-sd-jwt-vc]. Implementations conforming to this profile MUST include the JSON Web Key [@!RFC7517] in the `jwk` sub claim.
 * The public key used to validate the signature on the Status List Token MUST be included in the `x5c` JOSE header of the Token. The X.509 certificate of the trust anchor MUST NOT be included in the `x5c` JOSE header of the Status List Token.
 
