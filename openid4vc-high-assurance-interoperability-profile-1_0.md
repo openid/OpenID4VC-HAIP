@@ -64,9 +64,9 @@ Implementations of this specification do not have to implement all of the flows 
 
 A parameter that is listed as optional to be implemented in a specification that is being profiled (i.e., OpenID4VCI, OpenID4VP, W3C Digital Credentials API, IETF SD-JWT VC, and ISO mdoc) remains optional unless it is stated otherwise in this specification.
 
-Profile of OpenID4VCI defines Wallet Attestation and Key Attestation.
+The Profile of OpenID4VCI defines Wallet Attestation and Key Attestation.
 
-Profile of IETF SD-JWT VC defines the following aspects:
+The Profile of IETF SD-JWT VC defines the following aspects:
 
   * Status management of the Credentials, including revocation
   * Cryptographic Key Binding
@@ -92,6 +92,7 @@ Assumptions made are the following:
 * Combined Issuance of IETF SD-JWT VC and ISO mdoc
 * Both issuer-initiated and wallet-initiated issuance
 * Presentation and Issuance of PID and (Q)EAA as defined in Architecture and Reference Framework [@EU.ARF] implementing [@eIDAS2.0].
+* Issuance and presentation of Credentials with and without cryptographic holder binding
 
 ## Standards Requirements
 
@@ -128,6 +129,8 @@ Both Wallet initiated and Issuer initiated issuance are supported.
 When ecosystem policies require Issuer Authentication to a higher level than possible with TLS alone, signed Credential Issuer Metadata as specified in Section 11.2.3 in [@!OIDF.OID4VCI]
 MUST be supported by both the Wallet and the Issuer. Key resolution to validate the signed Issuer
 Metadata MUST be supported using the `x5c` JOSE header parameter as defined in [@!RFC7515].
+
+If the Issuer supports Credential Configurations that require key binding, as indicated by the presence of `cryptographic_binding_methods_supported`, the `nonce_endpoint` MUST be present in the Credential Issuer Metadata.
 
 ## Credential Offer
 
@@ -169,7 +172,7 @@ Individual Wallet Attestations MUST be used for each Issuer and they MUST not co
 
 ### Key Attestation {#key-attestation}
 
-Wallets MUST support key attestations as defined in Annex D of [@!OIDF.OID4VCI]. If batch issuance is used, all public keys used in Credential Request SHOULD be attested within a single key attestation.
+Wallets MUST support key attestations as defined in Annex D of [@!OIDF.OID4VCI]. If batch issuance is used and the Credential Issuer has indicated (via `cryptographic_binding_methods_supported` metadata parameter) that cryptographic holder binding is required, all public keys used in Credential Request SHOULD be attested within a single key attestation.
 
 ## Issuer Metadata
 
@@ -189,8 +192,10 @@ The following requirements apply to OpenID4VP, irrespective of the flow and Cred
 * Response encryption MUST be performed as specified in [@!OIDF.OID4VP, section 8.3]. The JWE `alg` (algorithm) header parameter (see [@!RFC7516, section 4.1.1])
   value `ECDH-ES` (as defined in [@!RFC7518, section 4.6]), with key agreement utilizing keys on the `P-256` curve (see [@!RFC7518, section 6.2.1.1]) MUST be supported.
   The JWE `enc` (encryption algorithm) header parameter (see [@!RFC7516, section 4.1.2]) value `A128GCM` (as defined in [@!RFC7518, section 5.3]) MUST be supported.
+* Verifiers MUST use ephemeral encryption keys specific to each Authorization Request passed via client metadata as specified in Section 8.3 of [@!OIDF.OID4VP].
+* The Authority Key Identifier (`aki`)-based Trusted Authority Query (`trusted_authorities`) for DCQL, as defined in section 6.1.1.1 of [@!OIDF.OID4VP], MUST be supported. Note that the Authority Key Identifiers mechanism can be used to support multiple X.509-based trust mechanisms, such as ISO mDL VICAL (as introduced in [@ISO.18013-5]) or ETSI Trusted Lists [@ETSI.TL]. This is achieved by collecting the relevant X.509 certificates for the trusted Issuers and including the encoded KeyIdentifers from the certificates in the `aki` array .
 
-Additional requirements for OpenID4VP are defined in (#oid4vp-redirects) and (#oid4vp-dc-api).
+Additional requirements for OpenID4VP are defined in (#oid4vp-redirects), (#oid4vp-dc-api) and (#oid4vp-credential-formats).
 
 ## OpenID for Verifiable Presentations via Redirects {#oid4vp-redirects}
 
@@ -210,7 +215,7 @@ The following requirements apply to OpenID4VP via the W3C Digital Credentials AP
 * The Verifier and Wallet MUST use Annex A in [@!OIDF.OID4VP] that defines how to use OpenID4VP over the W3C Digital Credentials API.
 * The Wallet MUST support both signed and unsigned requests as defined in Annex A.3.1 and A.3.2 of [@!OIDF.OID4VP]. The Verifier MAY support signed requests, unsigned requests, or both.
 
-## Requirements specific to Credential Formats
+## Requirements specific to Credential Formats {#oid4vp-credential-formats}
 
 ### ISO Mobile Documents or mdocs (ISO/IEC 18013 and ISO/IEC 23220 series)
 
@@ -249,18 +254,16 @@ This profile defines the following additional requirements for IETF SD-JWT VCs a
 | iss | MUST |[@!RFC7519], Section 4.1.1 |
 | iat | MUST |[@!RFC7519], Section 4.1.6 |
 | exp | SHOULD (at the discretion of the Issuer) | [@!RFC7519], Section 4.1.4 |
-| cnf |	MUST |	[@!RFC7800]|
+| cnf | MUST if the corresponding Credential Configuration requires cryptographic holder binding | [@!RFC7800]|
 | vct |	MUST | [@!I-D.ietf-oauth-sd-jwt-vc]|
 |status| SHOULD (at the discretion of the Issuer)| [@!I-D.ietf-oauth-status-list]|
 
 * The Issuer MUST NOT make any of the JWT Claims in the table above to be selectively disclosable, so that they are always present in the SD-JWT-VC presented by the Holder.
 * It is at the discretion of the Issuer whether to use `exp` claim and/or a `status` claim to express the validity period of an SD-JWT-VC. The Wallet and the verifier  MUST support both mechanisms.
-* The `iss` claim MUST be an HTTPS URL. The `iss` value is used to obtain Issuer’s signing key as defined in (#issuer-key-resolution).
+* The `iss` claim MUST be an HTTPS URL.
 * The `vct` JWT claim as defined in [@!I-D.ietf-oauth-sd-jwt-vc].
 * The `cnf` claim [@!RFC7800] MUST conform to the definition given in [@!I-D.ietf-oauth-sd-jwt-vc]. Implementations conforming to this profile MUST include the JSON Web Key [@!RFC7517] in the `jwk` sub claim.
 * The public key used to validate the signature on the Status List Token MUST be included in the `x5c` JOSE header of the Token.
-
-Any of the flows defined in this specification MUST be used with cryptographic holder binding.
 
 Note: Re-using the same Credential across Verifiers, or re-using the same JWK value across multiple Credentials gives colluding Verifiers a mechanism to correlate the User. There are currently two known ways to address this with SD-JWT VCs. First is to issue multiple instances of the same Credentials with different JWK values, so that if each instance of the Credential is used at only one Verifier, it can be reused multiple times. Another is to use each Credential only once (ephemeral Credentials). It is RECOMMENDED to adopt one of these mechanisms.
 
@@ -276,7 +279,7 @@ This profile mandates the support for X.509 certificate-based key resolution to 
 
 #### Cryptographic Holder Binding between VC and VP
 
-* For Cryptographic Holder Binding, a KB-JWT, as defined in [@!I-D.ietf-oauth-sd-jwt-vc], MUST always be present when presenting an SD-JWT VC.
+* If the credential has cryptographic holder binding, a KB-JWT, as defined in [@!I-D.ietf-oauth-sd-jwt-vc], MUST always be present when presenting an SD-JWT VC.
 
 # Crypto Suites
 
@@ -450,6 +453,16 @@ The security considerations in [@!OIDF.OID4VCI] and [@!OIDF.OID4VP] apply.
         </front>
 </reference>
 
+<reference anchor="ETSI.TL" target="https://www.etsi.org/deliver/etsi_ts/119600_119699/119612/02.01.01_60/ts_119612v020101p.pdf">
+        <front>
+          <title>ETSI TS 119 612 V2.3.1 Electronic Signatures and Infrastructures (ESI); Trusted Lists </title>
+          <author>
+            <organization>European Telecommunications Standards Institute (ETSI)</organization>
+          </author>
+          <date month="Nov" year="2024"/>
+        </front>
+</reference>
+
 # Acknowledgements {#Acknowledgements}
 
 We would like to thank Paul Bastian, Christian Bormann, Mike Jones, Oliver Terbu, Daniel Fett, and Giuseppe De Marco for their valuable feedback and contributions to this specification.
@@ -468,6 +481,9 @@ The technology described in this specification was made available from contribut
 
    -04
 
+   * Added support for credentials without cryptographic holder binding
+   * mandate support for aki trusted_authorities method
+   * remove presentation exchange reference since it was removed in openid4vp
    * Authorization Server and Credential Issuer must support metadata
    * x509_san_dns & verifier_attestations client id prefixes are no longer permitted, x509_hash must be used
    * x.509 certificates are now the mandatory mechanism for SD-JWT VC issuer key resolution
