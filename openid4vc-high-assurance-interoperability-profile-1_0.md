@@ -194,11 +194,9 @@ The following requirements apply to OpenID4VP, irrespective of the flow and Cred
   value `ECDH-ES` (as defined in [@!RFC7518, section 4.6]), with key agreement utilizing keys on the `P-256` curve (see [@!RFC7518, section 6.2.1.1]) MUST be supported.
   The JWE `enc` (encryption algorithm) header parameter (see [@!RFC7516, section 4.1.2]) value `A128GCM` (as defined in [@!RFC7518, section 5.3]) MUST be supported.
 
-Additional requirements for OpenID4VP are defined in (#oid4vp-flows) and (#oid4vp-dc-api).
+Additional requirements for OpenID4VP are defined in (#oid4vp-redirects) and (#oid4vp-dc-api).
 
-## Requirements specific to Flows {#oid4vp-flows}
-
-### OpenID for Verifiable Presentations via Redirects {#oid4vp-redirects}
+## OpenID for Verifiable Presentations via Redirects {#oid4vp-redirects}
 
 The following requirements apply to OpenID4VP via redirects, unless specified otherwise:
 
