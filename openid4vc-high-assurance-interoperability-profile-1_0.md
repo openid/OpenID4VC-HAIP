@@ -498,7 +498,10 @@ The technology described in this specification was made available from contribut
    * Old link in section 8 & clarify a note on claim based binding in OpenID4VP in HAIP #183
    * Clarify clause 4.1 statement #169
    * add a list of all specifications being profiled #145
-   * refactor sections to align ISO mdoc issuance and presentation with SD-JWT VC
+   * refactor to separate generic and SD-JWT clauses
+   * add support for ISO mdoc isssuance
+   * add support for ISO mdoc when using redirect-based OID4VP
+   * restrict OID4VP redirect flow to same-device case
 
    -03
 
