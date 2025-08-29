@@ -501,6 +501,9 @@ The technology described in this specification was made available from contribut
    * refactor to separate generic and SD-JWT clauses
    * add support for ISO mdoc isssuance
    * add support for ISO mdoc when using redirect-based OID4VP
+   * prohibit self-signed certificates for signing with `x509_hash`
+   * prevent trust anchor certificates to be included in `x5c` headers
+
 
    -03
 
