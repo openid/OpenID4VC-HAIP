@@ -119,7 +119,7 @@ Both the Wallet and the Credential Issuer:
 
 * MUST support the authorization code flow.
 * MUST support at least one of the following Credential Format Profiles defined in (#vc-profiles): IETF SD-JWT VC or ISO mdoc. Ecosystems SHOULD clearly indicate which of these formats, IETF SD-JWT VC, ISO mdoc, or both, are required to be supported.
-* MUST support sender-constrained tokens using the mechanism defined in [@!RFC9449].
+* MUST support sender-constrained tokens using the mechanism defined in [@!RFC9449]. Note this requires Wallets to be prepared to handle the `DPoP-Nonce` HTTP response header from the Credential Issuer’s Nonce Endpoint, as well as from other applicable endpoints of the Credential Issuer and Authorization Server.
 * MUST support [@!RFC7636] with `S256` as the code challenge method.
 
 Both Wallet initiated and Issuer initiated issuance are supported.
@@ -464,7 +464,7 @@ The security considerations in [@!OIDF.OID4VCI] and [@!OIDF.OID4VP] apply.
 
 # Acknowledgements {#Acknowledgements}
 
-We would like to thank Paul Bastian, Christian Bormann, Mike Jones, Oliver Terbu, Daniel Fett, and Giuseppe De Marco for their valuable feedback and contributions to this specification.
+We would like to thank Paul Bastian, Christian Bormann, Brian Campbell, Mike Jones, Oliver Terbu, Daniel Fett, and Giuseppe De Marco for their valuable feedback and contributions to this specification.
 
 # Notices
 
@@ -497,6 +497,7 @@ The technology described in this specification was made available from contribut
    * Old link in section 8 & clarify a note on claim based binding in OpenID4VP in HAIP #183
    * Clarify clause 4.1 statement #169
    * add a list of all specifications being profiled #145
+   * say something about DPoP nonces
    * refactor to separate generic and SD-JWT clauses
    * add support for ISO mdoc isssuance
    * add support for ISO mdoc when using redirect-based OID4VP
