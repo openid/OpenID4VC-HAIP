@@ -495,6 +495,7 @@ The technology described in this specification was made available from contribut
    * Old link in section 8 & clarify a note on claim based binding in OpenID4VP in HAIP #183
    * Clarify clause 4.1 statement #169
    * add a list of all specifications being profiled #145
+   * prohibit self-signed certificates for signing with `x509_hash`
 
    -03
 
