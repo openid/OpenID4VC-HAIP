@@ -504,7 +504,6 @@ The technology described in this specification was made available from contribut
    * prohibit self-signed certificates for signing with `x509_hash`
    * prevent trust anchor certificates to be included in `x5c` headers
 
-
    -03
 
    * Add initial security considerations section
