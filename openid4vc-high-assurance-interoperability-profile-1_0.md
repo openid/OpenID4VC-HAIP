@@ -187,7 +187,7 @@ The following requirements apply to OpenID4VP, irrespective of the flow and Cred
 
 * The Wallet and Verifier MUST support at least one of the following Credential Format Profiles defined in (#vc-profiles): IETF SD-JWT VC or ISO mdoc. Ecosystems SHOULD clearly indicate which of these formats, IETF SD-JWT VC, ISO mdoc, or both, are required to be supported.
 * The Response type MUST be `vp_token`.
-* For signed requests, the Verifier MUST use, and the Wallet MUST accept the Client Identifier Prefix `x509_hash` as defined in Section 5.9.3 of [@!OIDF.OID4VP].
+* For signed requests, the Verifier MUST use, and the Wallet MUST accept the Client Identifier Prefix `x509_hash` as defined in Section 5.9.3 of [@!OIDF.OID4VP]. The X.509 certificate of the trust anchor MUST NOT be included in the `x5c` JOSE header of the signed request. The X.509 certificate signing the request MUST NOT be self-signed.
 * The DCQL query and response as defined in Section 6 of [@!OIDF.OID4VP] MUST be used.
 * Response encryption MUST be performed as specified in [@!OIDF.OID4VP, section 8.3]. The JWE `alg` (algorithm) header parameter (see [@!RFC7516, section 4.1.1])
   value `ECDH-ES` (as defined in [@!RFC7518, section 4.6]), with key agreement utilizing keys on the `P-256` curve (see [@!RFC7518, section 6.2.1.1]) MUST be supported.
