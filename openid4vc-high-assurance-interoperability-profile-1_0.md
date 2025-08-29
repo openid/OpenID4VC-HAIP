@@ -193,7 +193,7 @@ Requirements for both the Wallet and the Verifier:
 * Response type MUST be `vp_token`.
 * Response mode MUST be `direct_post.jwt`. The Verifier MUST return `redirect_uri` in response to the HTTP POST request from the Wallet, where the Wallet redirects the User to, as defined in Section 8.2 of [@!OIDF.OID4VP]. Implementation considerations for the response mode `direct_post.jwt` are given in Section 14.3 of [@!OIDF.OID4VP].
 * Authorization Request MUST be sent using the `request_uri` parameter as defined in JWT-Secured Authorization Request (JAR) [@!RFC9101].
-* The Client Identifier Prefix `x509_hash` MUST be used by the Verifier and accepted by the Wallet (see Section 5.9.3 of [@!OIDF.OID4VP]). The X.509 certificate of the trust anchor MUST NOT be included in the `x5c` JOSE header of the signed request.
+* The Client Identifier Prefix `x509_hash` MUST be used by the Verifier and accepted by the Wallet (see Section 5.9.3 of [@!OIDF.OID4VP]). The X.509 certificate of the trust anchor MUST NOT be included in the `x5c` JOSE header of the signed request. The certificate signing the request MUST NOT be self-signed.
 * Verifiers MUST use ephemeral encryption keys specific to each Authorization Request passed via client metadata as specified in Section 8.3 of [@!OIDF.OID4VP].
 * The Authority Key Identifier (`aki`)-based Trusted Authority Query (`trusted_authorities`) for DCQL, as defined in section 6.1.1.1 of [@!OIDF.OID4VP], MUST be supported.
 
