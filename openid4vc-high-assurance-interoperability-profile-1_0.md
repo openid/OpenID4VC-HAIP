@@ -327,9 +327,9 @@ The security considerations in [@!OIDF.OID4VCI] and [@!OIDF.OID4VP] apply.
         </front>
 </reference>
 
-<reference anchor="OIDF.OID4VP" target="https://openid.net/specs/openid-4-verifiable-presentations-1_0-24.html">
+<reference anchor="OIDF.OID4VP" target="https://openid.net/specs/openid-4-verifiable-presentations-1_0.html">
       <front>
-        <title>OpenID for Verifiable Presentations - draft 24</title>
+        <title>OpenID for Verifiable Presentations 1.0</title>
         <author initials="O." surname="Terbu" fullname="Oliver Terbu">
          <organization>Mattr</organization>
         </author>
@@ -339,10 +339,13 @@ The security considerations in [@!OIDF.OID4VCI] and [@!OIDF.OID4VP] apply.
         <author initials="K." surname="Yasuda" fullname="Kristina Yasuda">
           <organization>SPRIND</organization>
         </author>
-        <author initials="T." surname="Looker" fullname="Tobias Looker">
-          <organization>Mattr</organization>
+        <author initials="D." surname="Fett" fullname="Daniel Fett">
+          <organization>Authlete</organization>
         </author>
-       <date day="27" month="January" year="2025"/>
+        <author initials="J." surname="Heenan" fullname="Joseph Heenan">
+          <organization>Authlete</organization>
+        </author>
+       <date day="9" month="July" year="2025"/>
       </front>
 </reference>
 
