@@ -276,9 +276,9 @@ Cryptography is required by the following operations:
 - to sign and validate the Holder's signature on the Verifiable Presentation
 - to sign and validate the Verifier's signature on the Presentation Request
 
-Issuers, Holders, and Verifiers MUST support P-256 (secp256r1) as a key type with the ES256 JWT algorithm [@!RFC7518] for the creation and the verification of the above signatures.
+Issuers, Holders, and Verifiers MUST support P-256 (secp256r1) as a key type with the ES256 JWT algorithm [@!RFC7518] for the creation and verification of the above signatures.
 
-When using this profile alongside other cryptosuites, each entity SHOULD make it explicit in its metadata which other algorithms and key types are supported for the cryptographic operations.
+When using this profile alongside other crypto suites, each entity SHOULD make it explicit in its metadata which other algorithms and key types are supported for the cryptographic operations.
 
 # Hash Algorithms
 
@@ -447,7 +447,7 @@ The security considerations in [@!OIDF.OID4VCI] and [@!OIDF.OID4VP] apply.
 
 # Acknowledgements {#Acknowledgements}
 
-We would like to thank Paul Bastian, Christian Bormann, Brian Campbell, Mike Jones, Oliver Terbu, Daniel Fett, and Giuseppe De Marco for their valuable feedback and contributions to this specification.
+We would like to thank Paul Bastian, Christian Bormann, Brian Campbell, Andrii Deinega, Mike Jones, Oliver Terbu, Daniel Fett, and Giuseppe De Marco for their valuable feedback and contributions to this specification.
 
 # Notices
 
