@@ -178,7 +178,7 @@ Wallets MUST support key attestations as defined in Annex D of [@!OIDF.OID4VCI].
 
 The Authorization Server MUST support metadata according to [@!RFC8414].
 
-The Credential Issuer MUST support metadata retrieval according to Section 12.2.2 of [@!OIDF.OID4VCI].
+The Credential Issuer MUST support metadata retrieval according to Section 11.2.2 of [@!OIDF.OID4VCI].
 The Credential Issuer metadata MUST include a scope for every Credential Configuration it supports.
 
 # OpenID for Verifiable Presentations
