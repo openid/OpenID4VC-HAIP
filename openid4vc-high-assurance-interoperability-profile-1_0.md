@@ -246,22 +246,9 @@ Credential Format Profiles are defined as follows:
 This profile defines the following additional requirements for IETF SD-JWT VCs as defined in [@!I-D.ietf-oauth-sd-jwt-vc].
 
 * Compact serialization MUST be supported as defined in [@!I-D.ietf-oauth-selective-disclosure-jwt]. JSON serialization MAY be supported.
-* The following JWT Claims MUST be supported Content (differentiate issuance & presentation)
-
-| Claim | SD-JWT as issued by the Issuer | Normative Definition |
-|:--- |:--- |:--- |
-| iss | MUST |[@!RFC7519], Section 4.1.1 |
-| iat | MUST |[@!RFC7519], Section 4.1.6 |
-| exp | SHOULD (at the discretion of the Issuer) | [@!RFC7519], Section 4.1.4 |
-| cnf | MUST if the corresponding Credential Configuration requires cryptographic holder binding | [@!RFC7800]|
-| vct |	MUST | [@!I-D.ietf-oauth-sd-jwt-vc]|
-|status| SHOULD (at the discretion of the Issuer)| [@!I-D.ietf-oauth-status-list]|
-
-* The Issuer MUST NOT make any of the JWT Claims in the table above to be selectively disclosable, so that they are always present in the SD-JWT-VC presented by the Holder.
-* It is at the discretion of the Issuer whether to use `exp` claim and/or a `status` claim to express the validity period of an SD-JWT-VC. The Wallet and the verifier  MUST support both mechanisms.
-* The `iss` claim MUST be an HTTPS URL.
-* The `vct` JWT claim as defined in [@!I-D.ietf-oauth-sd-jwt-vc].
-* The `cnf` claim [@!RFC7800] MUST conform to the definition given in [@!I-D.ietf-oauth-sd-jwt-vc]. Implementations conforming to this profile MUST include the JSON Web Key [@!RFC7517] in the `jwk` sub claim.
+* It is at the discretion of the Issuer whether to use `exp` claim and/or a `status` claim to express the validity period of an SD-JWT VC. The Wallet and the Verifier MUST support both mechanisms.
+* The `iss` claim, if present, MUST be an HTTPS URL.
+* The `cnf` claim [@!RFC7800] MUST conform to the definition given in [@!I-D.ietf-oauth-sd-jwt-vc]. Implementations conforming to this profile MUST include the JSON Web Key [@!RFC7517] in the `jwk` member if the corresponding Credential Configuration requires cryptographic holder binding.
 * The public key used to validate the signature on the Status List Token MUST be included in the `x5c` JOSE header of the Token. The X.509 certificate of the trust anchor MUST NOT be included in the `x5c` JOSE header of the Status List Token.
 
 Note: Re-using the same Credential across Verifiers, or re-using the same JWK value across multiple Credentials gives colluding Verifiers a mechanism to correlate the User. There are currently two known ways to address this with SD-JWT VCs. First is to issue multiple instances of the same Credentials with different JWK values, so that if each instance of the Credential is used at only one Verifier, it can be reused multiple times. Another is to use each Credential only once (ephemeral Credentials). It is RECOMMENDED to adopt one of these mechanisms.
@@ -300,10 +287,6 @@ The hash algorithm SHA-256 MUST be supported by all the entities to generate and
 When using this profile alongside other hash algorithms, each entity SHOULD make it explicit in its metadata which other algorithms are supported.
 
 # Implementations Considerations
-
-## Validity Period of the Signature and the Claim Values
-
-`iat` and `exp` JWT claims express both the validity period of both the signature and the claims about the subject, unless there is a separate claim used to express the validity of the claims.
 
 # Security Considerations {#security_considerations}
 
