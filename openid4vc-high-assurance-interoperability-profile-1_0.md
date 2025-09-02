@@ -464,7 +464,7 @@ The security considerations in [@!OIDF.OID4VCI] and [@!OIDF.OID4VP] apply.
 
 # Acknowledgements {#Acknowledgements}
 
-We would like to thank Paul Bastian, Christian Bormann, Brian Campbell, Mike Jones, Oliver Terbu, Daniel Fett, and Giuseppe De Marco for their valuable feedback and contributions to this specification.
+We would like to thank Paul Bastian, Christian Bormann, Brian Campbell, Andrii Deinega, Mike Jones, Oliver Terbu, Daniel Fett, and Giuseppe De Marco for their valuable feedback and contributions to this specification.
 
 # Notices
 
