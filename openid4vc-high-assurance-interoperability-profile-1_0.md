@@ -127,7 +127,7 @@ Both the Wallet and the Credential Issuer:
 
 Both Wallet initiated and Issuer initiated issuance are supported.
 
-The Wallet MUST support batch issuance. The Issuer MUST indicate whether batch issuance is supported by including or omitting the `batch_credential_issuance` metadata parameter. The Issuer’s decision may be influenced by various factors, including, but not limited to, trust framework requirements, regulatory constraints, applicable laws or internal policies.
+If the Issuer supports batch issuance, the Wallet SHOULD NOT make multiple requests for a single copy of the same credential in a short space of time. The Issuer MUST indicate whether batch issuance is supported by including or omitting the `batch_credential_issuance` metadata parameter. The Issuer’s decision may be influenced by various factors, including, but not limited to, trust framework requirements, regulatory constraints, applicable laws or internal policies.
 
 
 ## Issuer Metadata
