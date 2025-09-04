@@ -38,6 +38,11 @@ This document defines a profile of OpenID for Verifiable Credentials in combinat
 
 This document defines a set of requirements for the existing specifications to enable interoperability among Issuers, Wallets and Verifiers of Credentials where a high level of security and privacy is required. This document is an interoperability profile that can be used by implementations in various contexts, be it a certain industry or a certain regulatory environment.
 
+The meaning of "high assurance" in the context of this profile is:
+
+* There is a high assurance the claims in a certain credential are valid and bound to the holder (authenticity of the claims). The authenticity is about the policies and procedures to gather and maintain the claims as well as authentication of the holder in the process of the credential issuance and the protection of the authenticity during rest in the wallet and presentation. In scope for this profile is the security of the issuance flow and the protection of the issued credentials as well as ways for verifers to gather data about the issuer. 
+* There is a high assurance the credential presented in a certain transaction is presented by its holder (holder authentication). There are several ways to proof and validate the holder binding. In scope of this profiles is the security of the presentation of key bound credentials. The holder binding of claims-bound can be implemented on top of this functionality. 
+
 This document is not a specification, but a profile. It refers to the specifications required for implementations to interoperate among each other and for the optionalities mentioned in the referenced specifications, defines the set of features to be mandatory to implement.
 
 The profile uses OpenID for Verifiable Credential Issuance [@!OIDF.OID4VCI] and OpenID for Verifiable Presentations [@!OIDF.OID4VP] as the base protocols for issuance and presentation of Credentials, respectively. The credential formats used are IETF SD-JWT VC as specified in [@!I-D.ietf-oauth-sd-jwt-vc] and ISO mdoc [@!ISO.18013-5]. Additionally, considerations are given on how the issuance of Credentials in both IETF SD-JWT VC [@!I-D.ietf-oauth-sd-jwt-vc] and ISO mdoc [@ISO.18013-5] formats can be performed in the same transaction.
