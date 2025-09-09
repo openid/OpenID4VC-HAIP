@@ -286,7 +286,11 @@ The hash algorithm SHA-256 MUST be supported by all the entities to generate and
 
 When using this profile alongside other hash algorithms, each entity SHOULD make it explicit in its metadata which other algorithms are supported.
 
-# Implementations Considerations
+# Implementation Considerations
+
+## Prerequisites
+
+This specification assumes certain prerequisites, including browser/OS support of certain features (for example the `haip://` custom URL scheme). This means some of the mandatory clauses might not be implementable for reasons outside the implementer's control.
 
 # Security Considerations {#security_considerations}
 
