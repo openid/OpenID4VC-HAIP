@@ -195,6 +195,8 @@ The following requirements apply to OpenID4VP, irrespective of the flow and Cred
 
 Additional requirements for OpenID4VP are defined in (#oid4vp-redirects), (#oid4vp-dc-api) and (#oid4vp-credential-formats).
 
+Note that while this document does not define profiles for X.509 certificates used in Verifier authentication (e.g., with the `x509_hash` Client Identifier Prefix), ecosystems are encouraged to define their own certificate issuing policies and certificate profiles. Such policies and profiles MAY specify how information in the certificate corresponds to information in the presentation flows. For example, an ecosystem might require that the Wallet verifies that the `redirect_uri`, `response_uri`, `origin`, or `expected_origin` request parameters match with information contained in the Verifier's end-entity certificate (e.g., its DNS name).
+
 ## OpenID for Verifiable Presentations via Redirects {#oid4vp-redirects}
 
 The following requirements apply to OpenID4VP via redirects, unless specified otherwise:
@@ -464,6 +466,7 @@ The technology described in this specification was made available from contribut
 
    -04
 
+   * Add note on verifier certificate profiling
    * Added support for credentials without cryptographic holder binding
    * mandate support for aki trusted_authorities method
    * remove presentation exchange reference since it was removed in openid4vp
