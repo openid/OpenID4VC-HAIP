@@ -38,10 +38,10 @@ This document defines a profile of OpenID for Verifiable Credentials in combinat
 
 This document defines a set of requirements for the existing specifications to enable interoperability among Issuers, Wallets and Verifiers of Credentials where a high level of security and privacy is required. This document is an interoperability profile that can be used by implementations in various contexts, be it a certain industry or a certain regulatory environment.
 
-The meaning of "high assurance" in the context of this profile is:
+The level of "high assurance" aimed to be achieved in the context of this profile includes the following:
 
-* There is a high assurance the claims in a certain credential are valid and bound to the holder (authenticity of the claims). The authenticity is about the policies and procedures to gather and maintain the claims as well as authentication of the holder in the process of the credential issuance and the protection of the authenticity during rest in the wallet and presentation. In scope for this profile is the security of the issuance flow and the protection of the issued credentials as well as ways for verifers to gather data about the issuer. 
-* There is a high assurance the credential presented in a certain transaction is presented by its holder (holder authentication). There are several ways to proof and validate the holder binding. In scope of this profiles is the security of the presentation of key bound credentials. The holder binding of claims-bound can be implemented on top of this functionality. 
+* Authenticity of claims: There is strong assurance that the claims within a Credential are valid and bound to the correct Holder. This involves the policies and procedures used to collect and maintain the claims, the authentication of the Holder during issuance, and the protection of claim authenticity both at rest (in the wallet) and during presentation. In scope for this profile are security of the issuance process, protection of issued credentials, and providing mechanisms for the Verifiers to access trustworthy information about the Issuer.
+* Holder authentication: There is strong assurance that the Credential is presented by its legitimate Holder in a given transaction. This involves proof of Holder binding, which can be validated through several methods. In scope of this profile are ensuring secure presentation of key-bound credentials, and supporting Claim-based Binding when built on top of this functionality.
 
 This document is not a specification, but a profile. It refers to the specifications required for implementations to interoperate among each other and for the optionalities mentioned in the referenced specifications, defines the set of features to be mandatory to implement.
 
