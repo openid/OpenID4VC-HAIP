@@ -126,6 +126,11 @@ Both Wallet initiated and Issuer initiated issuance are supported.
 
 ## Issuer Metadata
 
+The Authorization Server MUST support metadata according to [@!RFC8414].
+
+The Credential Issuer MUST support metadata retrieval according to Section 12.2.2 of [@!OIDF.OID4VCI].
+The Credential Issuer metadata MUST include a scope for every Credential Configuration it supports.
+
 When ecosystem policies require Issuer Authentication to a higher level than possible with TLS alone, signed Credential Issuer Metadata as specified in Section 11.2.3 in [@!OIDF.OID4VCI]
 MUST be supported by both the Wallet and the Issuer. Key resolution to validate the signed Issuer
 Metadata MUST be supported using the `x5c` JOSE header parameter as defined in [@!RFC7515].
@@ -174,13 +179,6 @@ Individual Wallet Attestations MUST be used for each Issuer and they MUST not co
 
 Wallets MUST support key attestations as defined in Annex D of [@!OIDF.OID4VCI]. If batch issuance is used and the Credential Issuer has indicated (via `cryptographic_binding_methods_supported` metadata parameter) that cryptographic holder binding is required, all public keys used in Credential Request SHOULD be attested within a single key attestation.
 
-## Issuer Metadata
-
-The Authorization Server MUST support metadata according to [@!RFC8414].
-
-The Credential Issuer MUST support metadata retrieval according to Section 12.2.2 of [@!OIDF.OID4VCI].
-The Credential Issuer metadata MUST include a scope for every Credential Configuration it supports.
-
 # OpenID for Verifiable Presentations
 
 The following requirements apply to OpenID4VP, irrespective of the flow and Credential Format, unless specified otherwise:
@@ -196,6 +194,8 @@ The following requirements apply to OpenID4VP, irrespective of the flow and Cred
 * The Authority Key Identifier (`aki`)-based Trusted Authority Query (`trusted_authorities`) for DCQL, as defined in section 6.1.1.1 of [@!OIDF.OID4VP], MUST be supported. Note that the Authority Key Identifiers mechanism can be used to support multiple X.509-based trust mechanisms, such as ISO mDL VICAL (as introduced in [@ISO.18013-5]) or ETSI Trusted Lists [@ETSI.TL]. This is achieved by collecting the relevant X.509 certificates for the trusted Issuers and including the encoded KeyIdentifers from the certificates in the `aki` array .
 
 Additional requirements for OpenID4VP are defined in (#oid4vp-redirects), (#oid4vp-dc-api) and (#oid4vp-credential-formats).
+
+Note that while this document does not define profiles for X.509 certificates used in Verifier authentication (e.g., with the `x509_hash` Client Identifier Prefix), ecosystems are encouraged to define their own certificate issuing policies and certificate profiles. Such policies and profiles MAY specify how information in the certificate corresponds to information in the presentation flows. For example, an ecosystem might require that the Wallet verifies that the `redirect_uri`, `response_uri`, `origin`, or `expected_origin` request parameters match with information contained in the Verifier's end-entity certificate (e.g., its DNS name).
 
 ## OpenID for Verifiable Presentations via Redirects {#oid4vp-redirects}
 
@@ -310,9 +310,9 @@ The security considerations in [@!OIDF.OID4VCI] and [@!OIDF.OID4VP] apply.
         </front>
 </reference>
 
-<reference anchor="OIDF.OID4VP" target="https://openid.net/specs/openid-4-verifiable-presentations-1_0-24.html">
+<reference anchor="OIDF.OID4VP" target="https://openid.net/specs/openid-4-verifiable-presentations-1_0.html">
       <front>
-        <title>OpenID for Verifiable Presentations - draft 24</title>
+        <title>OpenID for Verifiable Presentations 1.0</title>
         <author initials="O." surname="Terbu" fullname="Oliver Terbu">
          <organization>Mattr</organization>
         </author>
@@ -322,10 +322,13 @@ The security considerations in [@!OIDF.OID4VCI] and [@!OIDF.OID4VP] apply.
         <author initials="K." surname="Yasuda" fullname="Kristina Yasuda">
           <organization>SPRIND</organization>
         </author>
-        <author initials="T." surname="Looker" fullname="Tobias Looker">
-          <organization>Mattr</organization>
+        <author initials="D." surname="Fett" fullname="Daniel Fett">
+          <organization>Authlete</organization>
         </author>
-       <date day="27" month="January" year="2025"/>
+        <author initials="J." surname="Heenan" fullname="Joseph Heenan">
+          <organization>Authlete</organization>
+        </author>
+       <date day="9" month="July" year="2025"/>
       </front>
 </reference>
 
@@ -464,6 +467,7 @@ The technology described in this specification was made available from contribut
    -04
 
    * Add note that lower assurance credentials can also be conveyed using this profile
+   * Add note on verifier certificate profiling
    * Added support for credentials without cryptographic holder binding
    * mandate support for aki trusted_authorities method
    * remove presentation exchange reference since it was removed in openid4vp
