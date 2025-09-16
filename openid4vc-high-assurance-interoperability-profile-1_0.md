@@ -136,7 +136,7 @@ If the Issuer supports Credential Configurations that require key binding, as in
 
 * The Grant Type `authorization_code` MUST be supported as defined in Section 4.1.1 in [@!OIDF.OID4VCI]
 * For Grant Type `authorization_code`, the Issuer MUST include a scope value in order to allow the Wallet to identify the desired Credential Type. The Wallet MUST use that value in the `scope` Authorization parameter.
-* As a way to invoke the Wallet, at least a custom URL scheme `haip://` MUST be supported. Implementations MAY support other ways to invoke the Wallets as agreed by trust frameworks/ecosystems/jurisdictions, not limited to using other custom URL schemes.
+* As a way to invoke the Wallet the custom URL scheme `haip-vci://` MAY be supported. Implementations MAY support other ways to invoke Wallets as agreed by trust frameworks/ecosystems/jurisdictions, including but not limited to using other custom URL schemes or claimed "https" scheme URIs.
 
 Note: The Authorization Code flow does not require a Credential Offer from the Issuer to the Wallet. However, it is included in the feature set to allow for Issuer initiated Credential issuance.
 
@@ -201,7 +201,7 @@ Additional requirements for OpenID4VP are defined in (#oid4vp-redirects), (#oid4
 
 The following requirements apply to OpenID4VP via redirects, unless specified otherwise:
 
-* As a way to invoke the Wallet, at least a custom URL scheme `haip://` MUST be supported by the Wallet and the Verifier. Implementations MAY support other ways to invoke the Wallets as agreed by trust frameworks/ecosystems/jurisdictions, not limited to using other custom URL schemes.
+* As a way to invoke the Wallet, the custom URL scheme `haip-vp://` MAY be supported by the Wallet and the Verifier. Implementations MAY support other ways to invoke the Wallets as agreed by trust frameworks/ecosystems/jurisdictions, including but not limited to using other custom URL schemes or claimed "https" scheme URIs.
 * Signed Authorization Requests MUST be used by utilizing JWT-Secured Authorization Request (JAR) [@!RFC9101] with the `request_uri` parameter.
 * Response encryption MUST be used by utilizing response mode `direct_post.jwt`, as defined in Section 8.3 of [@!OIDF.OID4VP]. Security Considerations in Section 14.3 of [@!OIDF.OID4VP] MUST be applied.
 
