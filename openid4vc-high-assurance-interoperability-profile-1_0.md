@@ -132,7 +132,7 @@ Metadata MUST be supported using the `x5c` JOSE header parameter as defined in [
 
 If the Issuer supports Credential Configurations that require key binding, as indicated by the presence of `cryptographic_binding_methods_supported`, the `nonce_endpoint` MUST be present in the Credential Issuer Metadata.
 
-## Credential Offer
+## Credential Offer {#credential-offer}
 
 * The Grant Type `authorization_code` MUST be supported as defined in Section 4.1.1 in [@!OIDF.OID4VCI]
 * For Grant Type `authorization_code`, the Issuer MUST include a scope value in order to allow the Wallet to identify the desired Credential Type. The Wallet MUST use that value in the `scope` Authorization parameter.
@@ -444,6 +444,41 @@ The security considerations in [@!OIDF.OID4VCI] and [@!OIDF.OID4VP] apply.
           <date month="Nov" year="2024"/>
         </front>
 </reference>
+
+<reference anchor="IANA.URI.Schemes" target="https://www.iana.org/assignments/uri-schemes">
+  <front>
+    <title>Uniform Resource Identifier (URI) Schemes</title>
+    <author>
+      <organization>IANA</organization>
+    </author>
+    <date/>
+  </front>
+</reference>
+
+# IANA Considerations
+
+## Uniform Resource Identifier (URI) Schemes Registry
+
+This specification registers the following URI scheme
+in the IANA "Uniform Resource Identifier (URI) Schemes" registry [@IANA.URI.Schemes].
+
+### haip-vci
+
+* URI Scheme: haip-vci
+* Description: Custom scheme used for invoking wallets with credential offers implementing the OIDF HAIP profile
+* Status: Permanent
+* Well-Known URI Support: -
+* Change Controller: OpenID Foundation Digital Credentials Protocols Working Group - openid-specs-digital-credentials-protocols@lists.openid.net
+* Reference: (#credential-offer) of this specification
+
+### haip-vp
+
+* URI Scheme: haip-vp
+* Description: Custom scheme used for invoking wallets implementing the OIDF HAIP profile
+* Status: Permanent
+* Well-Known URI Support: -
+* Change Controller: OpenID Foundation Digital Credentials Protocols Working Group - openid-specs-digital-credentials-protocols@lists.openid.net
+* Reference: (#oid4vp-redirects) of this specification
 
 # Acknowledgements {#Acknowledgements}
 
