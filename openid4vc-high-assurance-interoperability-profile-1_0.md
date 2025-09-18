@@ -177,7 +177,9 @@ Individual Wallet Attestations MUST be used for each Issuer and they MUST not co
 
 ### Key Attestation {#key-attestation}
 
-Wallets MUST support key attestations as defined in Annex D of [@!OIDF.OID4VCI]. If batch issuance is used and the Credential Issuer has indicated (via `cryptographic_binding_methods_supported` metadata parameter) that cryptographic holder binding is required, all public keys used in Credential Request SHOULD be attested within a single key attestation.
+Wallets MUST support key attestations. Ecosystems that desire wallet-issuer interoperability on the level of key attestations SHOULD require Wallets to support the format specified in Annex D of [@!OIDF.OID4VCI]. Alternatively, ecosystems MAY choose to rely on other key attestation formats.
+
+If batch issuance is used and the Credential Issuer has indicated (via `cryptographic_binding_methods_supported` metadata parameter) that cryptographic holder binding is required, all public keys used in Credential Request SHOULD be attested within a single key attestation.
 
 # OpenID for Verifiable Presentations
 
@@ -288,9 +290,23 @@ When using this profile alongside other hash algorithms, each entity SHOULD make
 
 # Implementations Considerations
 
+## Validity Period of the Signature and the Claim Values
+
+`iat` and `exp` JWT claims express both the validity period of both the signature and the claims about the subject, unless there is a separate claim used to express the validity of the claims.
+
+## Interoperable Key Attestations
+
+Wallet implementations using the key attestation format specified in Annex D of [@!OIDF.OID4VCI] might need to utilize a transformation (backend) service to create such attestations based on data as provided in other formats by the respective platform or secure key management module. The dependency on such a service might impact the availability of the wallet app as well as the performance of the issuance process. This could be mitigated by creating keys and obtaining the respective key attestations in advance. 
+
 # Security Considerations {#security_considerations}
 
 The security considerations in [@!OIDF.OID4VCI] and [@!OIDF.OID4VP] apply.
+
+# Privacy Considerations
+
+## Interoperable Key Attestations
+
+Wallet implementations using the key attestation format specified in Annex D of [@!OIDF.OID4VCI] might need to utilize a transformation (backend) service to create such attestations based on data as provided in other formats by the respective platform or secure key management module. Such a backend service MUST be designed considering the privacy of its users. For example, the service could be stateless and just perform the transformation of the attestation data without binding the process in any way to a unique user identifier.
 
 {backmatter}
 
