@@ -133,7 +133,7 @@ The Credential Issuer metadata MUST include a scope for every Credential Configu
 
 When ecosystem policies require Issuer Authentication to a higher level than possible with TLS alone, signed Credential Issuer Metadata as specified in Section 11.2.3 in [@!OIDF.OID4VCI]
 MUST be supported by both the Wallet and the Issuer. Key resolution to validate the signed Issuer
-Metadata MUST be supported using the `x5c` JOSE header parameter as defined in [@!RFC7515].
+Metadata MUST be supported using the `x5c` JOSE header parameter as defined in [@!RFC7515]. In this case, the X.509 certificate of the trust anchor MUST NOT be included in the `x5c` JOSE header of the signed request. The X.509 certificate signing the request MUST NOT be self-signed.
 
 If the Issuer supports Credential Configurations that require key binding, as indicated by the presence of `cryptographic_binding_methods_supported`, the `nonce_endpoint` MUST be present in the Credential Issuer Metadata.
 
@@ -187,7 +187,7 @@ The following requirements apply to OpenID4VP, irrespective of the flow and Cred
 
 * The Wallet and Verifier MUST support at least one of the following Credential Format Profiles defined in (#vc-profiles): IETF SD-JWT VC or ISO mdoc. Ecosystems SHOULD clearly indicate which of these formats, IETF SD-JWT VC, ISO mdoc, or both, are required to be supported.
 * The Response type MUST be `vp_token`.
-* For signed requests, the Verifier MUST use, and the Wallet MUST accept the Client Identifier Prefix `x509_hash` as defined in Section 5.9.3 of [@!OIDF.OID4VP]. X.509 certificate profiles to be used with `x509_hash` are out of scope of this specification. Ecosystems MAY define their own X.509 certificate profiles for `x509_hash` and use them accordingly. For example, an mDL ecosystem can use the Reader Authentication Certificate profile defined in ISO/IEC 18013-5, Annex B with `x509_hash`.
+* For signed requests, the Verifier MUST use, and the Wallet MUST accept the Client Identifier Prefix `x509_hash` as defined in Section 5.9.3 of [@!OIDF.OID4VP]. The X.509 certificate of the trust anchor MUST NOT be included in the `x5c` JOSE header of the signed request. The X.509 certificate signing the request MUST NOT be self-signed. X.509 certificate profiles to be used with `x509_hash` are out of scope of this specification. Ecosystems MAY define their own X.509 certificate profiles for `x509_hash` and use them accordingly. For example, an mDL ecosystem can use the Reader Authentication Certificate profile defined in ISO/IEC 18013-5, Annex B with `x509_hash`.
 * The DCQL query and response as defined in Section 6 of [@!OIDF.OID4VP] MUST be used.
 * Response encryption MUST be performed as specified in [@!OIDF.OID4VP, section 8.3]. The JWE `alg` (algorithm) header parameter (see [@!RFC7516, section 4.1.1])
   value `ECDH-ES` (as defined in [@!RFC7518, section 4.6]), with key agreement utilizing keys on the `P-256` curve (see [@!RFC7518, section 6.2.1.1]) MUST be supported.
@@ -251,7 +251,7 @@ This profile defines the following additional requirements for IETF SD-JWT VCs a
 * It is at the discretion of the Issuer whether to use `exp` claim and/or a `status` claim to express the validity period of an SD-JWT VC. The Wallet and the Verifier MUST support both mechanisms.
 * The `iss` claim, if present, MUST be an HTTPS URL.
 * The `cnf` claim [@!RFC7800] MUST conform to the definition given in [@!I-D.ietf-oauth-sd-jwt-vc]. Implementations conforming to this profile MUST include the JSON Web Key [@!RFC7517] in the `jwk` member if the corresponding Credential Configuration requires cryptographic holder binding.
-* The public key used to validate the signature on the Status List Token MUST be included in the `x5c` JOSE header of the Token. The X.509 certificate of the trust anchor MUST NOT be included in the `x5c` JOSE header of the Status List Token.
+* The public key used to validate the signature on the Status List Token MUST be included in the `x5c` JOSE header of the Token. The X.509 certificate of the trust anchor MUST NOT be included in the `x5c` JOSE header of the Status List Token. The X.509 certificate signing the request MUST NOT be self-signed.
 
 Note: Re-using the same Credential across Verifiers, or re-using the same JWK value across multiple Credentials gives colluding Verifiers a mechanism to correlate the User. There are currently two known ways to address this with SD-JWT VCs. First is to issue multiple instances of the same Credentials with different JWK values, so that if each instance of the Credential is used at only one Verifier, it can be reused multiple times. Another is to use each Credential only once (ephemeral Credentials). It is RECOMMENDED to adopt one of these mechanisms.
 
@@ -263,7 +263,7 @@ Note: In some Credential Types, it is not desirable to include an expiration dat
 
 ### Issuer identification and key resolution to validate an issued Credential {#issuer-key-resolution}
 
-This profile mandates the support for X.509 certificate-based key resolution to validate the issuer signature of an SD-JWT VC. This MUST be supported by all entities (Issuer, Wallet, Verifier). The SD-JWT VC MUST contain the credential issuer's signing certificate along with a trust chain in the `x5c` JOSE header parameter as described in section 3.5 of [@!I-D.ietf-oauth-sd-jwt-vc]. The X.509 certificate of the trust anchor MUST NOT be included in the `x5c` JOSE header of the SD-JWT VC.
+This profile mandates the support for X.509 certificate-based key resolution to validate the issuer signature of an SD-JWT VC. This MUST be supported by all entities (Issuer, Wallet, Verifier). The SD-JWT VC MUST contain the credential issuer's signing certificate along with a trust chain in the `x5c` JOSE header parameter as described in section 3.5 of [@!I-D.ietf-oauth-sd-jwt-vc]. The X.509 certificate of the trust anchor MUST NOT be included in the `x5c` JOSE header of the SD-JWT VC. The X.509 certificate signing the request MUST NOT be self-signed.
 
 #### Cryptographic Holder Binding between VC and VP
 
@@ -505,6 +505,8 @@ The technology described in this specification was made available from contribut
    * refactor to separate generic and SD-JWT clauses
    * add support for ISO mdoc isssuance
    * add support for ISO mdoc when using redirect-based OID4VP
+   * prohibit self-signed certificates for signing with `x509_hash`
+   * prevent trust anchor certificates to be included in `x5c` headers
 
    -03
 
