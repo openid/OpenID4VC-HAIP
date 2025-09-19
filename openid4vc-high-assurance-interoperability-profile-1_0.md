@@ -123,6 +123,8 @@ Both the Wallet and the Credential Issuer:
 * MUST comply with the [@!FAPI2_Security_Profile], including but not limited to using PKCE [@!RFC7636] with `S256` as the code challenge method, Pushed Authorization Requests (PAR) [@!RFC9126] and the `iss` value in the Authorization response [@!RFC9207]. The following exception to [@!FAPI2_Security_Profile] applies:
   * Client authentication: Wallet Attestation as defined in (#wallet-attestation) in used.
 
+Note that some parts of [@!FAPI2_Security_Profile] are not required when using only OpenID for Verifiable Credential Issuance - there is no need to use MTLS or OpenID Connect.
+
 Both Wallet initiated and Issuer initiated issuance are supported.
 
 ## Issuer Metadata
