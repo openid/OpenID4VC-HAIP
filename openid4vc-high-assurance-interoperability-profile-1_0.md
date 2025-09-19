@@ -438,7 +438,7 @@ Wallet implementations using the key attestation format specified in Annex D of 
           <author fullname="Mohamed Amir Yosef">
             <organization>Google Inc.</organization>
           </author>
-          <date day="4" month="Sep" year="2025"/>
+          <date day="17" month="Sep" year="2025"/>
         </front>
 </reference>
 
