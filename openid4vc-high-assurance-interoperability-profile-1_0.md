@@ -520,6 +520,7 @@ The technology described in this specification was made available from contribut
 
    -04
 
+   * update etsi tl and DC API references
    * update VP & VCI references to be to 1.0 Final
    * add separate custom url schemes for issuance and presentation to replace the haip:// scheme
    * support for haip-vp:// and haip-vci:// custom url schemes is now an ecosystem decision
