@@ -426,18 +426,19 @@ Wallet implementations using the key attestation format specified in Annex D of 
         </front>
 </reference>
 
-<reference anchor="w3c.digital_credentials_api" target="https://wicg.github.io/digital-credentials/">
+<reference anchor="w3c.digital_credentials_api" target="https://www.w3.org/TR/digital-credentials/">
         <front>
           <title>Digital Credentials API</title>
-		  <author fullname="Marcos Caceres">
+          <author fullname="Marcos Caceres">
             <organization>Apple Inc.</organization>
-          </author>
-          <author fullname="Sam Goto">
-            <organization>Google</organization>
           </author>
           <author fullname="Tim Cappalli">
             <organization>Okta</organization>
           </author>
+          <author fullname="Mohamed Amir Yosef">
+            <organization>Google Inc.</organization>
+          </author>
+          <date day="4" month="Sep" year="2025"/>
         </front>
 </reference>
 
@@ -457,13 +458,13 @@ Wallet implementations using the key attestation format specified in Annex D of 
         </front>
 </reference>
 
-<reference anchor="ETSI.TL" target="https://www.etsi.org/deliver/etsi_ts/119600_119699/119612/02.01.01_60/ts_119612v020101p.pdf">
+<reference anchor="ETSI.TL" target="https://www.etsi.org/deliver/etsi_ts/119600_119699/119612/02.04.01_60/ts_119612v020401p.pdf">
         <front>
-          <title>ETSI TS 119 612 V2.3.1 Electronic Signatures and Infrastructures (ESI); Trusted Lists </title>
+          <title>ETSI TS 119 612 V2.4.1 Electronic Signatures and Trust Infrastructures (ESI); Trusted Lists </title>
           <author>
             <organization>European Telecommunications Standards Institute (ETSI)</organization>
           </author>
-          <date month="Nov" year="2024"/>
+          <date month="Aug" year="2025"/>
         </front>
 </reference>
 
