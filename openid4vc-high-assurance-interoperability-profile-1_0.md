@@ -119,8 +119,11 @@ Both the Wallet and the Credential Issuer:
 
 * MUST support the authorization code flow.
 * MUST support at least one of the following Credential Format Profiles defined in (#vc-profiles): IETF SD-JWT VC or ISO mdoc. Ecosystems SHOULD clearly indicate which of these formats, IETF SD-JWT VC, ISO mdoc, or both, are required to be supported.
-* MUST support sender-constrained tokens using the mechanism defined in [@!RFC9449]. Note this requires Wallets to be prepared to handle the `DPoP-Nonce` HTTP response header from the Credential Issuer’s Nonce Endpoint, as well as from other applicable endpoints of the Credential Issuer and Authorization Server.
-* MUST support [@!RFC7636] with `S256` as the code challenge method.
+* MUST support sender-constrained tokens using DPoP as defined in [@!RFC9449]. Note this requires Wallets to be prepared to handle the `DPoP-Nonce` HTTP response header from the Credential Issuer’s Nonce Endpoint, as well as from other applicable endpoints of the Credential Issuer and Authorization Server.
+* MUST comply with the [@!FAPI2_Security_Profile], including but not limited to using PKCE [@!RFC7636] with `S256` as the code challenge method, Pushed Authorization Requests (PAR) [@!RFC9126] and the `iss` value in the Authorization response [@!RFC9207]. The following exception to [@!FAPI2_Security_Profile] applies:
+  * Client authentication: Wallet Attestation as defined in (#wallet-attestation) in used.
+
+Note that some parts of [@!FAPI2_Security_Profile] are not required when using only OpenID for Verifiable Credential Issuance - there is no need to use MTLS or OpenID Connect.
 
 Both Wallet initiated and Issuer initiated issuance are supported.
 
@@ -149,7 +152,6 @@ Both Issuer and Wallet MUST support Credential Offer in both same-device and cro
 
 ## Authorization Endpoint
 
-* MUST use Pushed Authorization Requests (PAR) [@!RFC9126] to send the Authorization Request.
 * Wallets MUST authenticate themselves at the PAR endpoint using the same rules as defined in (#token-endpoint) for client authentication at the token endpoint.
 * MUST use the `scope` parameter to communicate Credential Type(s) to be issued. The scope value MUST map to a specific Credential Type. The scope value may be pre-agreed, obtained from the Credential Offer, or the Credential Issuer Metadata.
 * The `client_id` value in the PAR request MUST be a string that the Wallet has used as the `sub` value in the client attestation JWT.
@@ -374,6 +376,22 @@ Wallet implementations using the key attestation format specified in Annex D of 
       <organization>KDDI Corporation</organization>
     </author>
    <date day="19" month="August" year="2022"/>
+  </front>
+</reference>
+
+<reference anchor="FAPI2_Security_Profile" target="https://openid.net/specs/fapi-security-profile-2_0.html">
+  <front>
+    <title>FAPI 2.0 Security Profile</title>
+    <author initials="D." surname="Fett" fullname="Daniel Fett">
+      <organization>Authlete</organization>
+    </author>
+    <author initials="D." surname="Tonge" fullname="Dave Tonge">
+      <organization>Moneyhub Financial Technology Ltd.</organization>
+    </author>
+    <author initials="J." surname="Heenan" fullname="Joseph Heenan">
+      <organization>Authlete</organization>
+    </author>
+   <date day="22" month="Feb" year="2025"/>
   </front>
 </reference>
 
