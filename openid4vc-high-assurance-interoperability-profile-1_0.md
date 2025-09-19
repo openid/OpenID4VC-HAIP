@@ -465,7 +465,7 @@ in the IANA "Uniform Resource Identifier (URI) Schemes" registry [@IANA.URI.Sche
 ### haip-vci
 
 * URI Scheme: haip-vci
-* Description: Custom scheme used for invoking wallets with credential offers implementing the OIDF HAIP profile
+* Description: Custom scheme used for invoking wallets that implement the OIDF HAIP profile to offer a Credential
 * Status: Permanent
 * Well-Known URI Support: -
 * Change Controller: OpenID Foundation Digital Credentials Protocols Working Group - openid-specs-digital-credentials-protocols@lists.openid.net
@@ -474,7 +474,7 @@ in the IANA "Uniform Resource Identifier (URI) Schemes" registry [@IANA.URI.Sche
 ### haip-vp
 
 * URI Scheme: haip-vp
-* Description: Custom scheme used for invoking wallets implementing the OIDF HAIP profile
+* Description: Custom scheme used for invoking wallets that implement the OIDF HAIP profile to request the presentation of a Credential
 * Status: Permanent
 * Well-Known URI Support: -
 * Change Controller: OpenID Foundation Digital Credentials Protocols Working Group - openid-specs-digital-credentials-protocols@lists.openid.net
