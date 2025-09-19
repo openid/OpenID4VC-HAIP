@@ -171,9 +171,10 @@ Individual Wallet Attestations MUST be used for each Issuer and they MUST not co
 
 ## Credential Endpoint
 
-* The following proof types MUST be supported:
-  * `jwt` proof type using `key_attestation`
-  * `attestation` proof type
+The following proof types MUST be supported:
+
+* `jwt` proof type using `key_attestation`
+* `attestation` proof type
 
 ### Key Attestation {#key-attestation}
 
