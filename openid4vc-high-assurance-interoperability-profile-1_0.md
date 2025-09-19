@@ -84,7 +84,7 @@ Assumptions made are the following:
 * The Issuers and Verifiers cannot pre-discover Wallet’s capability
 * The Issuer is talking to the Wallet supporting the features defined in this profile (via Wallet invocation mechanism)
 * There are mechanisms in place for Verifiers to discover Wallets' and Issuers' capabilities
-* There are mechanisms in place for Wallets to discover Verifiers' capabilities  
+* There are mechanisms in place for Wallets to discover Verifiers' capabilities
 * There are mechanisms in place for Issuers to discover Wallets' capabilities
 
 ## Scenarios/Business Requirements
@@ -459,8 +459,7 @@ The security considerations in [@!OIDF.OID4VCI] and [@!OIDF.OID4VP] apply.
 
 ## Uniform Resource Identifier (URI) Schemes Registry
 
-This specification registers the following URI scheme
-in the IANA "Uniform Resource Identifier (URI) Schemes" registry [@IANA.URI.Schemes].
+This specification registers the following URI schemes in the IANA "Uniform Resource Identifier (URI) Schemes" registry [@IANA.URI.Schemes].
 
 ### haip-vci
 
