@@ -84,7 +84,7 @@ Assumptions made are the following:
 * The Issuers and Verifiers cannot pre-discover Wallet’s capability
 * The Issuer is talking to the Wallet supporting the features defined in this profile (via Wallet invocation mechanism)
 * There are mechanisms in place for Verifiers to discover Wallets' and Issuers' capabilities
-* There are mechanisms in place for Wallets to discover Verifiers' capabilities  
+* There are mechanisms in place for Wallets to discover Verifiers' capabilities
 * There are mechanisms in place for Issuers to discover Wallets' capabilities
 
 ## Scenarios/Business Requirements
@@ -137,11 +137,11 @@ Metadata MUST be supported using the `x5c` JOSE header parameter as defined in [
 
 If the Issuer supports Credential Configurations that require key binding, as indicated by the presence of `cryptographic_binding_methods_supported`, the `nonce_endpoint` MUST be present in the Credential Issuer Metadata.
 
-## Credential Offer
+## Credential Offer {#credential-offer}
 
 * The Grant Type `authorization_code` MUST be supported as defined in Section 4.1.1 in [@!OIDF.OID4VCI]
 * For Grant Type `authorization_code`, the Issuer MUST include a scope value in order to allow the Wallet to identify the desired Credential Type. The Wallet MUST use that value in the `scope` Authorization parameter.
-* As a way to invoke the Wallet, at least a custom URL scheme `haip://` MUST be supported. Implementations MAY support other ways to invoke the Wallets as agreed by trust frameworks/ecosystems/jurisdictions, not limited to using other custom URL schemes.
+* As a way to invoke the Wallet the custom URL scheme `haip-vci://` MAY be supported. Implementations MAY support other ways to invoke Wallets as agreed upon by trust frameworks/ecosystems/jurisdictions, including but not limited to using other custom URL schemes or claimed "https" scheme URIs.
 
 Note: The Authorization Code flow does not require a Credential Offer from the Issuer to the Wallet. However, it is included in the feature set to allow for Issuer initiated Credential issuance.
 
@@ -203,7 +203,7 @@ Note that while this document does not define profiles for X.509 certificates us
 
 The following requirements apply to OpenID4VP via redirects, unless specified otherwise:
 
-* As a way to invoke the Wallet, at least a custom URL scheme `haip://` MUST be supported by the Wallet and the Verifier. Implementations MAY support other ways to invoke the Wallets as agreed by trust frameworks/ecosystems/jurisdictions, not limited to using other custom URL schemes.
+* As a way to invoke the Wallet, the custom URL scheme `haip-vp://` MAY be supported by the Wallet and the Verifier. Implementations MAY support other ways to invoke the Wallets as agreed upon by trust frameworks/ecosystems/jurisdictions, including but not limited to using other custom URL schemes or claimed "https" scheme URIs.
 * Signed Authorization Requests MUST be used by utilizing JWT-Secured Authorization Request (JAR) [@!RFC9101] with the `request_uri` parameter.
 * Response encryption MUST be used by utilizing response mode `direct_post.jwt`, as defined in Section 8.3 of [@!OIDF.OID4VP]. Security Considerations in Section 14.3 of [@!OIDF.OID4VP] MUST be applied.
 
@@ -463,6 +463,40 @@ Wallet implementations using the key attestation format specified in Annex D of 
           <date month="Nov" year="2024"/>
         </front>
 </reference>
+
+<reference anchor="IANA.URI.Schemes" target="https://www.iana.org/assignments/uri-schemes">
+  <front>
+    <title>Uniform Resource Identifier (URI) Schemes</title>
+    <author>
+      <organization>IANA</organization>
+    </author>
+    <date/>
+  </front>
+</reference>
+
+# IANA Considerations
+
+## Uniform Resource Identifier (URI) Schemes Registry
+
+This specification registers the following URI schemes in the IANA "Uniform Resource Identifier (URI) Schemes" registry [@IANA.URI.Schemes].
+
+### haip-vci
+
+* URI Scheme: haip-vci
+* Description: Custom scheme used for invoking wallets that implement the OIDF HAIP profile to offer a Credential
+* Status: Permanent
+* Well-Known URI Support: -
+* Change Controller: OpenID Foundation Digital Credentials Protocols Working Group - openid-specs-digital-credentials-protocols@lists.openid.net
+* Reference: (#credential-offer) of this specification
+
+### haip-vp
+
+* URI Scheme: haip-vp
+* Description: Custom scheme used for invoking wallets that implement the OIDF HAIP profile to request the presentation of Credentials
+* Status: Permanent
+* Well-Known URI Support: -
+* Change Controller: OpenID Foundation Digital Credentials Protocols Working Group - openid-specs-digital-credentials-protocols@lists.openid.net
+* Reference: (#oid4vp-redirects) of this specification
 
 # Acknowledgements {#Acknowledgements}
 
