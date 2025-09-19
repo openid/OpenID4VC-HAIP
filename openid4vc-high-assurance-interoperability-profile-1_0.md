@@ -44,9 +44,9 @@ The profile uses OpenID for Verifiable Credential Issuance [@!OIDF.OID4VCI] and 
 
 A full list of the open standards used in this profile can be found in Overview of the Open Standards Requirements (reference).
 
-## Audience Target audience/Usage
+## Target Audience/Usage
 
-The audience of the document is implementers who require a high level of security and privacy for their solutions. A non-exhaustive list of the interested parties includes anyone implementing [eIDAS 2.0](https://eur-lex.europa.eu/legal-content/EN/TXT/HTML/?uri=OJ:L_202401183), [California Department of Motor Vehicles](https://www.dmv.ca.gov/portal/), [Open Wallet Foundation (OWF)](https://openwallet.foundation/), [IDunion](https://idunion.org/?lang=en), [GAIN](https://gainforum.org/), and [the Trusted Web project of the Japanese government](https://trustedweb.go.jp/en), but is expected to grow to include other jurisdictions and private sector companies.
+The target audience of this document is implementers who require a high level of security and privacy for their solutions. A non-exhaustive list of the interested parties includes anyone implementing [eIDAS 2.0](https://eur-lex.europa.eu/legal-content/EN/TXT/HTML/?uri=OJ:L_202401183), [California Department of Motor Vehicles](https://www.dmv.ca.gov/portal/), [Open Wallet Foundation (OWF)](https://openwallet.foundation/), [IDunion](https://idunion.org/?lang=en), [GAIN](https://gainforum.org/), and [the Trusted Web project of the Japanese government](https://trustedweb.go.jp/en), but is expected to grow to include other jurisdictions and private sector companies.
 
 # Terminology
 
@@ -171,9 +171,10 @@ Individual Wallet Attestations MUST be used for each Issuer and they MUST not co
 
 ## Credential Endpoint
 
-* The following proof types MUST be supported:
-  * `jwt` proof type using `key_attestation`
-  * `attestation` proof type
+The following proof types MUST be supported:
+
+* `jwt` proof type using `key_attestation`
+* `attestation` proof type
 
 ### Key Attestation {#key-attestation}
 
@@ -193,7 +194,7 @@ The following requirements apply to OpenID4VP, irrespective of the flow and Cred
   value `ECDH-ES` (as defined in [@!RFC7518, section 4.6]), with key agreement utilizing keys on the `P-256` curve (see [@!RFC7518, section 6.2.1.1]) MUST be supported.
   The JWE `enc` (encryption algorithm) header parameter (see [@!RFC7516, section 4.1.2]) value `A128GCM` (as defined in [@!RFC7518, section 5.3]) MUST be supported.
 * Verifiers MUST use ephemeral encryption keys specific to each Authorization Request passed via client metadata as specified in Section 8.3 of [@!OIDF.OID4VP].
-* The Authority Key Identifier (`aki`)-based Trusted Authority Query (`trusted_authorities`) for DCQL, as defined in section 6.1.1.1 of [@!OIDF.OID4VP], MUST be supported. Note that the Authority Key Identifiers mechanism can be used to support multiple X.509-based trust mechanisms, such as ISO mDL VICAL (as introduced in [@ISO.18013-5]) or ETSI Trusted Lists [@ETSI.TL]. This is achieved by collecting the relevant X.509 certificates for the trusted Issuers and including the encoded KeyIdentifers from the certificates in the `aki` array .
+* The Authority Key Identifier (`aki`)-based Trusted Authority Query (`trusted_authorities`) for DCQL, as defined in section 6.1.1.1 of [@!OIDF.OID4VP], MUST be supported. Note that the Authority Key Identifiers mechanism can be used to support multiple X.509-based trust mechanisms, such as ISO mDL VICAL (as introduced in [@ISO.18013-5]) or ETSI Trusted Lists [@ETSI.TL]. This is achieved by collecting the relevant X.509 certificates for the trusted Issuers and including the encoded Key Identifiers from the certificates in the `aki` array .
 
 Additional requirements for OpenID4VP are defined in (#oid4vp-redirects), (#oid4vp-dc-api) and (#oid4vp-credential-formats).
 
@@ -259,7 +260,7 @@ Note: If there is a requirement to communicate information about the verificatio
 
 Note: If there is a requirement to provide the Subject’s identifier assigned and maintained by the Issuer, the `sub` claim MAY be used. There is no requirement for a binding to exist between the `sub` and `cnf` claims. See the Implementation Considerations section in [@!I-D.ietf-oauth-sd-jwt-vc].
 
-Note: In some Credential Types, it is not desirable to include an expiration date (eg: diploma attestation). Therefore, this profile leaves its inclusion to the Issuer, or the body defining the respective Credential Type.
+Note: In some Credential Types, it is not desirable to include an expiration date (e.g., diploma attestation). Therefore, this profile leaves its inclusion to the Issuer, or the body defining the respective Credential Type.
 
 ### Issuer identification and key resolution to validate an issued Credential {#issuer-key-resolution}
 
@@ -296,7 +297,7 @@ When using this profile alongside other hash algorithms, each entity SHOULD make
 
 ## Interoperable Key Attestations
 
-Wallet implementations using the key attestation format specified in Annex D of [@!OIDF.OID4VCI] might need to utilize a transformation (backend) service to create such attestations based on data as provided in other formats by the respective platform or secure key management module. The dependency on such a service might impact the availability of the wallet app as well as the performance of the issuance process. This could be mitigated by creating keys and obtaining the respective key attestations in advance. 
+Wallet implementations using the key attestation format specified in Annex D of [@!OIDF.OID4VCI] might need to utilize a transformation (backend) service to create such attestations based on data as provided in other formats by the respective platform or secure key management module. The dependency on such a service might impact the availability of the wallet app as well as the performance of the issuance process. This could be mitigated by creating keys and obtaining the respective key attestations in advance.
 
 # Security Considerations {#security_considerations}
 
@@ -312,17 +313,20 @@ Wallet implementations using the key attestation format specified in Annex D of 
 
 <reference anchor="OIDF.OID4VCI" target="https://openid.net/specs/openid-4-verifiable-credential-issuance-1_0.html">
         <front>
-          <title>OpenID for Verifiable Credential Issuance</title>
+          <title>OpenID for Verifiable Credential Issuance 1.0</title>
           <author initials="T." surname="Lodderstedt" fullname="Torsten Lodderstedt">
-            <organization>yes.com</organization>
+            <organization>SPRIND</organization>
           </author>
           <author initials="K." surname="Yasuda" fullname="Kristina Yasuda">
-            <organization>Microsoft</organization>
+            <organization>SPRIND</organization>
           </author>
           <author initials="T." surname="Looker" fullname="Tobias Looker">
             <organization>Mattr</organization>
           </author>
-          <date day="20" month="June" year="2022"/>
+          <author initials="P." surname="Bastian" fullname="Paul P. Bastian">
+            <organization>Bundesdruckerei</organization>
+          </author>
+          <date day="16" month="September" year="2025"/>
         </front>
 </reference>
 
@@ -423,18 +427,19 @@ Wallet implementations using the key attestation format specified in Annex D of 
         </front>
 </reference>
 
-<reference anchor="w3c.digital_credentials_api" target="https://wicg.github.io/digital-credentials/">
+<reference anchor="w3c.digital_credentials_api" target="https://www.w3.org/TR/digital-credentials/">
         <front>
           <title>Digital Credentials API</title>
-		  <author fullname="Marcos Caceres">
+          <author fullname="Marcos Caceres">
             <organization>Apple Inc.</organization>
-          </author>
-          <author fullname="Sam Goto">
-            <organization>Google</organization>
           </author>
           <author fullname="Tim Cappalli">
             <organization>Okta</organization>
           </author>
+          <author fullname="Mohamed Amir Yosef">
+            <organization>Google Inc.</organization>
+          </author>
+          <date day="17" month="Sep" year="2025"/>
         </front>
 </reference>
 
@@ -454,13 +459,13 @@ Wallet implementations using the key attestation format specified in Annex D of 
         </front>
 </reference>
 
-<reference anchor="ETSI.TL" target="https://www.etsi.org/deliver/etsi_ts/119600_119699/119612/02.01.01_60/ts_119612v020101p.pdf">
+<reference anchor="ETSI.TL" target="https://www.etsi.org/deliver/etsi_ts/119600_119699/119612/02.04.01_60/ts_119612v020401p.pdf">
         <front>
-          <title>ETSI TS 119 612 V2.3.1 Electronic Signatures and Infrastructures (ESI); Trusted Lists </title>
+          <title>ETSI TS 119 612 V2.4.1 Electronic Signatures and Trust Infrastructures (ESI); Trusted Lists </title>
           <author>
             <organization>European Telecommunications Standards Institute (ETSI)</organization>
           </author>
-          <date month="Nov" year="2024"/>
+          <date month="Aug" year="2025"/>
         </front>
 </reference>
 
@@ -500,7 +505,7 @@ This specification registers the following URI schemes in the IANA "Uniform Reso
 
 # Acknowledgements {#Acknowledgements}
 
-We would like to thank Paul Bastian, Christian Bormann, Brian Campbell, Andrii Deinega, Mike Jones, Oliver Terbu, Daniel Fett, and Giuseppe De Marco for their valuable feedback and contributions to this specification.
+We would like to thank Paul Bastian, Christian Bormann, Brian Campbell, Stefan Charsley, Andrii Deinega, Timo Glastra, Martijn Haring, Łukasz Jaromin, Mike Jones, Philipp Lehwalder, Oliver Terbu, Daniel Fett, Giuseppe De Marco, Joel Posti, and Andreea Prian for their valuable feedback and contributions to this specification.
 
 # Notices
 
@@ -516,9 +521,17 @@ The technology described in this specification was made available from contribut
 
    -04
 
-   * Add note that lower assurance credentials can also be conveyed using this profile
-   * Add note on verifier certificate profiling
-   * Added support for credentials without cryptographic holder binding
+   * update etsi tl and DC API references
+   * update VP & VCI references to be to 1.0 Final
+   * add separate custom url schemes for issuance and presentation to replace the haip:// scheme
+   * support for haip-vp:// and haip-vci:// custom url schemes is now an ecosystem decision
+   * allow ecosystems the option to use key attestations other than those defined in Annex D of [@!OIDF.OID4VCI] in some cases
+   * clarify nonce endpoint must be present when cryptographic_binding_methods_supported is
+   * remove various requirements around claims present in SD-JWT VC as upstream spec covers them
+   * require ephemeral encryption keys in VP
+   * add note that lower assurance credentials can also be conveyed using this profile
+   * add note on verifier certificate profiling
+   * added support for credentials without cryptographic holder binding
    * mandate support for aki trusted_authorities method
    * remove presentation exchange reference since it was removed in openid4vp
    * Authorization Server and Credential Issuer must support metadata
@@ -526,21 +539,23 @@ The technology described in this specification was made available from contribut
    * x.509 certificates are now the mandatory mechanism for SD-JWT VC issuer key resolution
    * `x5c` header in Status List Token must be present
    * clarify that Wallet Attestations must not contain linkable information.
-   * Add signed Issuer Metadata
-   * add key attestation to OpenID4VCI
+   * add signed Issuer Metadata
+   * require key attestation for OpenID4VCI
    * clarify text regarding mdoc specific parameters
-   * Add small note that establishing trust in and retrieving root certs is out scope
-   * Update wording from Client Identifier Scheme to Client Identifier Prefix #182
+   * add small note that establishing trust in and retrieving root certs is out scope
+   * update wording from Client Identifier Scheme to Client Identifier Prefix #182
    * fix reference to ARF #177
-   * Old link in section 8 & clarify a note on claim based binding in OpenID4VP in HAIP #183
+   * remove old link in section 8 & clarify a note on claim based binding in OpenID4VP in HAIP #183
    * Clarify clause 4.1 statement #169
    * add a list of all specifications being profiled #145
    * say something about DPoP nonces
    * refactor to separate generic and SD-JWT clauses
    * add support for ISO mdoc isssuance
    * add support for ISO mdoc when using redirect-based OID4VP
+   * remove requirement to support batch endpoint (it was removed from OID4VP)
+   * remove SIOPv2 (webauthn is now the recommended way to handle pseudonymous login)
    * prohibit self-signed certificates for signing with `x509_hash`
-   * prevent trust anchor certificates to be included in `x5c` headers
+   * trust anchor certificates must not be included in `x5c` headers
 
    -03
 
