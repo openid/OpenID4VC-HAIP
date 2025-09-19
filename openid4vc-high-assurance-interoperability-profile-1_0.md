@@ -473,7 +473,7 @@ This specification registers the following URI schemes in the IANA "Uniform Reso
 ### haip-vp
 
 * URI Scheme: haip-vp
-* Description: Custom scheme used for invoking wallets that implement the OIDF HAIP profile to request the presentation of a Credential
+* Description: Custom scheme used for invoking wallets that implement the OIDF HAIP profile to request the presentation of Credentials
 * Status: Permanent
 * Well-Known URI Support: -
 * Change Controller: OpenID Foundation Digital Credentials Protocols Working Group - openid-specs-digital-credentials-protocols@lists.openid.net
