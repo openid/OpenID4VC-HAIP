@@ -291,10 +291,6 @@ When using this profile alongside other hash algorithms, each entity SHOULD make
 
 # Implementations Considerations
 
-## Validity Period of the Signature and the Claim Values
-
-`iat` and `exp` JWT claims express both the validity period of both the signature and the claims about the subject, unless there is a separate claim used to express the validity of the claims.
-
 ## Interoperable Key Attestations
 
 Wallet implementations using the key attestation format specified in Annex D of [@!OIDF.OID4VCI] might need to utilize a transformation (backend) service to create such attestations based on data as provided in other formats by the respective platform or secure key management module. The dependency on such a service might impact the availability of the wallet app as well as the performance of the issuance process. This could be mitigated by creating keys and obtaining the respective key attestations in advance.
