@@ -42,7 +42,7 @@ This document is not a specification, but a profile. It refers to the specificat
 
 The profile uses OpenID for Verifiable Credential Issuance [@!OIDF.OID4VCI] and OpenID for Verifiable Presentations [@!OIDF.OID4VP] as the base protocols for issuance and presentation of Credentials, respectively. The credential formats used are IETF SD-JWT VC as specified in [@!I-D.ietf-oauth-sd-jwt-vc] and ISO mdoc [@!ISO.18013-5]. Additionally, considerations are given on how the issuance of Credentials in both IETF SD-JWT VC [@!I-D.ietf-oauth-sd-jwt-vc] and ISO mdoc [@ISO.18013-5] formats can be performed in the same transaction.
 
-A full list of the open standards used in this profile can be found in Overview of the Open Standards Requirements (reference).
+A full list of the open standards used in this profile can be found in the Standards Requirements (#standards_requirements).
 
 ## Target Audience/Usage
 
@@ -94,7 +94,7 @@ Assumptions made are the following:
 * Presentation and Issuance of PID and (Q)EAA as defined in Architecture and Reference Framework [@EU.ARF] implementing [@eIDAS2.0].
 * Issuance and presentation of Credentials with and without cryptographic holder binding
 
-## Standards Requirements
+## Standards Requirements {#standards_requirements}
 
 The standards that are being profiled in this specification are:
 
