@@ -290,7 +290,7 @@ When using this profile alongside other hash algorithms, each entity SHOULD make
 
 ## Prerequisites
 
-This specification assumes certain prerequisites, including browser/OS support of certain features (for example the `haip://` custom URL scheme). This means some of the mandatory clauses might not be implementable for reasons outside the implementer's control.
+This specification assumes certain prerequisites, including browser/OS support of certain features. Where these prerequisites are mandatory for a flow (for example, the W3C Digital Credentials API or an equivalent platform API), this means the implementer might not be able to implement some flows for reasons outside the implementer's control. In some cases (e.g. custom URL schemes) the prerequisites are not mandatory, meaning the implementer can potentially implement the flow using alternatives.
 
 # Security Considerations {#security_considerations}
 
