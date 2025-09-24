@@ -306,6 +306,16 @@ Wallet implementations using the key attestation format specified in Annex D of 
 
 The security considerations in [@!OIDF.OID4VCI] and [@!OIDF.OID4VP] apply.
 
+## Incomplete or Incorrect Implementations of the Specifications and Conformance Testing
+
+To achieve the full security benefits, it is important that the implementation of this specification, and the underlying specifications, are both complete and correct.
+
+The OpenID Foundation provides tools that can be used to confirm that an implementation is correct and conformant:
+
+https://openid.net/certification/conformance-testing-for-openid-for-verifiable-credential-issuance/
+
+https://openid.net/certification/conformance-testing-for-openid-for-verifiable-presentations/
+
 # Privacy Considerations
 
 ## Interoperable Key Attestations
