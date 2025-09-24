@@ -178,7 +178,7 @@ Wallets MUST support key attestations. Ecosystems that desire wallet-issuer inte
 * `jwt` proof type using `key_attestation`
 * `attestation` proof type
 
-Alternatively, ecosystems MAY choose to rely on other key attestation formats, meaning they would need to use a proof type other than `attestation` or expand the `jwt` proof type to support other key attestation formats.
+Alternatively, ecosystems MAY choose to rely on other key attestation formats, meaning they would need to use a proof type other than `attestation`, define a new proof type, or expand the `jwt` proof type to support other key attestation formats.
 
 If batch issuance is used and the Credential Issuer has indicated (via `cryptographic_binding_methods_supported` metadata parameter) that cryptographic holder binding is required, all public keys used in Credential Request SHOULD be attested within a single key attestation.
 
