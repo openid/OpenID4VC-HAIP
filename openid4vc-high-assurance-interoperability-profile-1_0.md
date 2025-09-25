@@ -230,7 +230,7 @@ The following requirements apply to all OpenID4VP flows when the mdoc Credential
 * The ISO mdoc Credential Format specific DCQL parameter, `intent_to_retain` defined in Annex B.3.1 of [@!OIDF.OID4VP] MUST be present.
 * When multiple ISO mdocs are being returned, each ISO mdoc MUST be returned in a separate `DeviceResponse` (as defined in 8.3.2.1.2.2 of [@!ISO.18013-5]), each matching to a respective DCQL query. Therefore, the resulting `vp_token` contains multiple `DeviceResponse` instances.
 
-Note: The second edition of ISO/IEC 18013-5 that is currently in development ([@!ISO.18013-5.second.edition]) contains definitions of status / revocation mechanisms that can be used with ISO mdocs.
+Note: The second edition of ISO/IEC 18013-5 ([@!ISO.18013-5.second.edition]) contains definitions of status / revocation mechanisms that can be used with ISO mdocs.
 
 ### IETF SD-JWT VC
 
@@ -388,7 +388,7 @@ Wallet implementations using the key attestation format specified in Annex D of 
         </front>
 </reference>
 
-<reference anchor="ISO.18013-5.second.edition" target="https://www.iso.org/standard/69084.html">
+<reference anchor="ISO.18013-5.second.edition" target="https://www.iso.org/standard/91081.html">
         <front>
           <title>ISO/IEC 18013-5:xxxx Personal identification — ISO-compliant driving license — Part 5: Mobile driving license (mDL)  application edition 2</title>
           <author>
