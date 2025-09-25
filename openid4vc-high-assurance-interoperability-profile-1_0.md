@@ -118,7 +118,7 @@ The following items are out of scope for the current version of this document, b
 
 # OpenID for Verifiable Credential Issuance
 
-When implementing OpenID for Verifiable Credential Issueance, both the Wallet and the Credential Issuer:
+When implementing OpenID for Verifiable Credential Issuance, both the Wallet and the Credential Issuer:
 
 * MUST support the authorization code flow.
 * MUST support at least one of the following Credential Format Profiles defined in (#vc-profiles): IETF SD-JWT VC or ISO mdoc. Ecosystems SHOULD clearly indicate which of these formats, IETF SD-JWT VC, ISO mdoc, or both, are required to be supported.
@@ -187,7 +187,7 @@ If batch issuance is used and the Credential Issuer has indicated (via `cryptogr
 
 # OpenID for Verifiable Presentations
 
-The following requirements apply to OpenID4VP, irrespective of the flow and Credential Format:
+The following requirements apply to OpenID for Verifiable Presentations, irrespective of the flow and Credential Format:
 
 * The Wallet and Verifier MUST support at least one of the following Credential Format Profiles defined in (#vc-profiles): IETF SD-JWT VC or ISO mdoc. Ecosystems SHOULD clearly indicate which of these formats, IETF SD-JWT VC, ISO mdoc, or both, are required to be supported.
 * The Response type MUST be `vp_token`.
@@ -205,7 +205,7 @@ Note that while this document does not define profiles for X.509 certificates us
 
 ## OpenID for Verifiable Presentations via Redirects {#oid4vp-redirects}
 
-The following requirements apply to OpenID4VP via redirects:
+The following requirements apply to OpenID for Verifiable Presentations via redirects:
 
 * As a way to invoke the Wallet, the custom URL scheme `haip-vp://` MAY be supported by the Wallet and the Verifier. Implementations MAY support other ways to invoke the Wallets as agreed upon by trust frameworks/ecosystems/jurisdictions, including but not limited to using other custom URL schemes or claimed "https" scheme URIs.
 * Signed Authorization Requests MUST be used by utilizing JWT-Secured Authorization Request (JAR) [@!RFC9101] with the `request_uri` parameter.
@@ -213,7 +213,7 @@ The following requirements apply to OpenID4VP via redirects:
 
 ## OpenID for Verifiable Presentations via W3C Digital Credentials API {#oid4vp-dc-api}
 
-The following requirements apply to OpenID4VP via the W3C Digital Credentials API:
+The following requirements apply to OpenID for Verifiable Presentations via the W3C Digital Credentials API:
 
 * Wallet Invocation is done via the W3C Digital Credentials API or an equivalent platform API. Any other mechanism, including Custom URL schemes, MUST NOT be used.
 * The Response Mode MUST be `dc_api.jwt`.
