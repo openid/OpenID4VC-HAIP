@@ -249,7 +249,7 @@ Credential Format Profiles are defined as follows:
 This profile defines the following additional requirements for IETF SD-JWT VCs as defined in [@!I-D.ietf-oauth-sd-jwt-vc].
 
 * Compact serialization MUST be supported as defined in [@!I-D.ietf-oauth-selective-disclosure-jwt]. JSON serialization MAY be supported.
-* It is RECOMMENDED that Issuers limit the validity period when issuing SD-JWT VC. If the Issuer wishes to do so, it MUST use an `exp` claim, a `status` claim, or both. The Wallet and the Verifier MUST support both mechanisms.
+* It is RECOMMENDED that Issuers limit the validity period when issuing SD-JWT VC. When doing so, the Issuer MUST use an `exp` claim, a `status` claim, or both. The Wallet and the Verifier MUST support both mechanisms.
 * The `iss` claim, if present, MUST be an HTTPS URL.
 * The `cnf` claim [@!RFC7800] MUST conform to the definition given in [@!I-D.ietf-oauth-sd-jwt-vc]. Implementations conforming to this profile MUST include the JSON Web Key [@!RFC7517] in the `jwk` member if the corresponding Credential Configuration requires cryptographic holder binding.
 * The public key used to validate the signature on the Status List Token MUST be included in the `x5c` JOSE header of the Token. The X.509 certificate of the trust anchor MUST NOT be included in the `x5c` JOSE header of the Status List Token. The X.509 certificate signing the request MUST NOT be self-signed.
