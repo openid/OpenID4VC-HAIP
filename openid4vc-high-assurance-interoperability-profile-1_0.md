@@ -126,7 +126,6 @@ Both Wallet initiated and Issuer initiated issuance are supported.
 
 If batch issuance is supported, the Wallet SHOULD use it rather than making consecutive requests for a single Credential of the same Credential Dataset. The Issuer MUST indicate whether batch issuance is supported by including or omitting the `batch_credential_issuance` metadata parameter. The Issuer’s decision may be influenced by various factors, including, but not limited to, trust framework requirements, regulatory constraints, applicable laws or internal policies.
 
-
 ## Issuer Metadata
 
 The Authorization Server MUST support metadata according to [@!RFC8414].
@@ -137,6 +136,8 @@ The Credential Issuer metadata MUST include a scope for every Credential Configu
 When ecosystem policies require Issuer Authentication to a higher level than possible with TLS alone, signed Credential Issuer Metadata as specified in Section 11.2.3 in [@!OIDF.OID4VCI]
 MUST be supported by both the Wallet and the Issuer. Key resolution to validate the signed Issuer
 Metadata MUST be supported using the `x5c` JOSE header parameter as defined in [@!RFC7515]. In this case, the X.509 certificate of the trust anchor MUST NOT be included in the `x5c` JOSE header of the signed request. The X.509 certificate signing the request MUST NOT be self-signed.
+
+Wallets which support rendering images provided by the Credential Issuer in its metadata such as the logo associated to a specific credential as defined in Section 12.2.4 of [@!OIDF.OID4VCI] MUST support at least both the SVG and PNG formats and both data URI and HTTPS URLs as the form of the URI used to convey these images.
 
 If the Issuer supports Credential Configurations that require key binding, as indicated by the presence of `cryptographic_binding_methods_supported`, the `nonce_endpoint` MUST be present in the Credential Issuer Metadata.
 
