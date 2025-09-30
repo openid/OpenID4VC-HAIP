@@ -174,14 +174,14 @@ Individual Wallet Attestations MUST be used for each Issuer and they MUST not co
 
 ## Credential Endpoint
 
-The following proof types MUST be supported:
+### Key Attestation {#key-attestation}
+
+Wallets MUST support key attestations. Ecosystems that desire wallet-issuer interoperability on the level of key attestations SHOULD require Wallets to support the format specified in Annex D of [@!OIDF.OID4VCI], in combination with the following proof types:
 
 * `jwt` proof type using `key_attestation`
 * `attestation` proof type
 
-### Key Attestation {#key-attestation}
-
-Wallets MUST support key attestations. Ecosystems that desire wallet-issuer interoperability on the level of key attestations SHOULD require Wallets to support the format specified in Annex D of [@!OIDF.OID4VCI]. Alternatively, ecosystems MAY choose to rely on other key attestation formats.
+Alternatively, ecosystems MAY choose to rely on other key attestation formats, meaning they would need to use a proof type other than `attestation`, define a new proof type, or expand the `jwt` proof type to support other key attestation formats.
 
 If batch issuance is used and the Credential Issuer has indicated (via `cryptographic_binding_methods_supported` metadata parameter) that cryptographic holder binding is required, all public keys used in Credential Request SHOULD be attested within a single key attestation.
 
