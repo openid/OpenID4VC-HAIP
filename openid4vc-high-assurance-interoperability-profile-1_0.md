@@ -220,6 +220,8 @@ The following requirements apply to OpenID4VP via the W3C Digital Credentials AP
 * The Verifier and Wallet MUST use Annex A in [@!OIDF.OID4VP] that defines how to use OpenID4VP over the W3C Digital Credentials API.
 * The Wallet MUST support both signed and unsigned requests as defined in Annex A.3.1 and A.3.2 of [@!OIDF.OID4VP]. The Verifier MAY support signed requests, unsigned requests, or both.
 
+Note that unsigned requests depend on origin information provided by the platform and the web PKI to protect requests and authenticate the Verifier, whereas signed requests introduce a separate layer for request integrity protection and Verifier authentication that can be validated by the Wallet.
+
 ## Requirements specific to Credential Formats {#oid4vp-credential-formats}
 
 ### ISO Mobile Documents or mdocs (ISO/IEC 18013 and ISO/IEC 23220 series)
@@ -520,7 +522,7 @@ The technology described in this specification was made available from contribut
 
    -05
 
-   * TBC
+   * add small note about signed requests
 
    -04
 
