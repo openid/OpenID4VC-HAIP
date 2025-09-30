@@ -521,7 +521,7 @@ The technology described in this specification was made available from contribut
 
    -05
 
-   * TBC
+   * enforce same device flow for redirect-based OpenID4VP
 
    -04
 
