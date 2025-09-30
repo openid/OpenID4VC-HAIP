@@ -42,7 +42,7 @@ This document is not a specification, but a profile. It refers to the specificat
 
 The profile uses OpenID for Verifiable Credential Issuance [@!OIDF.OID4VCI] and OpenID for Verifiable Presentations [@!OIDF.OID4VP] as the base protocols for issuance and presentation of Credentials, respectively. The credential formats used are IETF SD-JWT VC as specified in [@!I-D.ietf-oauth-sd-jwt-vc] and ISO mdoc [@!ISO.18013-5]. Additionally, considerations are given on how the issuance of Credentials in both IETF SD-JWT VC [@!I-D.ietf-oauth-sd-jwt-vc] and ISO mdoc [@ISO.18013-5] formats can be performed in the same transaction.
 
-A full list of the open standards used in this profile can be found in Overview of the Open Standards Requirements (reference).
+A full list of the open standards used in this profile can be found in (#standards-requirements).
 
 ## Target Audience/Usage
 
@@ -98,7 +98,7 @@ Assumptions made are the following:
 * Presentation and Issuance of PID and (Q)EAA as defined in Architecture and Reference Framework [@EU.ARF] implementing [@eIDAS2.0].
 * Issuance and presentation of Credentials with and without cryptographic holder binding
 
-## Standards Requirements
+## Standards Requirements {#standards-requirements}
 
 The standards that are being profiled in this specification are:
 
@@ -166,7 +166,7 @@ Both Issuer and Wallet MUST support Credential Offer in both same-device and cro
 * The Wallets MUST perform client authentication as defined in (#wallet-attestation).
 * Refresh tokens are RECOMMENDED to be supported for Credential refresh. For details, see Section 13.5 in [@!OIDF.OID4VCI].
 
-Note: Issuers SHOULD be mindful of how long the usage of the refresh token is allowed to refresh a credential, as opposed to starting the issuance flow from the beginning. For example, if the User is trying to refresh a Credential more than a year after its original issuance, the usage of the refresh tokens is NOT RECOMMENDED.
+Note: Issuers SHOULD consider how long a refresh token is allowed to be used to refresh a credential, as opposed to starting the issuance flow from the beginning. For example, if the User is trying to refresh a Credential more than a year after its original issuance, the usage of the refresh tokens is NOT RECOMMENDED.
 
 ### Wallet Attestation {#wallet-attestation}
 
@@ -174,7 +174,7 @@ Wallets MUST use Wallet Attestations as defined in Annex E of [@!OIDF.OID4VCI].
 
 The public key certificate, and optionally a trust certificate chain, used to validate the signature on the Wallet Attestation MUST be included in the `x5c` JOSE header of the Client Attestation JWT.
 
-Individual Wallet Attestations MUST be used for each Issuer and they MUST not contain unique identifiers that would enable linkability between issuance processes. See section 14.4.4 of [@!OIDF.OID4VCI] for details on the Wallet Attestation subject.
+Individual Wallet Attestations MUST be used for each Issuer and they MUST not contain unique identifiers that would enable linkability between issuance processes. See section 15.4.4 of [@!OIDF.OID4VCI] for details on the Wallet Attestation subject.
 
 ## Credential Endpoint
 
