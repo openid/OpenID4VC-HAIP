@@ -209,7 +209,8 @@ The following requirements apply to OpenID4VP via redirects, unless specified ot
 
 * As a way to invoke the Wallet, the custom URL scheme `haip-vp://` MAY be supported by the Wallet and the Verifier. Implementations MAY support other ways to invoke the Wallets as agreed upon by trust frameworks/ecosystems/jurisdictions, including but not limited to using other custom URL schemes or claimed "https" scheme URIs.
 * Signed Authorization Requests MUST be used by utilizing JWT-Secured Authorization Request (JAR) [@!RFC9101] with the `request_uri` parameter.
-* Response encryption MUST be used by utilizing response mode `direct_post.jwt`, as defined in Section 8.3 of [@!OIDF.OID4VP]. Security Considerations in Section 14.3 of [@!OIDF.OID4VP] MUST be applied.
+* Response encryption MUST be used by utilizing response mode `direct_post.jwt`, as defined in Section 8.3 of [@!OIDF.OID4VP]. Security considerations in Section 14.3 of [@!OIDF.OID4VP] MUST be applied.
+* Same-device flows MUST be enforced by the Verifier by including `redirect_uri` in the HTTP response to the Wallet's HTTP POST to the `response_uri`, as defined in Section 8.2 of [@!OIDF.OID4VP]. Wallets MUST follow the the redirect to `redirect_uri` and Verifiers MUST reject presentations if Wallets do not follow the redirect back. Implementation considerations in Section 13.3 and security considerations in Section 14.2 of [@!OIDF.OID4VP] MUST be applied.
 
 ## OpenID for Verifiable Presentations via W3C Digital Credentials API {#oid4vp-dc-api}
 
