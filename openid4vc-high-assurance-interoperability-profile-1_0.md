@@ -164,9 +164,9 @@ Note: Issuers SHOULD be mindful of how long the usage of the refresh token is al
 
 ### Wallet Attestation {#wallet-attestation}
 
-Wallets and Issuers MUST use an OAuth Client authentication mechanism at the PAR/Token endpoints.
+Wallets and Issuers MUST use an OAuth Client authentication mechanism at the PAR and Token endpoints.
 
-Ecosystems that desire wallet-issuer interoperability on the level of wallet attestations SHOULD require Wallets to support the authentication mechanism and Wallet Attestation format specified in Annex E of [@!OIDF.OID4VCI]. When doing so, they might need to define additional ecosystem-specific claims contained in the attestation. Alternatively, ecosystems MAY choose to rely on other wallet attestation formats and mechanisms.
+Ecosystems that desire wallet-issuer interoperability on the level of Wallet Attestations SHOULD require Wallets to support the authentication mechanism and Wallet Attestation format specified in Annex E of [@!OIDF.OID4VCI]. When doing so, they might need to define additional ecosystem-specific claims contained in the attestation. Alternatively, ecosystems MAY choose to rely on other Wallet Attestation formats and mechanisms.
 
  Additional rules apply for the format defined in Annex E of [@!OIDF.OID4VCI]:
 
