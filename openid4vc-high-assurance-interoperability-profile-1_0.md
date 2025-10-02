@@ -42,11 +42,15 @@ This document is not a specification, but a profile. It refers to the specificat
 
 The profile uses OpenID for Verifiable Credential Issuance [@!OIDF.OID4VCI] and OpenID for Verifiable Presentations [@!OIDF.OID4VP] as the base protocols for issuance and presentation of Credentials, respectively. The credential formats used are IETF SD-JWT VC as specified in [@!I-D.ietf-oauth-sd-jwt-vc] and ISO mdoc [@!ISO.18013-5]. Additionally, considerations are given on how the issuance of Credentials in both IETF SD-JWT VC [@!I-D.ietf-oauth-sd-jwt-vc] and ISO mdoc [@ISO.18013-5] formats can be performed in the same transaction.
 
-A full list of the open standards used in this profile can be found in Overview of the Open Standards Requirements (reference).
+A full list of the open standards used in this profile can be found in (#standards-requirements).
 
 ## Target Audience/Usage
 
 The target audience of this document is implementers who require a high level of security and privacy for their solutions. A non-exhaustive list of the interested parties includes anyone implementing [eIDAS 2.0](https://eur-lex.europa.eu/legal-content/EN/TXT/HTML/?uri=OJ:L_202401183), [California Department of Motor Vehicles](https://www.dmv.ca.gov/portal/), [Open Wallet Foundation (OWF)](https://openwallet.foundation/), [IDunion](https://idunion.org/?lang=en), [GAIN](https://gainforum.org/), and [the Trusted Web project of the Japanese government](https://trustedweb.go.jp/en), but is expected to grow to include other jurisdictions and private sector companies.
+
+## Requirements Notation and Conventions
+
+The key words "MUST", "MUST NOT", "REQUIRED", "SHALL", "SHALL NOT", "SHOULD", "SHOULD NOT", "RECOMMENDED", "NOT RECOMMENDED", "MAY", and "OPTIONAL" in this document are to be interpreted as described in BCP 14 [@!RFC2119] [@!RFC8174] when, and only when, they appear in all capitals, as shown here.
 
 # Terminology
 
@@ -94,7 +98,7 @@ Assumptions made are the following:
 * Presentation and Issuance of PID and (Q)EAA as defined in Architecture and Reference Framework [@EU.ARF] implementing [@eIDAS2.0].
 * Issuance and presentation of Credentials with and without cryptographic holder binding
 
-## Standards Requirements
+## Standards Requirements {#standards-requirements}
 
 The standards that are being profiled in this specification are:
 
@@ -160,7 +164,7 @@ Both Issuer and Wallet MUST support Credential Offer in both same-device and cro
 
 * Refresh tokens are RECOMMENDED to be supported for Credential refresh. For details, see Section 13.5 in [@!OIDF.OID4VCI].
 
-Note: Issuers SHOULD be mindful of how long the usage of the refresh token is allowed to refresh a credential, as opposed to starting the issuance flow from the beginning. For example, if the User is trying to refresh a Credential more than a year after its original issuance, the usage of the refresh tokens is NOT RECOMMENDED.
+Note: Issuers SHOULD consider how long a refresh token is allowed to be used to refresh a credential, as opposed to starting the issuance flow from the beginning. For example, if the User is trying to refresh a Credential more than a year after its original issuance, the usage of the refresh tokens is NOT RECOMMENDED.
 
 ### Wallet Attestation {#wallet-attestation}
 
@@ -177,14 +181,14 @@ Ecosystems that desire wallet-issuer interoperability on the level of Wallet Att
 
 ## Credential Endpoint
 
-The following proof types MUST be supported:
+### Key Attestation {#key-attestation}
+
+Wallets MUST support key attestations. Ecosystems that desire wallet-issuer interoperability on the level of key attestations SHOULD require Wallets to support the format specified in Annex D of [@!OIDF.OID4VCI], in combination with the following proof types:
 
 * `jwt` proof type using `key_attestation`
 * `attestation` proof type
 
-### Key Attestation {#key-attestation}
-
-Wallets MUST support key attestations. Ecosystems that desire wallet-issuer interoperability on the level of key attestations SHOULD require Wallets to support the format specified in Annex D of [@!OIDF.OID4VCI]. Alternatively, ecosystems MAY choose to rely on other key attestation formats.
+Alternatively, ecosystems MAY choose to rely on other key attestation formats, meaning they would need to use a proof type other than `attestation`, define a new proof type, or expand the `jwt` proof type to support other key attestation formats.
 
 If batch issuance is used and the Credential Issuer has indicated (via `cryptographic_binding_methods_supported` metadata parameter) that cryptographic holder binding is required, all public keys used in Credential Request SHOULD be attested within a single key attestation.
 
@@ -256,7 +260,6 @@ This profile defines the following additional requirements for IETF SD-JWT VCs a
 
 * Compact serialization MUST be supported as defined in [@!I-D.ietf-oauth-selective-disclosure-jwt]. JSON serialization MAY be supported.
 * It is at the discretion of the Issuer whether to use `exp` claim and/or a `status` claim to express the validity period of an SD-JWT VC. The Wallet and the Verifier MUST support both mechanisms.
-* The `iss` claim, if present, MUST be an HTTPS URL.
 * The `cnf` claim [@!RFC7800] MUST conform to the definition given in [@!I-D.ietf-oauth-sd-jwt-vc]. Implementations conforming to this profile MUST include the JSON Web Key [@!RFC7517] in the `jwk` member if the corresponding Credential Configuration requires cryptographic holder binding.
 * The public key used to validate the signature on the Status List Token MUST be included in the `x5c` JOSE header of the Token. The X.509 certificate of the trust anchor MUST NOT be included in the `x5c` JOSE header of the Status List Token. The X.509 certificate signing the request MUST NOT be self-signed.
 
@@ -304,6 +307,16 @@ Wallet implementations using the key attestation format specified in Annex D of 
 # Security Considerations {#security_considerations}
 
 The security considerations in [@!OIDF.OID4VCI] and [@!OIDF.OID4VP] apply.
+
+## Incomplete or Incorrect Implementations of the Specifications and Conformance Testing
+
+To achieve the full security benefits, it is important that the implementation of this specification, and the underlying specifications, are both complete and correct.
+
+The OpenID Foundation provides tools that can be used to confirm that an implementation is correct and conformant:
+
+https://openid.net/certification/conformance-testing-for-openid-for-verifiable-credential-issuance/
+
+https://openid.net/certification/conformance-testing-for-openid-for-verifiable-presentations/
 
 # Privacy Considerations
 
