@@ -133,6 +133,8 @@ Both Wallet initiated and Issuer initiated issuance are supported.
 
 If batch issuance is supported, the Wallet SHOULD use it rather than making consecutive requests for a single Credential of the same Credential Dataset. The Issuer MUST indicate whether batch issuance is supported by including or omitting the `batch_credential_issuance` metadata parameter. The Issuer’s decision may be influenced by various factors, including, but not limited to, trust framework requirements, regulatory constraints, applicable laws or internal policies.
 
+Additional requirements for OpenID4VCI are defined in (#crypto-suites) and (#hash-algorithms).
+
 ## Issuer Metadata
 
 The Authorization Server MUST support metadata according to [@!RFC8414].
@@ -207,7 +209,7 @@ The following requirements apply to OpenID for Verifiable Presentations, irrespe
 * Verifiers MUST use ephemeral encryption keys specific to each Authorization Request passed via client metadata as specified in Section 8.3 of [@!OIDF.OID4VP].
 * The Authority Key Identifier (`aki`)-based Trusted Authority Query (`trusted_authorities`) for DCQL, as defined in section 6.1.1.1 of [@!OIDF.OID4VP], MUST be supported. Note that the Authority Key Identifiers mechanism can be used to support multiple X.509-based trust mechanisms, such as ISO mDL VICAL (as introduced in [@ISO.18013-5]) or ETSI Trusted Lists [@ETSI.TL]. This is achieved by collecting the relevant X.509 certificates for the trusted Issuers and including the encoded Key Identifiers from the certificates in the `aki` array .
 
-Additional requirements for OpenID4VP are defined in (#oid4vp-redirects), (#oid4vp-dc-api) and (#oid4vp-credential-formats).
+Additional requirements for OpenID4VP are defined in (#oid4vp-redirects), (#oid4vp-dc-api), (#oid4vp-credential-formats), (#crypto-suites) and (#hash-algorithms).
 
 Note that while this document does not define profiles for X.509 certificates used in Verifier authentication (e.g., with the `x509_hash` Client Identifier Prefix), ecosystems are encouraged to select suitable certificate issuing policies and certificate profiles (for example, an mDL ecosystem can use the Reader Authentication Certificate profile defined in Annex B of ISO/IEC 18013-5 with `x509_hash`), or define new ones if there is a good reason to do so. Such policies and profiles MAY specify how information in the certificate corresponds to information in the presentation flows. For example, an ecosystem might require that the Wallet verifies that the `redirect_uri`, `response_uri`, `origin`, or `expected_origin` request parameters match with information contained in the Verifier's end-entity certificate (e.g., its DNS name).
 
@@ -283,22 +285,30 @@ This profile mandates the support for X.509 certificate-based key resolution to 
 
 * If the credential has cryptographic holder binding, a KB-JWT, as defined in [@!I-D.ietf-oauth-sd-jwt-vc], MUST always be present when presenting an SD-JWT VC.
 
-# Crypto Suites
+# Crypto Suites {#crypto-suites}
 
-Cryptography is required by the following operations:
 
-- to sign and validate the signature on the Wallet Attestation and its proof of possession
-- to sign and validate the Issuer's signature on the Verifiable Credential
-- to sign and validate the Holder's signature on the Verifiable Presentation
-- to sign and validate the Verifier's signature on the Presentation Request
+Issuers, Verifiers, and Wallets MUST, at a minimum, support ECDSA with P-256 and SHA-256 (JOSE algorithm identifier `ES256`; COSE algorithm identifier `-7`, as applicable) for the purpose of validating the following:
 
-Issuers, Holders, and Verifiers MUST support P-256 (secp256r1) as a key type with the ES256 JWT algorithm [@!RFC7518] for the creation and verification of the above signatures.
+- Issuers
+  - Wallet Attestations (including PoP) when Annex E of [@!OIDF.OID4VCI] is used;
+  - Key Attestations when Annex D of [@!OIDF.OID4VCI] is used.
+- Verifiers
+  - the signature of the Verifiable Presentation, e.g., KB-JWT of an SD-JWT VC, or `deviceSignature` CBOR structure in case of ISO mdocs. Verifiers are assumed to determine in advance the cryptographic suites supported by the ecosystem, e.g. mDL Issuers/Verifiers implementing ISO mdocs.
+  - the status information of the Verifiable Credential or Wallet Attestation.
+- Wallets
+  - signed presentation requests.
+  - signed Issuer metadata.
+
+Ecosystem-specific profiles MAY mandate additional cryptographic suites.
 
 When using this profile alongside other crypto suites, each entity SHOULD make it explicit in its metadata which other algorithms and key types are supported for the cryptographic operations.
 
-# Hash Algorithms
+# Hash Algorithms {#hash-algorithms}
 
 The hash algorithm SHA-256 MUST be supported by all the entities to generate and validate the digests in the IETF SD-JWT VC and ISO mdoc.
+
+Ecosystem-specific profiles MAY mandate additional hashing algorithms.
 
 When using this profile alongside other hash algorithms, each entity SHOULD make it explicit in its metadata which other algorithms are supported.
 
@@ -581,6 +591,8 @@ The technology described in this specification was made available from contribut
 
    -05
 
+   * update crypto suites to require at least ECDSA w/ P-256 and SHA-256 for verifying signed artificats; and made ecosystem-specific exceptions for crypto suites and hash algorithms if certain criteria is not met
+   * removed intent_to_retain mandatory
    * add small note about signed requests
 
    -04
