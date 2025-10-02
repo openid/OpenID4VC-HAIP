@@ -287,7 +287,7 @@ Cryptography is required by the following operations:
 - to sign and validate the Holder's signature on the Verifiable Presentation
 - to sign and validate the Verifier's signature on the Presentation Request
 
-All parties MUST, at a minimum, support ECDSA with P-256 and SHA-256 (JOSE algorithm identifier `ES256`; COSE algorithm identifier `-7`, as applicable) for the following:
+Issuers, Verifiers, and Wallets MUST, at a minimum, support ECDSA with P-256 and SHA-256 (JOSE algorithm identifier `ES256`; COSE algorithm identifier `-7`, as applicable) for the following purposes:
 
 - Issuers
   - validating Wallet Attestations (including PoP) when Annex E of [@!OIDF.OID4VCI] is used;
