@@ -307,6 +307,10 @@ When using this profile alongside other crypto suites, each entity SHOULD make i
 
 The hash algorithm SHA-256 MUST be supported by all the entities to generate and validate the digests in the IETF SD-JWT VC and ISO mdoc.
 
+Although support for the above algorithm is mandatory, an Issuer, Verifier, or Wallet MAY reject a particular hashing algorithm or the corresponding protected artifact if there are reasonable security, privacy, or policy concerns (e.g., suspected compromise or non-compliance). Such decisions are out of scope of the algorithm requirements but can be necessary in real-world deployments.
+
+Ecosystem-specific profiles MAY mandate additional hashing algorithms.
+
 When using this profile alongside other hash algorithms, each entity SHOULD make it explicit in its metadata which other algorithms are supported.
 
 # Implementations Considerations
