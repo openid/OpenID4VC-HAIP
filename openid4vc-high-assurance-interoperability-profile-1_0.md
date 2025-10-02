@@ -318,6 +318,10 @@ https://openid.net/certification/conformance-testing-for-openid-for-verifiable-c
 
 https://openid.net/certification/conformance-testing-for-openid-for-verifiable-presentations/
 
+## Key sizes
+
+Implementers need to ensure appropriate key sizes are used. Guidance can be found in, for example, [@NIST.SP.800-131A], [@NIST.SP.800-57] or [@BSI.TR-02102-1].
+
 # Privacy Considerations
 
 ## Interoperable Key Attestations
@@ -491,6 +495,39 @@ Wallet implementations using the key attestation format specified in Annex D of 
       <organization>IANA</organization>
     </author>
     <date/>
+  </front>
+</reference>
+
+<reference anchor="NIST.SP.800-131A" target="https://csrc.nist.gov/pubs/sp/800/131/a/r2/final">
+  <front>
+    <title>NIST SP 800-131A: Transitioning the Use of Cryptographic Algorithms and Key Lengths</title>
+    <author fullname="Elaine Barker">
+        <organization>NIST</organization>
+    </author>
+    <author fullname="Allen Roginsky">
+        <organization>NIST</organization>
+    </author>
+    <date month="Mar" year="2019"/>
+  </front>
+</reference>
+
+<reference anchor="NIST.SP.800-57" target="https://csrc.nist.gov/pubs/sp/800/57/pt1/r5/final">
+  <front>
+    <title>NIST SP 800-57 Part 1: Recommendation for Key Management: Part 1 – General</title>
+    <author fullname="Elaine Barker">
+        <organization>NIST</organization>
+    </author>
+    <date month="May" year="2020"/>
+  </front>
+</reference>
+
+<reference anchor="BSI.TR-02102-1" target="https://www.bsi.bund.de/SharedDocs/Downloads/EN/BSI/Publications/TechGuidelines/TG02102/BSI-TR-02102-1.pdf?__blob=publicationFile">
+  <front>
+    <title>Cryptographic Mechanisms: Recommendations and Key Lengths</title>
+    <author>
+        <organization>Federal Office for Information Security (BSI)</organization>
+    </author>
+    <date month="Jan" year="2025"/>
   </front>
 </reference>
 
