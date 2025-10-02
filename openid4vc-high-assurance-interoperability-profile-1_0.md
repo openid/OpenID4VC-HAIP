@@ -281,7 +281,7 @@ This profile mandates the support for X.509 certificate-based key resolution to 
 
 Cryptography is required by the following operations:
 
-- to sign and validate the signature on the Wallet or Key Attestation and their proof of possession (PoP)
+- to sign and validate the signature on the Wallet or Key Attestation, and their proof of possession (PoP)
 - to sign and validate the signature of the status information of the Verifiable Credential or Wallet Attestation
 - to sign and validate the Issuer's signature on the Verifiable Credential
 - to sign and validate the Holder's signature on the Verifiable Presentation
