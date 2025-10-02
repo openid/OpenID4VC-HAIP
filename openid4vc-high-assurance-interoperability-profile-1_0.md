@@ -295,7 +295,11 @@ The hash algorithm SHA-256 MUST be supported by all the entities to generate and
 
 When using this profile alongside other hash algorithms, each entity SHOULD make it explicit in its metadata which other algorithms are supported.
 
-# Implementations Considerations
+# Implementation Considerations
+
+## Requirements for browser/OS support of specific features
+
+This specification relies on certain prerequisites, such as browser or operating system support for specific features. When these prerequisites are mandatory for a flow (e.g., the W3C Digital Credentials API or an equivalent platform API), an implementer might be unable to support that flow due to factors beyond their control. In other cases (e.g., custom URL schemes), the prerequisites are optional, allowing implementers to achieve the same flow through alternative mechanisms.
 
 ## Interoperable Key Attestations
 
