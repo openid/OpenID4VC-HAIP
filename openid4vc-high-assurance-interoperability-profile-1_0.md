@@ -38,7 +38,7 @@ This document defines a profile of OpenID for Verifiable Credentials in combinat
 
 This document defines a set of requirements for the existing specifications to enable interoperability among Issuers, Wallets and Verifiers of Credentials where a high level of security and privacy is required. This document is an interoperability profile that can be used by implementations in various contexts, be it a certain industry or a certain regulatory environment.
 
-The level of "high assurance" aimed to be achieved in the context of this profile includes the following:
+The level of "high assurance" defined in this profile includes the following assurance:
 
 * Authenticity of claims: There is strong assurance that the claims within a Credential are valid and bound to the correct Holder. This involves the policies and procedures used to collect and maintain the claims, the authentication of the Holder during issuance, and the protection of claim authenticity both at rest (in the wallet) and during presentation. The scope for this profile is: security of the issuance process, protection of issued credentials, and mechanisms for the Verifiers to access trustworthy information about the Issuer.
 * Holder authentication: There is strong assurance that the Credential is presented by its legitimate Holder in a given transaction. This involves proof of Holder binding, which can be validated through several methods. The scope for this profile includes secure presentation of key-bound credentials and supporting Claim-based Binding when built on top of this functionality.
