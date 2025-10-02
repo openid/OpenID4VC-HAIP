@@ -172,7 +172,7 @@ Wallets MUST use, and Issuers MUST require, an OAuth2 Client authentication mech
 
 Ecosystems that desire wallet-issuer interoperability on the level of Wallet Attestations SHOULD require Wallets to support the authentication mechanism and Wallet Attestation format specified in Annex E of [@!OIDF.OID4VCI]. When doing so, they might need to define additional ecosystem-specific claims contained in the attestation. Alternatively, ecosystems MAY choose to rely on other Wallet Attestation formats.
 
- Additional rules apply for the format defined in Annex E of [@!OIDF.OID4VCI]:
+ Additional rules apply when using the format defined in Annex E of [@!OIDF.OID4VCI]:
 
 * the public key certificate, and optionally a trust certificate chain, used to validate the signature on the Wallet Attestation MUST be included in the `x5c` JOSE header of the Client Attestation JWT 
 * individual Wallet Attestations MUST be used for each Issuer and they MUST not contain unique identifiers that would enable linkability between issuance processes. See section 15.4.4 of [@!OIDF.OID4VCI] for details on the Wallet Attestation subject.
