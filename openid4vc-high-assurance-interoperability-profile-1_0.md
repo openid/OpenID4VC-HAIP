@@ -299,7 +299,7 @@ All parties MUST, at a minimum, support ECDSA with P-256 and SHA-256 (JOSE algor
 
 Although support for the above algorithm is mandatory, an Issuer, Verifier, or Wallet MAY reject a particular cryptographic suite or the corresponding protected artifact if there are reasonable security, privacy, or policy concerns (e.g., suspected compromise or non-compliance). Such decisions are out of scope of the algorithm requirements but can be necessary in real-world deployments.
 
-Ecosystem-specific profiles MAY mandate additional or alternative cryptographic suites.
+Ecosystem-specific profiles MAY mandate additional cryptographic suites.
 
 When using this profile alongside other crypto suites, each entity SHOULD make it explicit in its metadata which other algorithms and key types are supported for the cryptographic operations.
 
