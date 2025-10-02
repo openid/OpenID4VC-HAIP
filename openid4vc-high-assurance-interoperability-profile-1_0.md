@@ -317,7 +317,7 @@ https://openid.net/certification/conformance-testing-for-openid-for-verifiable-p
 
 ## Key sizes
 
-Ensure appropriate key sizes are used. Guidance can be found in, for example, [@NIST.SP.800-131A], [@NIST.SP.800-57] or [@BSI.TR-02102-1].
+Implementers need to ensure appropriate key sizes are used. Guidance can be found in, for example, [@NIST.SP.800-131A], [@NIST.SP.800-57] or [@BSI.TR-02102-1].
 
 # Privacy Considerations
 
