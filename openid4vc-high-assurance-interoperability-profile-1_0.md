@@ -288,9 +288,9 @@ When using this profile alongside other hash algorithms, each entity SHOULD make
 
 # Implementation Considerations
 
-## Prerequisites
+## Requirements for browser/OS support of specific features
 
-This specification assumes certain prerequisites, including browser/OS support of certain features. Where these prerequisites are mandatory for a flow (for example, the W3C Digital Credentials API or an equivalent platform API), this means the implementer might not be able to implement some flows for reasons outside the implementer's control. In some cases (e.g. custom URL schemes) the prerequisites are not mandatory, meaning the implementer can potentially implement the flow using alternatives.
+This specification relies on certain prerequisites, such as browser or operating system support for specific features. When these prerequisites are mandatory for a flow (e.g., the W3C Digital Credentials API or an equivalent platform API), an implementer might be unable to support that flow due to factors beyond their control. In other cases (e.g., custom URL schemes), the prerequisites are optional, allowing implementers to achieve the same flow through alternative mechanisms.
 
 # Security Considerations {#security_considerations}
 
