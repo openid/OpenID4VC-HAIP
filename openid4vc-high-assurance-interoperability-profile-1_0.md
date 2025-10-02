@@ -551,7 +551,7 @@ The technology described in this specification was made available from contribut
 
    -05
 
-   * update crypto suites to require at least ECDSA w/ P-256 and SHA-256 for verifying signed artificats
+   * update crypto suites to require at least ECDSA w/ P-256 and SHA-256 for verifying signed artificats; and made ecosystem-specific exceptions for crypto suites and hash algorithms if certain criteria is not met
 
    -04
 
