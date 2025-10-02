@@ -324,7 +324,7 @@ Wallet implementations using the key attestation format specified in Annex D of 
 
 # Security Considerations {#security_considerations}
 
-The security considerations in [@!OIDF.OID4VCI] and [@!OIDF.OID4VP] apply.
+Note that security considerations for OpenID for Verifiable Credential Issuance are defined in Section 13 of [@!OIDF.OID4VCI] and for OpenID for Verifiable Presentations in Section 14 (for redirect based flows) or Section A.5 (for DC API) of [@!OIDF.OID4VP].
 
 ## Incomplete or Incorrect Implementations of the Specifications and Conformance Testing
 
