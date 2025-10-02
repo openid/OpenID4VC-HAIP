@@ -178,7 +178,7 @@ Wallets MUST use Wallet Attestations as defined in Annex E of [@!OIDF.OID4VCI].
 
 The public key certificate, and optionally a trust certificate chain, used to validate the signature on the Wallet Attestation MUST be included in the `x5c` JOSE header of the Client Attestation JWT.
 
-Individual Wallet Attestations MUST be used for each Issuer and they MUST not contain unique identifiers that would enable linkability between issuance processes. See section 15.4.4 of [@!OIDF.OID4VCI] for details on the Wallet Attestation subject.
+Individual Wallet Attestations MUST be used for each Issuer. They MUST not contain unique identifiers that would enable linkability between issuance processes. See section 14.4.4 of [@!OIDF.OID4VCI] for details on the Wallet Attestation subject.
 
 ## Credential Endpoint
 
@@ -263,7 +263,9 @@ This profile defines the following additional requirements for IETF SD-JWT VCs a
 * Compact serialization MUST be supported as defined in [@!I-D.ietf-oauth-selective-disclosure-jwt]. JSON serialization MAY be supported.
 * It is at the discretion of the Issuer whether to use `exp` claim and/or a `status` claim to express the validity period of an SD-JWT VC. The Wallet and the Verifier MUST support both mechanisms.
 * The `cnf` claim [@!RFC7800] MUST conform to the definition given in [@!I-D.ietf-oauth-sd-jwt-vc]. Implementations conforming to this profile MUST include the JSON Web Key [@!RFC7517] in the `jwk` member if the corresponding Credential Configuration requires cryptographic holder binding.
-* The public key used to validate the signature on the Status List Token MUST be included in the `x5c` JOSE header of the Token. The X.509 certificate of the trust anchor MUST NOT be included in the `x5c` JOSE header of the Status List Token. The X.509 certificate signing the request MUST NOT be self-signed.
+* The public key used to validate the signature on the Status List Token defined in [I-D.ietf-oauth-status-list] MUST be included in the `x5c` JOSE header of the Token. The X.509 certificate of the trust anchor MUST NOT be included in the `x5c` JOSE header of the Status List Token. The X.509 certificate signing the request MUST NOT be self-signed.
+
+Each Credential MUST have its own unique, unpredictable status list index, even when multiple Credentials reference the same status list URI (see section 13.2 of [@!I-D.ietf-oauth-status-list]). Refer to section 12.5 of [@!I-D.ietf-oauth-status-list] for additional privacy considerations on unlinkability.
 
 Note: For guidance on preventing linkability by colluding parties, such as Issuer/Verifier pairs, multiple Verifiers, or repeated interactions with the same Verifier, see Section 15.4.1 of [@!OIDF.OID4VCI] and Section 15.5 of [@!OIDF.OID4VP].
 
