@@ -164,7 +164,7 @@ Note: Issuers SHOULD be mindful of how long the usage of the refresh token is al
 
 ### Wallet Attestation {#wallet-attestation}
 
-Wallets and Issuers MUST use an OAuth Client authentication mechanism at the PAR and Token endpoints.
+Wallets MUST use, and Issuers MUST require, an OAuth2 Client authentication mechanism at OAuth2 Endpoints that support client authentication (such as the PAR and Token Endpoints).
 
 Ecosystems that desire wallet-issuer interoperability on the level of Wallet Attestations SHOULD require Wallets to support the authentication mechanism and Wallet Attestation format specified in Annex E of [@!OIDF.OID4VCI]. When doing so, they might need to define additional ecosystem-specific claims contained in the attestation. Alternatively, ecosystems MAY choose to rely on other Wallet Attestation formats.
 
@@ -172,8 +172,8 @@ Ecosystems that desire wallet-issuer interoperability on the level of Wallet Att
 
 * the public key certificate, and optionally a trust certificate chain, used to validate the signature on the Wallet Attestation MUST be included in the `x5c` JOSE header of the Client Attestation JWT 
 * individual Wallet Attestations MUST be used for each Issuer and they MUST not contain unique identifiers that would enable linkability between issuance processes. See section 15.4.4 of [@!OIDF.OID4VCI] for details on the Wallet Attestation subject.
-* the `client_id` value in the PAR request MUST be a string that the Wallet has used as the `sub` value in the client attestation JWT.
-* Wallets MUST perform client authentication with the Wallet Attestation at the Token Endpoint
+* the `client_id` value in the PAR request MUST be the string in the `sub` value in the client attestation JWT.
+* Wallets MUST perform client authentication with the Wallet Attestation at OAuth2 Endpoints that support client authentication.
 
 ## Credential Endpoint
 
