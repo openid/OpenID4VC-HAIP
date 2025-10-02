@@ -279,11 +279,6 @@ This profile mandates the support for X.509 certificate-based key resolution to 
 
 # Crypto Suites {#crypto-suites}
 
-- to sign and validate the signature on the Wallet or Key Attestation, and their proof of possession (PoP)
-- to sign and validate the signature of the status information of the Verifiable Credential or Wallet Attestation
-- to sign and validate the Issuer's signature on the Verifiable Credential
-- to sign and validate the Holder's signature on the Verifiable Presentation
-- to sign and validate the Verifier's signature on the Presentation Request
 
 Issuers, Verifiers, and Wallets MUST, at a minimum, support ECDSA with P-256 and SHA-256 (JOSE algorithm identifier `ES256`; COSE algorithm identifier `-7`, as applicable) for the following purposes:
 
