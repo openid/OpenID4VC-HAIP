@@ -292,8 +292,6 @@ Issuers, Verifiers, and Wallets MUST, at a minimum, support ECDSA with P-256 and
   - validating signed presentation requests.
   - validating signed Issuer metadata.
 
-Although support for the above algorithm is mandatory, an Issuer, Verifier, or Wallet MAY reject a particular cryptographic suite or the corresponding protected artifact if there are reasonable security, privacy, or policy concerns (e.g., suspected compromise or non-compliance). Such decisions are out of scope of the algorithm requirements but can be necessary in real-world deployments.
-
 Ecosystem-specific profiles MAY mandate additional cryptographic suites.
 
 When using this profile alongside other crypto suites, each entity SHOULD make it explicit in its metadata which other algorithms and key types are supported for the cryptographic operations.
@@ -301,8 +299,6 @@ When using this profile alongside other crypto suites, each entity SHOULD make i
 # Hash Algorithms {#hash-algorithms}
 
 The hash algorithm SHA-256 MUST be supported by all the entities to generate and validate the digests in the IETF SD-JWT VC and ISO mdoc.
-
-Although support for the above algorithm is mandatory, an Issuer, Verifier, or Wallet MAY reject a particular hashing algorithm or the corresponding protected artifact if there are reasonable security, privacy, or policy concerns (e.g., suspected compromise or non-compliance). Such decisions are out of scope of the algorithm requirements but can be necessary in real-world deployments.
 
 Ecosystem-specific profiles MAY mandate additional hashing algorithms.
 
@@ -547,6 +543,7 @@ The technology described in this specification was made available from contribut
    -05
 
    * update crypto suites to require at least ECDSA w/ P-256 and SHA-256 for verifying signed artificats; and made ecosystem-specific exceptions for crypto suites and hash algorithms if certain criteria is not met
+   * removed intent_to_retain mandatory
 
    -04
 
