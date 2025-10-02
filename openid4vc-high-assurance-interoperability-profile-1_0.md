@@ -297,6 +297,7 @@ Issuers, Verifiers, and Wallets MUST, at a minimum, support ECDSA with P-256 and
   - validating the status information of the Verifiable Credential or Wallet Attestation.
 - Wallets
   - validating signed presentation requests.
+  - validating signed Issuer metadata.
 
 Although support for the above algorithm is mandatory, an Issuer, Verifier, or Wallet MAY reject a particular cryptographic suite or the corresponding protected artifact if there are reasonable security, privacy, or policy concerns (e.g., suspected compromise or non-compliance). Such decisions are out of scope of the algorithm requirements but can be necessary in real-world deployments.
 
