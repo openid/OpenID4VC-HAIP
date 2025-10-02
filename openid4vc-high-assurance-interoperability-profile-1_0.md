@@ -257,7 +257,7 @@ This profile defines the following additional requirements for IETF SD-JWT VCs a
 * The `cnf` claim [@!RFC7800] MUST conform to the definition given in [@!I-D.ietf-oauth-sd-jwt-vc]. Implementations conforming to this profile MUST include the JSON Web Key [@!RFC7517] in the `jwk` member if the corresponding Credential Configuration requires cryptographic holder binding.
 * The public key used to validate the signature on the Status List Token defined in [I-D.ietf-oauth-status-list] MUST be included in the `x5c` JOSE header of the Token. The X.509 certificate of the trust anchor MUST NOT be included in the `x5c` JOSE header of the Status List Token. The X.509 certificate signing the request MUST NOT be self-signed.
 
-Each Credential MUST have its own unique, unpredictable status list index, even when multiple Credentials reference the same status list URI. For additional privacy considerations on unlinkability, see Section 11.4 of [@!I-D.ietf-oauth-status-list].
+Each Credential MUST have its own unique, unpredictable status list index, even when multiple Credentials reference the same status list URI (see section 13.2 of [@!I-D.ietf-oauth-status-list]). Refer to section 12.5 of [@!I-D.ietf-oauth-status-list] for additional privacy considerations on unlinkability.
 
 Note: For guidance on preventing linkability by colluding parties, such as Issuer/Verifier pairs, multiple Verifiers, or repeated interactions with the same Verifier, see Section 15.4.1 of [@!OIDF.OID4VCI] and Section 15.5 of [@!OIDF.OID4VP].
 
