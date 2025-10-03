@@ -45,7 +45,7 @@ The level of security and privacy defined in this profile includes the following
 
 Note: This profile defines the technical means by which holder authentication can be proven and claim authenticity can be protected using certain protocol and credential format features. Out of scope are concrete holder authentication mechanisms (which ensure only the holder can sign the presentation) and policies and procedures (as this is a technical interop profile and not a policy definition).
 
-Note: This specification does not correspond to the "High" Level of Assurance (LoA) as defined in the eIDAS Regulation [@eIDAS2.0]. While this profile defines features intended for scenarios targeting a high level of security, these features must be combined with additional measures outside of the scope of HAIP to achieve LoA High compliance. 
+Note: This specification fulfils some, but not all, of the requirements to meet the "High" Level of Assurance (LoA) as defined in the eIDAS Regulation [@eIDAS2.0]. While this profile defines features intended for scenarios targeting a high level of security, these features must be combined with additional measures outside of the scope of HAIP to achieve LoA High compliance. 
 
 This document is not a specification, but a profile. It refers to the specifications required for implementations to interoperate among each other and for the optionalities mentioned in the referenced specifications, defines the set of features to be mandatory to implement.
 
