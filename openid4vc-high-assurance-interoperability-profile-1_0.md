@@ -38,12 +38,14 @@ This document defines a profile of OpenID for Verifiable Credentials in combinat
 
 This document defines a set of requirements for the existing specifications to enable interoperability among Issuers, Wallets and Verifiers of Credentials where a high level of security and privacy is required. This document is an interoperability profile that can be used by implementations in various contexts, be it a certain industry or a certain regulatory environment.
 
-The level of "high assurance" defined in this profile includes the following assurance:
+The level of security and privacy defined in this profile includes the following assurance:
 
 * Authenticity of claims: There is strong assurance that the claims within a Credential are valid and bound to the correct Holder. This involves the policies and procedures used to collect and maintain the claims, the authentication of the Holder during issuance, and the protection of claim authenticity both at rest (in the wallet) and during presentation. The scope for this profile is: security of the issuance process, protection of issued credentials, and mechanisms for the Verifiers to access trustworthy information about the Issuer.
 * Holder authentication: There is strong assurance that the Credential is presented by its legitimate Holder in a given transaction. This involves proof of Holder binding, which can be validated through several methods. The scope for this profile includes secure presentation of key-bound credentials and supporting Claim-based Binding when built on top of this functionality.
 
-Note: This profile defines the technical means by which holder authentication can be proven and claim authenticity can protected using certain protocol and credential format features. Out of scope are concrete holder authentication mechanisms (which ensure only the holder can sign the presentation) and policies and procedures (as this is a technical interop profile and not a policy definition).
+Note: This profile defines the technical means by which holder authentication can be proven and claim authenticity can be protected using certain protocol and credential format features. Out of scope are concrete holder authentication mechanisms (which ensure only the holder can sign the presentation) and policies and procedures (as this is a technical interop profile and not a policy definition).
+
+Note: This specification does not correspond to the "High" Level of Assurance (LoA) as defined in the eIDAS Regulation [@eIDAS2.0]. While this profile defines features intended for scenarios targeting a high level of security, these features must be combined with additional measures outside of the scope of HAIP to achieve LoA High compliance. 
 
 This document is not a specification, but a profile. It refers to the specifications required for implementations to interoperate among each other and for the optionalities mentioned in the referenced specifications, defines the set of features to be mandatory to implement.
 
