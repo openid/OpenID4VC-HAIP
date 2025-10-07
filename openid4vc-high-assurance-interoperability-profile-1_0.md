@@ -326,13 +326,13 @@ Wallet implementations using the key attestation format specified in Annex D of 
 
 This document intentionally leaves certain extensions for ecosystems to define, in order to enable broad compatibility across differing or even conflicting requirements. These include:
 
-- Which Credential format to support across issuance and presentation
-- Whether to use Signed Issuer Metadata or not
-- How to send Credential Offer
+- Which Credential format to support across issuance and presentation.
+- Whether to use Signed Issuer Metadata or not.
+- How to send Credential Offer.
 - Key attestation formats.
 - X509 certificate profiles.
-- Presentation mechanisms.
-- Support or restriction of additional cryptographic suites and hash algorithms
+- Whether to use DC API, Redirects with custom URL schemes  and/or Redirects with claimed "https" scheme URIs for presentation. 
+- Support or restriction of additional cryptographic suites and hash algorithms.
 
 Below are two non-normative examples illustrating how an ecosystem may define the above elements to achieve its specific goals and preferences.
 
