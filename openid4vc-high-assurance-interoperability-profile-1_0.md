@@ -184,22 +184,25 @@ Both Issuer and Wallet MUST support Credential Offer in both same-device and cro
 
 * Wallets MUST authenticate themselves at the PAR endpoint using the same rules as defined in (#token-endpoint) for client authentication at the token endpoint.
 * MUST use the `scope` parameter to communicate Credential Type(s) to be issued. The scope value MUST map to a specific Credential Type. The scope value may be pre-agreed, obtained from the Credential Offer, or the Credential Issuer Metadata.
-* The `client_id` value in the PAR request MUST be a string that the Wallet has used as the `sub` value in the client attestation JWT.
 
 ## Token Endpoint {#token-endpoint}
 
-* The Wallets MUST perform client authentication as defined in (#wallet-attestation).
 * Refresh tokens are RECOMMENDED to be supported for Credential refresh. For details, see Section 13.5 in [@!OIDF.OID4VCI].
 
 Note: Issuers SHOULD consider how long a refresh token is allowed to be used to refresh a credential, as opposed to starting the issuance flow from the beginning. For example, if the User is trying to refresh a Credential more than a year after its original issuance, the usage of the refresh tokens is NOT RECOMMENDED.
 
 ### Wallet Attestation {#wallet-attestation}
 
-Wallets MUST use Wallet Attestations as defined in Annex E of [@!OIDF.OID4VCI].
+Wallets MUST use, and Issuers MUST require, an OAuth2 Client authentication mechanism at OAuth2 Endpoints that support client authentication (such as the PAR and Token Endpoints).
 
-The public key certificate, and optionally a trust certificate chain, used to validate the signature on the Wallet Attestation MUST be included in the `x5c` JOSE header of the Client Attestation JWT.
+Ecosystems that desire wallet-issuer interoperability on the level of Wallet Attestations SHOULD require Wallets to support the authentication mechanism and Wallet Attestation format specified in Annex E of [@!OIDF.OID4VCI]. When doing so, they might need to define additional ecosystem-specific claims contained in the attestation. Alternatively, ecosystems MAY choose to rely on other Wallet Attestation formats.
 
-Individual Wallet Attestations MUST be used for each Issuer. They MUST not contain unique identifiers that would enable linkability between issuance processes. See section 14.4.4 of [@!OIDF.OID4VCI] for details on the Wallet Attestation subject.
+ Additional rules apply when using the format defined in Annex E of [@!OIDF.OID4VCI]:
+
+* the public key certificate, and optionally a trust certificate chain excluding the trust anchor, used to validate the signature on the Wallet Attestation MUST be included in the `x5c` JOSE header of the Client Attestation JWT 
+* Wallet Attestations MUST NOT be reused across different Issuers. They MUST NOT introduce a unique identifier specific to a single Wallet instance. The subject claim for the Wallet Attestation MUST be a value that is shared by all Wallet instances using the present type of wallet implementation. See section 15.4.4 of [@!OIDF.OID4VCI] for details on the Wallet Attestation subject.
+* if applicable, the `client_id` value in the PAR request MUST be the string in the `sub` value in the client attestation JWT.
+* Wallets MUST perform client authentication with the Wallet Attestation at OAuth2 Endpoints that support client authentication.
 
 ## Credential Endpoint
 
@@ -627,6 +630,7 @@ The technology described in this specification was made available from contribut
 
    -05
 
+   * change wallet attesation format from mandatory to recommended
    * update crypto suites to require at least ECDSA w/ P-256 and SHA-256 for verifying signed artificats; and made ecosystem-specific exceptions for crypto suites and hash algorithms if certain criteria is not met
    * removed intent_to_retain mandatory
    * add small note about signed requests
