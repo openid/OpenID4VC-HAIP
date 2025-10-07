@@ -567,19 +567,19 @@ This specification registers the following URI schemes in the IANA "Uniform Reso
 
 ### haip-vci
 
-* URI Scheme: haip-vci
-* Description: Custom scheme used for invoking wallets that implement the OIDF HAIP profile to offer a Credential
+* Scheme name: haip-vci
 * Status: Permanent
-* Well-Known URI Support: -
+* Applications/protocols that use this scheme name: Wallets that implement the OIDF HAIP profile to offer a Credential using OpenID for Verifiable Credential Issuance
+* Contact: OpenID Foundation Digital Credentials Protocols Working Group - openid-specs-digital-credentials-protocols@lists.openid.net
 * Change Controller: OpenID Foundation Digital Credentials Protocols Working Group - openid-specs-digital-credentials-protocols@lists.openid.net
 * Reference: (#credential-offer) of this specification
 
 ### haip-vp
 
-* URI Scheme: haip-vp
-* Description: Custom scheme used for invoking wallets that implement the OIDF HAIP profile to request the presentation of Credentials
+* Scheme name: haip-vp
 * Status: Permanent
-* Well-Known URI Support: -
+* Applications/protocols that use this scheme name: Verifiers invoking Wallets that implement the OIDF HAIP profile to request the presentation of Credentials using OpenID for Verifiable Presentations
+* Contact: OpenID Foundation Digital Credentials Protocols Working Group - openid-specs-digital-credentials-protocols@lists.openid.net
 * Change Controller: OpenID Foundation Digital Credentials Protocols Working Group - openid-specs-digital-credentials-protocols@lists.openid.net
 * Reference: (#oid4vp-redirects) of this specification
 
