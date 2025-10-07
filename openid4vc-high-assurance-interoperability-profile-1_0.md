@@ -181,7 +181,7 @@ Ecosystems that desire wallet-issuer interoperability on the level of Wallet Att
  Additional rules apply when using the format defined in Annex E of [@!OIDF.OID4VCI]:
 
 * the public key certificate, and optionally a trust certificate chain excluding the trust anchor, used to validate the signature on the Wallet Attestation MUST be included in the `x5c` JOSE header of the Client Attestation JWT 
-* Wallet Attestations MUST NOT be reused across different Issuers. They MUST NOT introduce a unique identifier specific to a single Client Instance. The subject claim for the Wallet Attestation MUST be a value that is shared by all Wallet instances using the present type of wallet implementation. See section 15.4.4 of [@!OIDF.OID4VCI] for details on the Wallet Attestation subject.
+* Wallet Attestations MUST NOT be reused across different Issuers. They MUST NOT introduce a unique identifier specific to a single Wallet instance. The subject claim for the Wallet Attestation MUST be a value that is shared by all Wallet instances using the present type of wallet implementation. See section 15.4.4 of [@!OIDF.OID4VCI] for details on the Wallet Attestation subject.
 * if applicable, the `client_id` value in the PAR request MUST be the string in the `sub` value in the client attestation JWT.
 * Wallets MUST perform client authentication with the Wallet Attestation at OAuth2 Endpoints that support client authentication.
 
