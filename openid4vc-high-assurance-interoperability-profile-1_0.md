@@ -119,13 +119,19 @@ Both the Wallet and the Credential Issuer:
 
 * MUST support the authorization code flow.
 * MUST support at least one of the following Credential Format Profiles defined in (#vc-profiles): IETF SD-JWT VC or ISO mdoc. Ecosystems SHOULD clearly indicate which of these formats, IETF SD-JWT VC, ISO mdoc, or both, are required to be supported.
-* MUST support sender-constrained tokens using DPoP as defined in [@!RFC9449]. Note this requires Wallets to be prepared to handle the `DPoP-Nonce` HTTP response header from the Credential Issuer’s Nonce Endpoint, as well as from other applicable endpoints of the Credential Issuer and Authorization Server.
-* MUST comply with the [@!FAPI2_Security_Profile], including but not limited to using PKCE [@!RFC7636] with `S256` as the code challenge method, Pushed Authorization Requests (PAR) [@!RFC9126] (where applicable) and the `iss` value in the Authorization response [@!RFC9207]. The following exceptions to [@!FAPI2_Security_Profile] apply:
+* MUST comply with the provisions of [@!FAPI2_Security_Profile] that are applicable to this specification. This includes, but is not limited to using PKCE [@!RFC7636] with `S256` as the code challenge method, Pushed Authorization Requests (PAR) [@!RFC9126] (where applicable) and the `iss` value in the Authorization response [@!RFC9207]. 
+
+The following aspects of [@!FAPI2_Security_Profile] are further profiled:
+
+  * Sender-constrained access token: MUST support DPoP as defined in [@!RFC9449]. Note that this requires Wallets to be prepared to handle the `DPoP-Nonce` HTTP response header from the Credential Issuer’s Nonce Endpoint, as well as from other applicable endpoints of the Credential Issuer and Authorization Server.
+
+The following aspects of [@!FAPI2_Security_Profile] do not apply to this specification:
+
   * Client authentication: Wallet Attestation as defined in (#wallet-attestation) can be used.
   * Pushed Authorization Requests (PAR): Only required when using the Authorization Endpoint as defined in Section 5 of [@!OIDF.OID4VCI].
   * Cryptography and secrets: (#crypto-suites) overrides the requirements in Section 5.4.1 clause 1.
 
-Note that some parts of [@!FAPI2_Security_Profile] are not required when using only OpenID for Verifiable Credential Issuance - there is no need to use MTLS or OpenID Connect.
+Note that some optional parts of [@!FAPI2_Security_Profile] are not applicable when using only OpenID for Verifiable Credential Issuance, e.g., MTLS or OpenID Connect.
 
 Both Wallet initiated and Issuer initiated issuance are supported.
 
