@@ -626,7 +626,7 @@ The technology described in this specification was made available from contribut
    [[ To be removed from the final specification ]]
 
    -05
-
+   * Add ecosysetm guidance section
    * update crypto suites to require at least ECDSA w/ P-256 and SHA-256 for verifying signed artificats; and made ecosystem-specific exceptions for crypto suites and hash algorithms if certain criteria is not met
    * removed intent_to_retain mandatory
    * add small note about signed requests
