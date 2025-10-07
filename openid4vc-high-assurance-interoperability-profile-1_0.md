@@ -324,21 +324,21 @@ Wallet implementations using the key attestation format specified in Annex D of 
 
 ## Ecosystem Implementation Considerations
 
-This document leaves extensible a number of different options to allow for broad compatible with ecosystems that have conflicting needs. These include:
+This document intentionally leaves certain extensions for ecosystems to define, in order to enable broad compatibility across differing or even conflicting requirements. These include:
 
-- Credential format support requirements across issuance and presentation
-- Signed Issuer Metadata.
-- Credential Offer invocation mechanisms.
+- Which Credential format to support across issuance and presentation
+- Whether to use Signed Issuer Metadata or not
+- How to send Credential Offer
 - Key attestation formats.
-- X509 Verifier Authentication certificate profiles.
+- X509 certificate profiles.
 - Presentation mechanisms.
-- Additional crypto suite and hash algorithm support.
+- Support or restriction of additional cryptographic suites and hash algorithms
 
-Ecosystems MAY choose to further restrict or extend these. Below are two non-normative examples of ecosystem goals and choices that could be made to achieve them.
+Below are two non-normative examples illustrating how an ecosystem may define the above elements to achieve its specific goals and preferences.
 
 ### Improved Baseline Interoperability 
 
-This is an ecosystem that prioritizes all Wallets and Issuers operating without any pre-existing relationship, across both ISO mdocs and SD-JWT VCs. To achieve this the ecosystem could define the following:
+This ecosystem prioritizes interoperability among all Wallets and Issuers, without requiring any pre-existing relationships, and supports both ISO mdocs and SD-JWT VCs. To achieve this, the ecosystem could define the following:
 
 - Wallets MUST support both mdoc and sd-jwt-vc. Issuers MAY issue in either format.
 - Wallets MUST register for the 'haip-vci://' custom scheme, where possible.
@@ -349,7 +349,7 @@ Making these choices maximizes interoperability between the parties in the ecosy
 
 ### Existing Curve Requirements
 
-This is an ecosystem where backwards compatibility with existing issued curves is important. For example:
+This ecosystem places importance on maintaining backward compatibility with already issued cryptographic curves. To achieve this, the ecosystem could define the following:
 
 - Verifiers MUST support all curves from Cipher Suite 1 as listed in table 22 of (@!ISO.18013-5).
 - Verifiers MUST support all hash algorithms in table 21 of (@!ISO.18013-5).
@@ -626,6 +626,7 @@ The technology described in this specification was made available from contribut
    [[ To be removed from the final specification ]]
 
    -05
+
    * Add ecosysetm guidance section
    * update crypto suites to require at least ECDSA w/ P-256 and SHA-256 for verifying signed artificats; and made ecosystem-specific exceptions for crypto suites and hash algorithms if certain criteria is not met
    * removed intent_to_retain mandatory
