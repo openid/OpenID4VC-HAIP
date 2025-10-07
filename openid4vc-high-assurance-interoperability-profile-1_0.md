@@ -38,6 +38,15 @@ This document defines a profile of OpenID for Verifiable Credentials in combinat
 
 This document defines a set of requirements for the existing specifications to enable interoperability among Issuers, Wallets and Verifiers of Credentials where a high level of security and privacy is required. This document is an interoperability profile that can be used by implementations in various contexts, be it a certain industry or a certain regulatory environment. Note that while this profile is aimed at high assurance use-cases, it can also be used for lower assurance use-cases.
 
+The level of security and privacy defined in this profile includes the following assurance:
+
+* Authenticity of claims: There is strong assurance that the claims within a Credential are valid and bound to the correct Holder. This involves the policies and procedures used to collect and maintain the claims, the authentication of the Holder during issuance, and the protection of claim authenticity both at rest (in the wallet) and during presentation. The scope for this profile is: security of the issuance process, protection of issued credentials, and mechanisms for the Verifiers to access trustworthy information about the Issuer.
+* Holder authentication: There is strong assurance that the Credential is presented by its legitimate Holder in a given transaction. This involves proof of Holder binding, which can be validated through several methods. The scope for this profile includes secure presentation of key-bound credentials and supporting Claim-based Binding when built on top of this functionality.
+
+Note: This profile defines the technical means by which holder authentication can be proven and claim authenticity can be protected using certain protocol and credential format features. Out of scope are concrete holder authentication mechanisms (which ensure only the holder can sign the presentation) and policies and procedures (as this is a technical interop profile and not a policy definition).
+
+Note: This specification fulfils some, but not all, of the requirements to meet the "High" Level of Assurance (LoA) as defined in the eIDAS Regulation [@eIDAS2.0]. While this profile defines features intended for scenarios targeting a high level of security, these features must be combined with additional measures outside of the scope of HAIP to achieve LoA High compliance. 
+
 This document is not a specification, but a profile. It refers to the specifications required for implementations to interoperate among each other and for the optionalities mentioned in the referenced specifications, defines the set of features to be mandatory to implement.
 
 The profile uses OpenID for Verifiable Credential Issuance [@!OIDF.OID4VCI] and OpenID for Verifiable Presentations [@!OIDF.OID4VP] as the base protocols for issuance and presentation of Credentials, respectively. The credential formats used are IETF SD-JWT VC as specified in [@!I-D.ietf-oauth-sd-jwt-vc] and ISO mdoc [@!ISO.18013-5]. Additionally, considerations are given on how the issuance of Credentials in both IETF SD-JWT VC [@!I-D.ietf-oauth-sd-jwt-vc] and ISO mdoc [@ISO.18013-5] formats can be performed in the same transaction.
@@ -133,6 +142,8 @@ Both Wallet initiated and Issuer initiated issuance are supported.
 
 If batch issuance is supported, the Wallet SHOULD use it rather than making consecutive requests for a single Credential of the same Credential Dataset. The Issuer MUST indicate whether batch issuance is supported by including or omitting the `batch_credential_issuance` metadata parameter. The Issuer’s decision may be influenced by various factors, including, but not limited to, trust framework requirements, regulatory constraints, applicable laws or internal policies.
 
+Additional requirements for OpenID4VCI are defined in (#crypto-suites) and (#hash-algorithms).
+
 ## Issuer Metadata
 
 The Authorization Server MUST support metadata according to [@!RFC8414].
@@ -207,7 +218,7 @@ The following requirements apply to OpenID for Verifiable Presentations, irrespe
 * Verifiers MUST use ephemeral encryption keys specific to each Authorization Request passed via client metadata as specified in Section 8.3 of [@!OIDF.OID4VP].
 * The Authority Key Identifier (`aki`)-based Trusted Authority Query (`trusted_authorities`) for DCQL, as defined in section 6.1.1.1 of [@!OIDF.OID4VP], MUST be supported. Note that the Authority Key Identifiers mechanism can be used to support multiple X.509-based trust mechanisms, such as ISO mDL VICAL (as introduced in [@ISO.18013-5]) or ETSI Trusted Lists [@ETSI.TL]. This is achieved by collecting the relevant X.509 certificates for the trusted Issuers and including the encoded Key Identifiers from the certificates in the `aki` array .
 
-Additional requirements for OpenID4VP are defined in (#oid4vp-redirects), (#oid4vp-dc-api) and (#oid4vp-credential-formats).
+Additional requirements for OpenID4VP are defined in (#oid4vp-redirects), (#oid4vp-dc-api), (#oid4vp-credential-formats), (#crypto-suites) and (#hash-algorithms).
 
 Note that while this document does not define profiles for X.509 certificates used in Verifier authentication (e.g., with the `x509_hash` Client Identifier Prefix), ecosystems are encouraged to select suitable certificate issuing policies and certificate profiles (for example, an mDL ecosystem can use the Reader Authentication Certificate profile defined in Annex B of ISO/IEC 18013-5 with `x509_hash`), or define new ones if there is a good reason to do so. Such policies and profiles MAY specify how information in the certificate corresponds to information in the presentation flows. For example, an ecosystem might require that the Wallet verifies that the `redirect_uri`, `response_uri`, `origin`, or `expected_origin` request parameters match with information contained in the Verifier's end-entity certificate (e.g., its DNS name).
 
@@ -264,8 +275,9 @@ Credential Format Profiles are defined as follows:
 This profile defines the following additional requirements for IETF SD-JWT VCs as defined in [@!I-D.ietf-oauth-sd-jwt-vc].
 
 * Compact serialization MUST be supported as defined in [@!I-D.ietf-oauth-selective-disclosure-jwt]. JSON serialization MAY be supported.
-* It is at the discretion of the Issuer whether to use `exp` claim and/or a `status` claim to express the validity period of an SD-JWT VC. The Wallet and the Verifier MUST support both mechanisms.
+* It is RECOMMENDED that Issuers limit the validity period when issuing SD-JWT VC. When doing so, the Issuer MUST use an `exp` claim, a `status` claim, or both.
 * The `cnf` claim [@!RFC7800] MUST conform to the definition given in [@!I-D.ietf-oauth-sd-jwt-vc]. Implementations conforming to this profile MUST include the JSON Web Key [@!RFC7517] in the `jwk` member if the corresponding Credential Configuration requires cryptographic holder binding.
+* The `status` claim, if present, MUST contain `status_list` as defined in [@!I-D.ietf-oauth-status-list]
 * The public key used to validate the signature on the Status List Token defined in [I-D.ietf-oauth-status-list] MUST be included in the `x5c` JOSE header of the Token. The X.509 certificate of the trust anchor MUST NOT be included in the `x5c` JOSE header of the Status List Token. The X.509 certificate signing the request MUST NOT be self-signed.
 
 Each Credential MUST have its own unique, unpredictable status list index, even when multiple Credentials reference the same status list URI (see section 13.2 of [@!I-D.ietf-oauth-status-list]). Refer to section 12.5 of [@!I-D.ietf-oauth-status-list] for additional privacy considerations on unlinkability.
@@ -286,22 +298,30 @@ This profile mandates the support for X.509 certificate-based key resolution to 
 
 * If the credential has cryptographic holder binding, a KB-JWT, as defined in [@!I-D.ietf-oauth-sd-jwt-vc], MUST always be present when presenting an SD-JWT VC.
 
-# Crypto Suites
+# Crypto Suites {#crypto-suites}
 
-Cryptography is required by the following operations:
 
-- to sign and validate the signature on the Wallet Attestation and its proof of possession
-- to sign and validate the Issuer's signature on the Verifiable Credential
-- to sign and validate the Holder's signature on the Verifiable Presentation
-- to sign and validate the Verifier's signature on the Presentation Request
+Issuers, Verifiers, and Wallets MUST, at a minimum, support ECDSA with P-256 and SHA-256 (JOSE algorithm identifier `ES256`; COSE algorithm identifier `-7`, as applicable) for the purpose of validating the following:
 
-Issuers, Holders, and Verifiers MUST support P-256 (secp256r1) as a key type with the ES256 JWT algorithm [@!RFC7518] for the creation and verification of the above signatures.
+- Issuers
+  - Wallet Attestations (including PoP) when Annex E of [@!OIDF.OID4VCI] is used;
+  - Key Attestations when Annex D of [@!OIDF.OID4VCI] is used.
+- Verifiers
+  - the signature of the Verifiable Presentation, e.g., KB-JWT of an SD-JWT VC, or `deviceSignature` CBOR structure in case of ISO mdocs. Verifiers are assumed to determine in advance the cryptographic suites supported by the ecosystem, e.g. mDL Issuers/Verifiers implementing ISO mdocs.
+  - the status information of the Verifiable Credential or Wallet Attestation.
+- Wallets
+  - signed presentation requests.
+  - signed Issuer metadata.
+
+Ecosystem-specific profiles MAY mandate additional cryptographic suites.
 
 When using this profile alongside other crypto suites, each entity SHOULD make it explicit in its metadata which other algorithms and key types are supported for the cryptographic operations.
 
-# Hash Algorithms
+# Hash Algorithms {#hash-algorithms}
 
 The hash algorithm SHA-256 MUST be supported by all the entities to generate and validate the digests in the IETF SD-JWT VC and ISO mdoc.
+
+Ecosystem-specific profiles MAY mandate additional hashing algorithms.
 
 When using this profile alongside other hash algorithms, each entity SHOULD make it explicit in its metadata which other algorithms are supported.
 
@@ -317,7 +337,7 @@ Wallet implementations using the key attestation format specified in Annex D of 
 
 # Security Considerations {#security_considerations}
 
-The security considerations in [@!OIDF.OID4VCI] and [@!OIDF.OID4VP] apply.
+Note that security considerations for OpenID for Verifiable Credential Issuance are defined in Section 13 of [@!OIDF.OID4VCI] and for OpenID for Verifiable Presentations in Section 14 (for redirect based flows) or Section A.5 (for DC API) of [@!OIDF.OID4VP].
 
 ## Incomplete or Incorrect Implementations of the Specifications and Conformance Testing
 
@@ -585,6 +605,8 @@ The technology described in this specification was made available from contribut
    -05
 
    * enforce same device flow for redirect-based OpenID4VP
+   * update crypto suites to require at least ECDSA w/ P-256 and SHA-256 for verifying signed artificats; and made ecosystem-specific exceptions for crypto suites and hash algorithms if certain criteria is not met
+   * removed intent_to_retain mandatory
    * add small note about signed requests
 
    -04
