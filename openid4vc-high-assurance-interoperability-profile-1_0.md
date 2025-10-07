@@ -265,7 +265,7 @@ This profile defines the following additional requirements for IETF SD-JWT VCs a
 * Compact serialization MUST be supported as defined in [@!I-D.ietf-oauth-selective-disclosure-jwt]. JSON serialization MAY be supported.
 * It is RECOMMENDED that Issuers limit the validity period when issuing SD-JWT VC. When doing so, the Issuer MUST use an `exp` claim, a `status` claim, or both.
 * The `cnf` claim [@!RFC7800] MUST conform to the definition given in [@!I-D.ietf-oauth-sd-jwt-vc]. Implementations conforming to this profile MUST include the JSON Web Key [@!RFC7517] in the `jwk` member if the corresponding Credential Configuration requires cryptographic holder binding.
-* The `status` claim, if present, MUST use the Token Status List as defined in [@!I-D.ietf-oauth-status-list]
+* The `status` claim, if present, MUST contain `status_list` as defined in [@!I-D.ietf-oauth-status-list]
 * The public key used to validate the signature on the Status List Token defined in [I-D.ietf-oauth-status-list] MUST be included in the `x5c` JOSE header of the Token. The X.509 certificate of the trust anchor MUST NOT be included in the `x5c` JOSE header of the Status List Token. The X.509 certificate signing the request MUST NOT be self-signed.
 
 Each Credential MUST have its own unique, unpredictable status list index, even when multiple Credentials reference the same status list URI (see section 13.2 of [@!I-D.ietf-oauth-status-list]). Refer to section 12.5 of [@!I-D.ietf-oauth-status-list] for additional privacy considerations on unlinkability.
