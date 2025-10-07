@@ -627,7 +627,7 @@ This specification registers the following URI schemes in the IANA "Uniform Reso
 
 # Acknowledgements {#Acknowledgements}
 
-We would like to thank Paul Bastian, Brian Campbell, Lee Campbell, Tim Cappalli, Stefan Charsley, Gabe Cohen, Andrii Deinega, Daniel Fett, Pedro Felix, Ryan Galluzzo, Timo Glastra, Martijn Haring, Bjorn Hjelm, Alen Horvat, Łukasz Jaromin, Mike Jones, Markus Kreusch, Philipp Lehwalder, Tobias Looker, Hicham Lozi, Mirko Mollik, Gareth Oliver, Oliver Terbu, Giuseppe De Marco, Mikel Pintor, Joel Posti, Dima Postnikov, Andreea Prian, Bob Reynders, Samuel Rinnetmäki, Peter Sorotokin, Jan Vereecken and David Zeuthen for their valuable feedback and contributions to this specification.
+We would like to thank Patrick Amrein, Paul Bastian, Brian Campbell, Lee Campbell, Tim Cappalli, Stefan Charsley, Gabe Cohen, Andrii Deinega, Daniel Fett, Pedro Felix, Ryan Galluzzo, Timo Glastra, Martijn Haring, Bjorn Hjelm, Alen Horvat, Łukasz Jaromin, Mike Jones, Markus Kreusch, Philipp Lehwalder, Tobias Looker, Hicham Lozi, Mirko Mollik, Gareth Oliver, Oliver Terbu, Giuseppe De Marco, Mikel Pintor, Joel Posti, Dima Postnikov, Andreea Prian, Bob Reynders, Samuel Rinnetmäki, Peter Sorotokin, Jan Vereecken and David Zeuthen for their valuable feedback and contributions to this specification.
 
 # Notices
 
