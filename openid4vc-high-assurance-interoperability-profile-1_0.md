@@ -262,6 +262,7 @@ The following requirements apply to all OpenID4VP flows when the mdoc Credential
 
 * The Credential Format identifier MUST be `mso_mdoc`.
 * When multiple ISO mdocs are being returned, each ISO mdoc MUST be returned in a separate `DeviceResponse` (as defined in 8.3.2.1.2.2 of [@!ISO.18013-5]), each matching to a respective DCQL query. Therefore, the resulting `vp_token` contains multiple `DeviceResponse` instances.
+* The Credential Issuer MAY include the MSO revocation mechanism in the issued mdoc. When doing so, it MUST use one of the mechanisms defined in ISO/IEC 18013-5 ([@!ISO.18013-5.second.edition]).
 
 ### IETF SD-JWT VC
 
@@ -460,6 +461,15 @@ Wallet implementations using the key attestation format specified in Annex D of 
             <organization>ISO/IEC JTC 1/SC 17 Cards and security devices for personal identification</organization>
           </author>
           <date year="2021"/>
+        </front>
+</reference>
+
+<reference anchor="ISO.18013-5.second.edition" target="https://www.iso.org/standard/91081.html">
+        <front>
+          <title>ISO/IEC 18013-5:xxxx Personal identification — ISO-compliant driving license — Part 5: Mobile driving license (mDL)  application edition 2</title>
+          <author>
+            <organization>ISO/IEC JTC 1/SC 17 Cards and security devices for personal identification</organization>
+          </author>
         </front>
 </reference>
 
