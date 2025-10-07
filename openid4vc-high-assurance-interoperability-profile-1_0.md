@@ -135,8 +135,19 @@ When implementing OpenID for Verifiable Credential Issuance, both the Wallet and
 
 * MUST support the authorization code flow.
 * MUST support at least one of the following Credential Format Profiles defined in (#vc-profiles): IETF SD-JWT VC or ISO mdoc. Ecosystems SHOULD clearly indicate which of these formats, IETF SD-JWT VC, ISO mdoc, or both, are required to be supported.
-* MUST support sender-constrained tokens using the mechanism defined in [@!RFC9449]. Note this requires Wallets to be prepared to handle the `DPoP-Nonce` HTTP response header from the Credential Issuer’s Nonce Endpoint, as well as from other applicable endpoints of the Credential Issuer and Authorization Server.
-* MUST support [@!RFC7636] with `S256` as the code challenge method.
+* MUST comply with the provisions of [@!FAPI2_Security_Profile] that are applicable to this specification. This includes, but is not limited to using PKCE [@!RFC7636] with `S256` as the code challenge method, Pushed Authorization Requests (PAR) [@!RFC9126] (where applicable) and the `iss` value in the Authorization response [@!RFC9207]. 
+
+The following aspects of [@!FAPI2_Security_Profile] are further profiled:
+
+  * Sender-constrained access token: MUST support DPoP as defined in [@!RFC9449]. Note that this requires Wallets to be prepared to handle the `DPoP-Nonce` HTTP response header from the Credential Issuer’s Nonce Endpoint, as well as from other applicable endpoints of the Credential Issuer and Authorization Server.
+
+The following aspects of [@!FAPI2_Security_Profile] do not apply to this specification:
+
+  * Client authentication: Wallet Attestation as defined in (#wallet-attestation) can be used.
+  * Pushed Authorization Requests (PAR): Only required when using the Authorization Endpoint as defined in Section 5 of [@!OIDF.OID4VCI].
+  * Cryptography and secrets: (#crypto-suites) overrides the requirements in Section 5.4.1 clause 1.
+
+Note that some optional parts of [@!FAPI2_Security_Profile] are not applicable when using only OpenID for Verifiable Credential Issuance, e.g., MTLS or OpenID Connect.
 
 Both Wallet initiated and Issuer initiated issuance are supported.
 
@@ -171,7 +182,6 @@ Both Issuer and Wallet MUST support Credential Offer in both same-device and cro
 
 ## Authorization Endpoint
 
-* MUST use Pushed Authorization Requests (PAR) [@!RFC9126] to send the Authorization Request.
 * Wallets MUST authenticate themselves at the PAR endpoint using the same rules as defined in (#token-endpoint) for client authentication at the token endpoint.
 * MUST use the `scope` parameter to communicate Credential Type(s) to be issued. The scope value MUST map to a specific Credential Type. The scope value may be pre-agreed, obtained from the Credential Offer, or the Credential Issuer Metadata.
 * The `client_id` value in the PAR request MUST be a string that the Wallet has used as the `sub` value in the client attestation JWT.
@@ -421,6 +431,22 @@ Wallet implementations using the key attestation format specified in Annex D of 
       <organization>KDDI Corporation</organization>
     </author>
    <date day="19" month="August" year="2022"/>
+  </front>
+</reference>
+
+<reference anchor="FAPI2_Security_Profile" target="https://openid.net/specs/fapi-security-profile-2_0.html">
+  <front>
+    <title>FAPI 2.0 Security Profile</title>
+    <author initials="D." surname="Fett" fullname="Daniel Fett">
+      <organization>Authlete</organization>
+    </author>
+    <author initials="D." surname="Tonge" fullname="Dave Tonge">
+      <organization>Moneyhub Financial Technology Ltd.</organization>
+    </author>
+    <author initials="J." surname="Heenan" fullname="Joseph Heenan">
+      <organization>Authlete</organization>
+    </author>
+   <date day="22" month="Feb" year="2025"/>
   </front>
 </reference>
 
