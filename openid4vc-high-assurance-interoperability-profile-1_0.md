@@ -26,6 +26,22 @@ organization="SPRIND"
    [author.address]
    email = "torsten@lodderstedt.net"
 
+[[author]]
+initials="C."
+surname="Bormann"
+fullname="Christian Bormann"
+organization="SPRIND"
+    [author.address]
+    email = "chris.bormann@gmx.de"
+
+[[author]]
+initials="J."
+surname="Heenan"
+fullname="Joseph Heenan"
+organization="Authlete"
+    [author.address]
+    email = "joseph@heenan.me.uk"
+
 %%%
 
 .# Abstract
@@ -611,7 +627,7 @@ This specification registers the following URI schemes in the IANA "Uniform Reso
 
 # Acknowledgements {#Acknowledgements}
 
-We would like to thank Paul Bastian, Christian Bormann, Brian Campbell, Stefan Charsley, Andrii Deinega, Timo Glastra, Martijn Haring, Łukasz Jaromin, Mike Jones, Philipp Lehwalder, Oliver Terbu, Daniel Fett, Giuseppe De Marco, Joel Posti, and Andreea Prian for their valuable feedback and contributions to this specification.
+We would like to thank Paul Bastian, Brian Campbell, Stefan Charsley, Andrii Deinega, Timo Glastra, Martijn Haring, Łukasz Jaromin, Mike Jones, Philipp Lehwalder, Tobias Looker, Gareth Oliver, Oliver Terbu, Daniel Fett, Giuseppe De Marco, Joel Posti, and Andreea Prian for their valuable feedback and contributions to this specification.
 
 # Notices
 
