@@ -322,7 +322,7 @@ This specification relies on certain prerequisites, such as browser or operating
 
 Wallet implementations using the key attestation format specified in Annex D of [@!OIDF.OID4VCI] might need to utilize a transformation (backend) service to create such attestations based on data as provided in other formats by the respective platform or secure key management module. The dependency on such a service might impact the availability of the wallet app as well as the performance of the issuance process. This could be mitigated by creating keys and obtaining the respective key attestations in advance.
 
-## Ecosystem Guidance
+## Ecosystem Implementation Considerations
 
 This document leaves extensible a number of different options to allow for broad compatible with ecosystems that have conflicting needs. These include:
 
@@ -345,7 +345,7 @@ This is an ecosystem that prioritizes all Wallets and Issuers operating without 
 - Wallets and Issuers MUST support key attestations in the format specified in Annex D of [@!OIDF.OID4VCI].
 - Wallets MUST register for the 'haip-vp://' custom scheme and DC API when they have credentials available, where possible. 
 
-Making these choices maximizes interoperability between the parties in the ecosystem while minimizing the burden on Issuers and Verifiers. This comes at the expense of an increased burden on Wallets as well as the potential privacy and security issues in (##interop-key-attestations).
+Making these choices maximizes interoperability between the parties in the ecosystem while minimizing the burden on Issuers and Verifiers. This comes at the expense of an increased burden on Wallets as well as the potential privacy and security issues in (#interop-key-attestations).
 
 ### Existing Curve Requirements
 
@@ -356,7 +356,7 @@ This is an ecosystem where backwards compatibility with existing issued curves i
 - Issuers MAY sign credentials using any curve from Cipher Suite 1 as listed in table 22 of (@!ISO.18013-5).
 - Issuers MAY use any hash algorithm in table 21 of (@!ISO.18013-5).
 
-Making these choices ensures interoperability with any existing Issuer, at the cost of increased burden on the Verifier.
+Making these choices ensures interoperability with any existing Issuer, at the cost of an increased burden on the Verifier.
 
 # Security Considerations {#security_considerations}
 
