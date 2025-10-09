@@ -229,7 +229,11 @@ Wallets MUST support key attestations. Ecosystems that desire wallet-issuer inte
 * `jwt` proof type using `key_attestation`
 * `attestation` proof type
 
-Alternatively, ecosystems MAY choose to rely on other key attestation formats, meaning they would need to use a proof type other than `attestation`, define a new proof type, or expand the `jwt` proof type to support other key attestation formats.
+* Verifiers and Wallets MUST support the "same-device" flow. Verifiers are RECOMMENDED to use only the "same-device"  flow and not the "cross-device" flow unless the Verifier does not need to rely on session binding for phishing resistance, e.g. in a proximity scenario. If "same-device" flow is used, then:
+  * Verifiers MUST include `redirect_uri` in the HTTP response to the Wallet's HTTP POST to the `response_uri`, as defined in Section 8.2 of [@!OIDF.OID4VP].
+  * Wallets MUST follow the redirect to `redirect_uri`.
+  * Verifiers MUST reject presentations if Wallets do not follow the redirect back or the redirect back arrives in a different user session to the one the request was initiated in.
+* Implementation considerations can be found in Section 13.3 of [@!OIDF.OID4VP] and security considerations in Section 14.2 of [@!OIDF.OID4VP].
 
 If batch issuance is used and the Credential Issuer has indicated (via `cryptographic_binding_methods_supported` metadata parameter) that cryptographic holder binding is required, all public keys used in Credential Request SHOULD be attested within a single key attestation.
 
