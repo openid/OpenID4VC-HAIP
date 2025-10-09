@@ -119,7 +119,9 @@ Assumptions made are the following:
 * There are mechanisms in place for Wallets to discover Verifiers' capabilities
 * There are mechanisms in place for Issuers to discover Wallets' capabilities
 
-## Key Features
+## Additional scenarios:
+
+Below is the non-exhaustive list of scenarios that can be realized with this specification:
 
 * Combined Issuance of IETF SD-JWT VC and ISO mdoc
 * Both issuer-initiated and wallet-initiated issuance
