@@ -113,7 +113,7 @@ Note that when OpenID4VP is used, the Wallet and the Verifier can either be remo
 
 Assumptions made are the following:
 
-* The Issuer is talking to the Wallet supporting the features defined in this profile (via Wallet invocation mechanism)
+* The Issuer uses the Wallet features defined in this profile (via Wallet invocation mechanism)
 * There are mechanisms in place for Verifiers to discover Wallets' and Issuers' capabilities
 * There are mechanisms in place for Wallets to discover Verifiers' capabilities
 * There are mechanisms in place for Issuers to discover Wallets' capabilities
