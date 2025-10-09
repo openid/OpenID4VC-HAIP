@@ -7,7 +7,7 @@ keyword = ["security", "openid4vc", "sd-jwt", "sd-jwt-vc", "mdoc"]
 
 [seriesInfo]
 name = "Internet-Draft"
-value = "openid4vc-high-assurance-interoperability-profile-1_0-05"
+value = "openid4vc-high-assurance-interoperability-profile-1_0-06"
 status = "standard"
 
 [[author]]
@@ -151,7 +151,7 @@ When implementing OpenID for Verifiable Credential Issuance, both the Wallet and
 
 * MUST support the authorization code flow.
 * MUST support at least one of the following Credential Format Profiles defined in (#vc-profiles): IETF SD-JWT VC or ISO mdoc. Ecosystems SHOULD clearly indicate which of these formats, IETF SD-JWT VC, ISO mdoc, or both, are required to be supported.
-* MUST comply with the provisions of [@!FAPI2_Security_Profile] that are applicable to this specification. This includes, but is not limited to using PKCE [@!RFC7636] with `S256` as the code challenge method, Pushed Authorization Requests (PAR) [@!RFC9126] (where applicable) and the `iss` value in the Authorization response [@!RFC9207]. 
+* MUST comply with the provisions of [@!FAPI2_Security_Profile] that are applicable to this specification. This includes, but is not limited to using PKCE [@!RFC7636] with `S256` as the code challenge method, Pushed Authorization Requests (PAR) [@!RFC9126] (where applicable) and the `iss` value in the Authorization response [@!RFC9207].
 
 The following aspects of [@!FAPI2_Security_Profile] are further profiled:
 
@@ -215,7 +215,7 @@ Ecosystems that desire wallet-issuer interoperability on the level of Wallet Att
 
  Additional rules apply when using the format defined in Annex E of [@!OIDF.OID4VCI]:
 
-* the public key certificate, and optionally a trust certificate chain excluding the trust anchor, used to validate the signature on the Wallet Attestation MUST be included in the `x5c` JOSE header of the Client Attestation JWT 
+* the public key certificate, and optionally a trust certificate chain excluding the trust anchor, used to validate the signature on the Wallet Attestation MUST be included in the `x5c` JOSE header of the Client Attestation JWT
 * Wallet Attestations MUST NOT be reused across different Issuers. They MUST NOT introduce a unique identifier specific to a single Wallet instance. The subject claim for the Wallet Attestation MUST be a value that is shared by all Wallet instances using the present type of wallet implementation. See section 15.4.4 of [@!OIDF.OID4VCI] for details on the Wallet Attestation subject.
 * if applicable, the `client_id` value in the PAR request MUST be the string in the `sub` value in the client attestation JWT.
 * Wallets MUST perform client authentication with the Wallet Attestation at OAuth2 Endpoints that support client authentication.
@@ -672,6 +672,10 @@ The technology described in this specification was made available from contribut
 # Document History
 
    [[ To be removed from the final specification ]]
+
+   -06
+
+   * TBC
 
    -05
 
