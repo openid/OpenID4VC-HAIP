@@ -258,7 +258,7 @@ The following requirements apply to OpenID for Verifiable Presentations via redi
 * As a way to invoke the Wallet, the custom URL scheme `haip-vp://` MAY be supported by the Wallet and the Verifier. Implementations MAY support other ways to invoke the Wallets as agreed upon by trust frameworks/ecosystems/jurisdictions, including but not limited to using other custom URL schemes or claimed "https" scheme URIs.
 * Signed Authorization Requests MUST be used by utilizing JWT-Secured Authorization Request (JAR) [@!RFC9101] with the `request_uri` parameter.
 * Response encryption MUST be used by utilizing response mode `direct_post.jwt`, as defined in Section 8.3 of [@!OIDF.OID4VP]. Security considerations in Section 14.3 of [@!OIDF.OID4VP] MUST be applied.
-* Verifiers and Wallets MUST support the "same-device" flow. Verifiers are RECOMMENDED to use only the "same-device" flow and not the "cross-device" flow unless the Verifier does not need to rely on session binding for phishing resistance, e.g. in a proximity scenario. If "same-device" flow is used, then:
+* Verifiers and Wallets MUST support the "same-device" flow. Verifiers are RECOMMENDED to use only the "same-device" flow unless the Verifier does not rely on session binding for phishing resistance, e.g. in a proximity scenario. If "same-device" flow is used, then:
   * Verifiers MUST include `redirect_uri` in the HTTP response to the Wallet's HTTP POST to the `response_uri`, as defined in Section 8.2 of [@!OIDF.OID4VP].
   * Wallets MUST follow the redirect to `redirect_uri`.
   * Verifiers MUST reject presentations if Wallets do not follow the redirect back or the redirect back arrives in a different user session to the one the request was initiated in.
