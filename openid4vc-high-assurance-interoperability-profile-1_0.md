@@ -119,11 +119,10 @@ Assumptions made are the following:
 * There are mechanisms in place for Wallets to discover Verifiers' capabilities
 * There are mechanisms in place for Issuers to discover Wallets' capabilities
 
-## Scenarios/Business Requirements
+## Key Features
 
 * Combined Issuance of IETF SD-JWT VC and ISO mdoc
 * Both issuer-initiated and wallet-initiated issuance
-* Presentation and Issuance of PID and (Q)EAA as defined in Architecture and Reference Framework [@EU.ARF] implementing [@eIDAS2.0].
 * Issuance and presentation of Credentials with and without cryptographic holder binding
 
 ## Standards Requirements {#standards-requirements}
