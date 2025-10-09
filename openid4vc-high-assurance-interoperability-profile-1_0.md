@@ -61,7 +61,7 @@ This profile aims to achieve a level of security and privacy that includes the f
 
 Note: This profile defines the technical means by which holder authentication can be proven and claim authenticity can be protected using certain protocol and credential format features. Out of scope are concrete holder authentication mechanisms (which ensure only the holder can sign the presentation) and policies and procedures (as this is a technical interop profile and not a policy definition).
 
-Note: This specification fulfils some, but not all, of the requirements to meet the "High" Level of Assurance (LoA) as defined in the eIDAS Regulation [@eIDAS2.0]. While this profile defines features intended for scenarios targeting a high level of security, these features must be combined with additional measures outside of the scope of HAIP to achieve LoA High compliance.
+Note: This profile fulfils some, but not all, of the requirements to meet the "High" Level of Assurance (LoA) as defined in the eIDAS Regulation [@eIDAS2.0]. While this profile defines features intended for scenarios targeting a high level of security, these features must be combined with additional measures outside of the scope of HAIP to achieve LoA High compliance.
 
 This document is not a specification, but a profile. It refers to the specifications required for implementations to interoperate among each other and for the optionalities mentioned in the referenced specifications, defines the set of features to be mandatory to implement.
 
@@ -79,24 +79,24 @@ The key words "MUST", "MUST NOT", "REQUIRED", "SHALL", "SHALL NOT", "SHOULD", "S
 
 # Terminology
 
-This specification uses the terms "Holder", "Issuer", "Verifier", "Wallet", "Wallet Attestation", "Credential Type" and "Verifiable Credential" as defined in [@!OIDF.OID4VCI] and [@!OIDF.OID4VP].
+This document uses the terms "Holder", "Issuer", "Verifier", "Wallet", "Wallet Attestation", "Credential Type" and "Verifiable Credential" as defined in [@!OIDF.OID4VCI] and [@!OIDF.OID4VP].
 
 # Scope
 
-This specification enables interoperable implementations of the following flows:
+This profile enables interoperable implementations of the following flows:
 
 * Issuance of Credentials using OpenID for Verifiable Credential Issuance
 * Presentation of Credentials using OpenID for Verifiable Presentations with redirects
 * Presentation of Credentials using OpenID for Verifiable Presentations with the W3C Digital Credentials API
 
-Implementations of this specification do not have to implement all the flows listed above, but they MUST be compliant to all the requirements for a flow they choose to implement, as well as the requirements in the non-flow specific sections.
+Implementations of this profile do not have to implement all the flows listed above, but they MUST be compliant to all the requirements for a flow they choose to implement, as well as the requirements in the non-flow specific sections.
 
 For each flow, at least one of the Credential profiles defined in (#vc-profiles) MUST be supported:
 
 * IETF SD-JWT VC
 * ISO mdocs
 
-A parameter listed as optional to be implemented in a specification that is being profiled (e.g., OpenID4VCI, OpenID4VP, W3C Digital Credentials API, IETF SD-JWT VC, and ISO mdoc) remains optional unless stated otherwise in this specification.
+A parameter listed as optional to be implemented in a specification that is being profiled (e.g., OpenID4VCI, OpenID4VP, W3C Digital Credentials API, IETF SD-JWT VC, and ISO mdoc) remains optional unless stated otherwise in this profile.
 
 The Profile of OpenID4VCI defines Wallet Attestation and Key Attestation.
 
@@ -128,7 +128,7 @@ Assumptions made are the following:
 
 ## Standards Requirements {#standards-requirements}
 
-The standards that are being profiled in this specification are:
+The standards that are being profiled in this document are:
 
 * OpenID for Verifiable Credential Issuance [@!OIDF.OID4VCI]
 * OpenID for Verifiable Presentations [@!OIDF.OID4VP]
@@ -142,7 +142,7 @@ Note that these standards in turn build upon other underlying standards, and req
 
 The following items are out of scope for the current version of this document, but might be added in future versions:
 
-* Trust Management refers to authorization of an Issuer to issue certain types of credentials, authorization of the Wallet to be issued certain types of credentials, authorization of the Verifier to receive certain types of credentials. Although X.509 PKI is extensively utilized in this profile, the methods for establishing trust or obtaining root certificates are out of the scope of this specification.
+* Trust Management refers to authorization of an Issuer to issue certain types of credentials, authorization of the Wallet to be issued certain types of credentials, authorization of the Verifier to receive certain types of credentials. Although X.509 PKI is extensively utilized in this profile, the methods for establishing trust or obtaining root certificates are out of the scope of this profile.
 * Protocol for presentation of Verifiable Credentials for offline use-cases, e.g. over BLE.
 
 # OpenID for Verifiable Credential Issuance
@@ -151,13 +151,13 @@ When implementing OpenID for Verifiable Credential Issuance, both the Wallet and
 
 * MUST support the authorization code flow.
 * MUST support at least one of the following Credential Format Profiles defined in (#vc-profiles): IETF SD-JWT VC or ISO mdoc. Ecosystems SHOULD clearly indicate which of these formats, IETF SD-JWT VC, ISO mdoc, or both, are required to be supported.
-* MUST comply with the provisions of [@!FAPI2_Security_Profile] that are applicable to this specification. This includes, but is not limited to using PKCE [@!RFC7636] with `S256` as the code challenge method, Pushed Authorization Requests (PAR) [@!RFC9126] (where applicable) and the `iss` value in the Authorization response [@!RFC9207]. 
+* MUST comply with the provisions of [@!FAPI2_Security_Profile] that are applicable to this profile. This includes, but is not limited to using PKCE [@!RFC7636] with `S256` as the code challenge method, Pushed Authorization Requests (PAR) [@!RFC9126] (where applicable) and the `iss` value in the Authorization response [@!RFC9207].
 
 The following aspects of [@!FAPI2_Security_Profile] are further profiled:
 
   * Sender-constrained access token: MUST support DPoP as defined in [@!RFC9449]. Note that this requires Wallets to be prepared to handle the `DPoP-Nonce` HTTP response header from the Credential Issuer’s Nonce Endpoint, as well as from other applicable endpoints of the Credential Issuer and Authorization Server.
 
-The following aspects of [@!FAPI2_Security_Profile] do not apply to this specification:
+The following aspects of [@!FAPI2_Security_Profile] do not apply to this profile:
 
   * Client authentication: Wallet Attestation as defined in (#wallet-attestation) can be used.
   * Pushed Authorization Requests (PAR): Only required when using the Authorization Endpoint as defined in Section 5 of [@!OIDF.OID4VCI].
@@ -215,7 +215,7 @@ Ecosystems that desire wallet-issuer interoperability on the level of Wallet Att
 
  Additional rules apply when using the format defined in Annex E of [@!OIDF.OID4VCI]:
 
-* the public key certificate, and optionally a trust certificate chain excluding the trust anchor, used to validate the signature on the Wallet Attestation MUST be included in the `x5c` JOSE header of the Client Attestation JWT 
+* the public key certificate, and optionally a trust certificate chain excluding the trust anchor, used to validate the signature on the Wallet Attestation MUST be included in the `x5c` JOSE header of the Client Attestation JWT
 * Wallet Attestations MUST NOT be reused across different Issuers. They MUST NOT introduce a unique identifier specific to a single Wallet instance. The subject claim for the Wallet Attestation MUST be a value that is shared by all Wallet instances using the present type of wallet implementation. See section 15.4.4 of [@!OIDF.OID4VCI] for details on the Wallet Attestation subject.
 * if applicable, the `client_id` value in the PAR request MUST be the string in the `sub` value in the client attestation JWT.
 * Wallets MUST perform client authentication with the Wallet Attestation at OAuth2 Endpoints that support client authentication.
@@ -239,7 +239,7 @@ The following requirements apply to OpenID for Verifiable Presentations, irrespe
 
 * The Wallet and Verifier MUST support at least one of the following Credential Format Profiles defined in (#vc-profiles): IETF SD-JWT VC or ISO mdoc. Ecosystems SHOULD clearly indicate which of these formats, IETF SD-JWT VC, ISO mdoc, or both, are required to be supported.
 * The Response type MUST be `vp_token`.
-* For signed requests, the Verifier MUST use, and the Wallet MUST accept the Client Identifier Prefix `x509_hash` as defined in Section 5.9.3 of [@!OIDF.OID4VP]. The X.509 certificate of the trust anchor MUST NOT be included in the `x5c` JOSE header of the signed request. The X.509 certificate signing the request MUST NOT be self-signed. X.509 certificate profiles to be used with `x509_hash` are out of scope of this specification.
+* For signed requests, the Verifier MUST use, and the Wallet MUST accept the Client Identifier Prefix `x509_hash` as defined in Section 5.9.3 of [@!OIDF.OID4VP]. The X.509 certificate of the trust anchor MUST NOT be included in the `x5c` JOSE header of the signed request. The X.509 certificate signing the request MUST NOT be self-signed. X.509 certificate profiles to be used with `x509_hash` are out of scope of this profile.
 * The DCQL query and response as defined in Section 6 of [@!OIDF.OID4VP] MUST be used.
 * Response encryption MUST be performed as specified in [@!OIDF.OID4VP, section 8.3]. The JWE `alg` (algorithm) header parameter (see [@!RFC7516, section 4.1.1])
   value `ECDH-ES` (as defined in [@!RFC7518, section 4.6]), with key agreement utilizing keys on the `P-256` curve (see [@!RFC7518, section 6.2.1.1]) MUST be supported.
@@ -361,7 +361,7 @@ When using this profile alongside other hash algorithms, each entity SHOULD make
 
 ## Requirements for browser/OS support of specific features
 
-This specification relies on certain prerequisites, such as browser or operating system support for specific features. When these prerequisites are mandatory for a flow (e.g., the W3C Digital Credentials API or an equivalent platform API), an implementer might be unable to support that flow due to factors beyond their control. In other cases (e.g., custom URL schemes), the prerequisites are optional, allowing implementers to achieve the same flow through alternative mechanisms.
+This profile relies on certain prerequisites, such as browser or operating system support for specific features. When these prerequisites are mandatory for a flow (e.g., the W3C Digital Credentials API or an equivalent platform API), an implementer might be unable to support that flow due to factors beyond their control. In other cases (e.g., custom URL schemes), the prerequisites are optional, allowing implementers to achieve the same flow through alternative mechanisms.
 
 ## Interoperable Key Attestations
 
@@ -387,7 +387,7 @@ Note that security considerations for OpenID for Verifiable Credential Issuance 
 
 ## Incomplete or Incorrect Implementations of the Specifications and Conformance Testing
 
-To achieve the full security benefits, it is important that the implementation of this specification, and the underlying specifications, are both complete and correct.
+To achieve the full security benefits, it is important that the implementation of this profile, and the underlying specifications, are both complete and correct.
 
 The OpenID Foundation provides tools that can be used to confirm that an implementation is correct and conformant:
 
@@ -637,7 +637,7 @@ Wallet implementations using the key attestation format specified in Annex D of 
 
 ## Uniform Resource Identifier (URI) Schemes Registry
 
-This specification registers the following URI schemes in the IANA "Uniform Resource Identifier (URI) Schemes" registry [@IANA.URI.Schemes].
+This document registers the following URI schemes in the IANA "Uniform Resource Identifier (URI) Schemes" registry [@IANA.URI.Schemes].
 
 ### haip-vci
 
@@ -646,7 +646,7 @@ This specification registers the following URI schemes in the IANA "Uniform Reso
 * Applications/protocols that use this scheme name: Wallets that implement the OIDF HAIP profile to offer a Credential using OpenID for Verifiable Credential Issuance
 * Contact: OpenID Foundation Digital Credentials Protocols Working Group - openid-specs-digital-credentials-protocols@lists.openid.net
 * Change Controller: OpenID Foundation Digital Credentials Protocols Working Group - openid-specs-digital-credentials-protocols@lists.openid.net
-* Reference: (#credential-offer) of this specification
+* Reference: (#credential-offer) of this document
 
 ### haip-vp
 
@@ -655,11 +655,11 @@ This specification registers the following URI schemes in the IANA "Uniform Reso
 * Applications/protocols that use this scheme name: Verifiers invoking Wallets that implement the OIDF HAIP profile to request the presentation of Credentials using OpenID for Verifiable Presentations
 * Contact: OpenID Foundation Digital Credentials Protocols Working Group - openid-specs-digital-credentials-protocols@lists.openid.net
 * Change Controller: OpenID Foundation Digital Credentials Protocols Working Group - openid-specs-digital-credentials-protocols@lists.openid.net
-* Reference: (#oid4vp-redirects) of this specification
+* Reference: (#oid4vp-redirects) of this document
 
 # Acknowledgements {#Acknowledgements}
 
-We would like to thank Patrick Amrein, Paul Bastian, Brian Campbell, Lee Campbell, Tim Cappalli, Stefan Charsley, Gabe Cohen, Andrii Deinega, Daniel Fett, Pedro Felix, Ryan Galluzzo, Timo Glastra, Martijn Haring, Bjorn Hjelm, Alen Horvat, Łukasz Jaromin, Mike Jones, Markus Kreusch, Philipp Lehwalder, Tobias Looker, Hicham Lozi, Mirko Mollik, Gareth Oliver, Oliver Terbu, Giuseppe De Marco, Mikel Pintor, Joel Posti, Dima Postnikov, Andreea Prian, Bob Reynders, Samuel Rinnetmäki, Peter Sorotokin, Jan Vereecken and David Zeuthen for their valuable feedback and contributions to this specification.
+We would like to thank Patrick Amrein, Paul Bastian, Brian Campbell, Lee Campbell, Tim Cappalli, Stefan Charsley, Gabe Cohen, Andrii Deinega, Daniel Fett, Pedro Felix, Ryan Galluzzo, Timo Glastra, Martijn Haring, Bjorn Hjelm, Alen Horvat, Łukasz Jaromin, Mike Jones, Markus Kreusch, Philipp Lehwalder, Tobias Looker, Hicham Lozi, Mirko Mollik, Gareth Oliver, Oliver Terbu, Giuseppe De Marco, Mikel Pintor, Joel Posti, Dima Postnikov, Andreea Prian, Bob Reynders, Samuel Rinnetmäki, Peter Sorotokin, Jan Vereecken and David Zeuthen for their valuable feedback and contributions to this document.
 
 # Notices
 
