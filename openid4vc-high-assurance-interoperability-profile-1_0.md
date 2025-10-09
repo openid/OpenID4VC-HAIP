@@ -26,26 +26,42 @@ organization="SPRIND"
    [author.address]
    email = "torsten@lodderstedt.net"
 
+[[author]]
+initials="C."
+surname="Bormann"
+fullname="Christian Bormann"
+organization="SPRIND"
+    [author.address]
+    email = "chris.bormann@gmx.de"
+
+[[author]]
+initials="J."
+surname="Heenan"
+fullname="Joseph Heenan"
+organization="Authlete"
+    [author.address]
+    email = "joseph@heenan.me.uk"
+
 %%%
 
 .# Abstract
 
-This document defines a profile of OpenID for Verifiable Credentials in combination with the credential formats IETF SD-JWT VC [@!I-D.ietf-oauth-sd-jwt-vc] and ISO mdoc [@!ISO.18013-5]. The aim is to select features and to define a set of requirements for the existing specifications to enable interoperability among Issuers, Wallets and Verifiers of Credentials where a high level of security and privacy is required. The profiled specifications include OpenID for Verifiable Credential Issuance [@!OIDF.OID4VCI], OpenID for Verifiable Presentations [@!OIDF.OID4VP], IETF SD-JWT VC [@!I-D.ietf-oauth-sd-jwt-vc], and ISO mdoc [@!ISO.18013-5].
+This document defines a profile of OpenID for Verifiable Credentials in combination with the credential formats IETF SD-JWT VC [@!I-D.ietf-oauth-sd-jwt-vc] and ISO mdoc [@!ISO.18013-5]. The aim is to select features and to define a set of requirements for the existing specifications to enable interoperability among Issuers, Wallets, and Verifiers of Credentials where a high level of security and privacy is required. The profiled specifications include OpenID for Verifiable Credential Issuance [@!OIDF.OID4VCI], OpenID for Verifiable Presentations [@!OIDF.OID4VP], IETF SD-JWT VC [@!I-D.ietf-oauth-sd-jwt-vc], and ISO mdoc [@!ISO.18013-5].
 
 {mainmatter}
 
 # Introduction
 
-This document defines a set of requirements for the existing specifications to enable interoperability among Issuers, Wallets and Verifiers of Credentials where a high level of security and privacy is required. This document is an interoperability profile that can be used by implementations in various contexts, be it a certain industry or a certain regulatory environment. Note that while this profile is aimed at high assurance use-cases, it can also be used for lower assurance use-cases.
+This document defines a set of requirements for the existing specifications to enable interoperability among Issuers, Wallets, and Verifiers of Credentials where a high level of security and privacy is required. This document is an interoperability profile that can be used by implementations in various contexts, be it a certain industry or a certain regulatory environment. Note that while this profile is aimed at high assurance use-cases, it can also be used for lower assurance use-cases.
 
-The level of security and privacy defined in this profile includes the following assurance:
+This profile aims to achieve a level of security and privacy that includes the following properties:
 
-* Authenticity of claims: There is strong assurance that the claims within a Credential are valid and bound to the correct Holder. This involves the policies and procedures used to collect and maintain the claims, the authentication of the Holder during issuance, and the protection of claim authenticity both at rest (in the wallet) and during presentation. The scope for this profile is: security of the issuance process, protection of issued credentials, and mechanisms for the Verifiers to access trustworthy information about the Issuer.
+* Authenticity of claims: There is strong assurance that the claims within a Credential or Presentation are valid and bound to the correct Holder. This involves the policies and procedures used to collect and maintain the claims, the authentication of the Holder during issuance, and the protection of claim authenticity both at rest (in the wallet) and during presentation. The scope for this profile is: security of the issuance process, protection of issued credentials, and mechanisms for the Verifiers to access trustworthy information about the Issuer.
 * Holder authentication: There is strong assurance that the Credential is presented by its legitimate Holder in a given transaction. This involves proof of Holder binding, which can be validated through several methods. The scope for this profile includes secure presentation of key-bound credentials and supporting Claim-based Binding when built on top of this functionality.
 
 Note: This profile defines the technical means by which holder authentication can be proven and claim authenticity can be protected using certain protocol and credential format features. Out of scope are concrete holder authentication mechanisms (which ensure only the holder can sign the presentation) and policies and procedures (as this is a technical interop profile and not a policy definition).
 
-Note: This specification fulfils some, but not all, of the requirements to meet the "High" Level of Assurance (LoA) as defined in the eIDAS Regulation [@eIDAS2.0]. While this profile defines features intended for scenarios targeting a high level of security, these features must be combined with additional measures outside of the scope of HAIP to achieve LoA High compliance. 
+Note: This specification fulfils some, but not all, of the requirements to meet the "High" Level of Assurance (LoA) as defined in the eIDAS Regulation [@eIDAS2.0]. While this profile defines features intended for scenarios targeting a high level of security, these features must be combined with additional measures outside of the scope of HAIP to achieve LoA High compliance.
 
 This document is not a specification, but a profile. It refers to the specifications required for implementations to interoperate among each other and for the optionalities mentioned in the referenced specifications, defines the set of features to be mandatory to implement.
 
@@ -135,8 +151,19 @@ When implementing OpenID for Verifiable Credential Issuance, both the Wallet and
 
 * MUST support the authorization code flow.
 * MUST support at least one of the following Credential Format Profiles defined in (#vc-profiles): IETF SD-JWT VC or ISO mdoc. Ecosystems SHOULD clearly indicate which of these formats, IETF SD-JWT VC, ISO mdoc, or both, are required to be supported.
-* MUST support sender-constrained tokens using the mechanism defined in [@!RFC9449]. Note this requires Wallets to be prepared to handle the `DPoP-Nonce` HTTP response header from the Credential Issuer’s Nonce Endpoint, as well as from other applicable endpoints of the Credential Issuer and Authorization Server.
-* MUST support [@!RFC7636] with `S256` as the code challenge method.
+* MUST comply with the provisions of [@!FAPI2_Security_Profile] that are applicable to this specification. This includes, but is not limited to using PKCE [@!RFC7636] with `S256` as the code challenge method, Pushed Authorization Requests (PAR) [@!RFC9126] (where applicable) and the `iss` value in the Authorization response [@!RFC9207]. 
+
+The following aspects of [@!FAPI2_Security_Profile] are further profiled:
+
+  * Sender-constrained access token: MUST support DPoP as defined in [@!RFC9449]. Note that this requires Wallets to be prepared to handle the `DPoP-Nonce` HTTP response header from the Credential Issuer’s Nonce Endpoint, as well as from other applicable endpoints of the Credential Issuer and Authorization Server.
+
+The following aspects of [@!FAPI2_Security_Profile] do not apply to this specification:
+
+  * Client authentication: Wallet Attestation as defined in (#wallet-attestation) can be used.
+  * Pushed Authorization Requests (PAR): Only required when using the Authorization Endpoint as defined in Section 5 of [@!OIDF.OID4VCI].
+  * Cryptography and secrets: (#crypto-suites) overrides the requirements in Section 5.4.1 clause 1.
+
+Note that some optional parts of [@!FAPI2_Security_Profile] are not applicable when using only OpenID for Verifiable Credential Issuance, e.g., MTLS or OpenID Connect.
 
 Both Wallet initiated and Issuer initiated issuance are supported.
 
@@ -171,25 +198,27 @@ Both Issuer and Wallet MUST support Credential Offer in both same-device and cro
 
 ## Authorization Endpoint
 
-* MUST use Pushed Authorization Requests (PAR) [@!RFC9126] to send the Authorization Request.
 * Wallets MUST authenticate themselves at the PAR endpoint using the same rules as defined in (#token-endpoint) for client authentication at the token endpoint.
 * MUST use the `scope` parameter to communicate Credential Type(s) to be issued. The scope value MUST map to a specific Credential Type. The scope value may be pre-agreed, obtained from the Credential Offer, or the Credential Issuer Metadata.
-* The `client_id` value in the PAR request MUST be a string that the Wallet has used as the `sub` value in the client attestation JWT.
 
 ## Token Endpoint {#token-endpoint}
 
-* The Wallets MUST perform client authentication as defined in (#wallet-attestation).
 * Refresh tokens are RECOMMENDED to be supported for Credential refresh. For details, see Section 13.5 in [@!OIDF.OID4VCI].
 
 Note: Issuers SHOULD consider how long a refresh token is allowed to be used to refresh a credential, as opposed to starting the issuance flow from the beginning. For example, if the User is trying to refresh a Credential more than a year after its original issuance, the usage of the refresh tokens is NOT RECOMMENDED.
 
 ### Wallet Attestation {#wallet-attestation}
 
-Wallets MUST use Wallet Attestations as defined in Annex E of [@!OIDF.OID4VCI].
+Wallets MUST use, and Issuers MUST require, an OAuth2 Client authentication mechanism at OAuth2 Endpoints that support client authentication (such as the PAR and Token Endpoints).
 
-The public key certificate, and optionally a trust certificate chain, used to validate the signature on the Wallet Attestation MUST be included in the `x5c` JOSE header of the Client Attestation JWT.
+Ecosystems that desire wallet-issuer interoperability on the level of Wallet Attestations SHOULD require Wallets to support the authentication mechanism and Wallet Attestation format specified in Annex E of [@!OIDF.OID4VCI]. When doing so, they might need to define additional ecosystem-specific claims contained in the attestation. Alternatively, ecosystems MAY choose to rely on other Wallet Attestation formats.
 
-Individual Wallet Attestations MUST be used for each Issuer. They MUST not contain unique identifiers that would enable linkability between issuance processes. See section 14.4.4 of [@!OIDF.OID4VCI] for details on the Wallet Attestation subject.
+ Additional rules apply when using the format defined in Annex E of [@!OIDF.OID4VCI]:
+
+* the public key certificate, and optionally a trust certificate chain excluding the trust anchor, used to validate the signature on the Wallet Attestation MUST be included in the `x5c` JOSE header of the Client Attestation JWT 
+* Wallet Attestations MUST NOT be reused across different Issuers. They MUST NOT introduce a unique identifier specific to a single Wallet instance. The subject claim for the Wallet Attestation MUST be a value that is shared by all Wallet instances using the present type of wallet implementation. See section 15.4.4 of [@!OIDF.OID4VCI] for details on the Wallet Attestation subject.
+* if applicable, the `client_id` value in the PAR request MUST be the string in the `sub` value in the client attestation JWT.
+* Wallets MUST perform client authentication with the Wallet Attestation at OAuth2 Endpoints that support client authentication.
 
 ## Credential Endpoint
 
@@ -252,6 +281,7 @@ The following requirements apply to all OpenID4VP flows when the mdoc Credential
 
 * The Credential Format identifier MUST be `mso_mdoc`.
 * When multiple ISO mdocs are being returned, each ISO mdoc MUST be returned in a separate `DeviceResponse` (as defined in 8.3.2.1.2.2 of [@!ISO.18013-5]), each matching to a respective DCQL query. Therefore, the resulting `vp_token` contains multiple `DeviceResponse` instances.
+* The Credential Issuer MAY include the MSO revocation mechanism in the issued mdoc. When doing so, it MUST use one of the mechanisms defined in ISO/IEC 18013-5 ([@!ISO.18013-5.second.edition]).
 
 ### IETF SD-JWT VC
 
@@ -427,6 +457,22 @@ Wallet implementations using the key attestation format specified in Annex D of 
   </front>
 </reference>
 
+<reference anchor="FAPI2_Security_Profile" target="https://openid.net/specs/fapi-security-profile-2_0.html">
+  <front>
+    <title>FAPI 2.0 Security Profile</title>
+    <author initials="D." surname="Fett" fullname="Daniel Fett">
+      <organization>Authlete</organization>
+    </author>
+    <author initials="D." surname="Tonge" fullname="Dave Tonge">
+      <organization>Moneyhub Financial Technology Ltd.</organization>
+    </author>
+    <author initials="J." surname="Heenan" fullname="Joseph Heenan">
+      <organization>Authlete</organization>
+    </author>
+   <date day="22" month="Feb" year="2025"/>
+  </front>
+</reference>
+
 <reference anchor="ISO.18013-5" target="https://www.iso.org/standard/69084.html">
         <front>
           <title>ISO/IEC 18013-5:2021 Personal identification — ISO-compliant driving license — Part 5: Mobile driving license (mDL)  application</title>
@@ -434,6 +480,15 @@ Wallet implementations using the key attestation format specified in Annex D of 
             <organization>ISO/IEC JTC 1/SC 17 Cards and security devices for personal identification</organization>
           </author>
           <date year="2021"/>
+        </front>
+</reference>
+
+<reference anchor="ISO.18013-5.second.edition" target="https://www.iso.org/standard/91081.html">
+        <front>
+          <title>ISO/IEC 18013-5:xxxx Personal identification — ISO-compliant driving license — Part 5: Mobile driving license (mDL)  application edition 2</title>
+          <author>
+            <organization>ISO/IEC JTC 1/SC 17 Cards and security devices for personal identification</organization>
+          </author>
         </front>
 </reference>
 
@@ -570,25 +625,25 @@ This specification registers the following URI schemes in the IANA "Uniform Reso
 
 ### haip-vci
 
-* URI Scheme: haip-vci
-* Description: Custom scheme used for invoking wallets that implement the OIDF HAIP profile to offer a Credential
+* Scheme name: haip-vci
 * Status: Permanent
-* Well-Known URI Support: -
+* Applications/protocols that use this scheme name: Wallets that implement the OIDF HAIP profile to offer a Credential using OpenID for Verifiable Credential Issuance
+* Contact: OpenID Foundation Digital Credentials Protocols Working Group - openid-specs-digital-credentials-protocols@lists.openid.net
 * Change Controller: OpenID Foundation Digital Credentials Protocols Working Group - openid-specs-digital-credentials-protocols@lists.openid.net
 * Reference: (#credential-offer) of this specification
 
 ### haip-vp
 
-* URI Scheme: haip-vp
-* Description: Custom scheme used for invoking wallets that implement the OIDF HAIP profile to request the presentation of Credentials
+* Scheme name: haip-vp
 * Status: Permanent
-* Well-Known URI Support: -
+* Applications/protocols that use this scheme name: Verifiers invoking Wallets that implement the OIDF HAIP profile to request the presentation of Credentials using OpenID for Verifiable Presentations
+* Contact: OpenID Foundation Digital Credentials Protocols Working Group - openid-specs-digital-credentials-protocols@lists.openid.net
 * Change Controller: OpenID Foundation Digital Credentials Protocols Working Group - openid-specs-digital-credentials-protocols@lists.openid.net
 * Reference: (#oid4vp-redirects) of this specification
 
 # Acknowledgements {#Acknowledgements}
 
-We would like to thank Paul Bastian, Christian Bormann, Brian Campbell, Stefan Charsley, Andrii Deinega, Timo Glastra, Martijn Haring, Łukasz Jaromin, Mike Jones, Philipp Lehwalder, Oliver Terbu, Daniel Fett, Giuseppe De Marco, Joel Posti, and Andreea Prian for their valuable feedback and contributions to this specification.
+We would like to thank Patrick Amrein, Paul Bastian, Brian Campbell, Lee Campbell, Tim Cappalli, Stefan Charsley, Gabe Cohen, Andrii Deinega, Daniel Fett, Pedro Felix, Ryan Galluzzo, Timo Glastra, Martijn Haring, Bjorn Hjelm, Alen Horvat, Łukasz Jaromin, Mike Jones, Markus Kreusch, Philipp Lehwalder, Tobias Looker, Hicham Lozi, Mirko Mollik, Gareth Oliver, Oliver Terbu, Giuseppe De Marco, Mikel Pintor, Joel Posti, Dima Postnikov, Andreea Prian, Bob Reynders, Samuel Rinnetmäki, Peter Sorotokin, Jan Vereecken and David Zeuthen for their valuable feedback and contributions to this specification.
 
 # Notices
 
@@ -605,6 +660,7 @@ The technology described in this specification was made available from contribut
    -05
 
    * enforce same device flow for redirect-based OpenID4VP
+   * change wallet attesation format from mandatory to recommended
    * update crypto suites to require at least ECDSA w/ P-256 and SHA-256 for verifying signed artificats; and made ecosystem-specific exceptions for crypto suites and hash algorithms if certain criteria is not met
    * removed intent_to_retain mandatory
    * add small note about signed requests
