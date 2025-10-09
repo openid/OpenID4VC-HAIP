@@ -266,7 +266,7 @@ The following requirements apply to OpenID for Verifiable Presentations via redi
   * Verifiers MUST include `redirect_uri` in the HTTP response to the Wallet's HTTP POST to the `response_uri`, as defined in Section 8.2 of [@!OIDF.OID4VP].
   * Wallets MUST follow the redirect to `redirect_uri`.
   * Verifiers MUST reject presentations if Wallets do not follow the redirect back or the redirect back arrives in a different user session to the one the request was initiated in.
-* Implementation considerations can be found in Section 13.3 of [@!OIDF.OID4VP] and security considerations in Section 14.2 of [@!OIDF.OID4VP].
+  * Implementation considerations can be found in Section 13.3 of [@!OIDF.OID4VP] and security considerations in Section 14.2 of [@!OIDF.OID4VP].
 
 ## OpenID for Verifiable Presentations via W3C Digital Credentials API {#oid4vp-dc-api}
 
