@@ -336,30 +336,6 @@ This document intentionally leaves certain extensions for ecosystems to define, 
 - Whether to use DC API, Redirects with custom URL schemes  and/or Redirects with claimed `https` scheme URIs for presentation
 - Support or restriction of additional cryptographic suites and hash algorithms
 
-Below are two non-normative examples illustrating how an ecosystem may define the above elements to achieve its specific goals and preferences.
-
-### Improved Baseline Interoperability 
-
-This ecosystem prioritizes interoperability among all Wallets and Issuers, without requiring any pre-existing relationships, and supports both ISO mdocs and SD-JWT VCs. To achieve this, the ecosystem could define the following:
-
-- Wallets MUST support both mdoc and sd-jwt-vc. Issuers MAY issue in either format.
-- Wallets MUST register for the 'haip-vci://' custom scheme, where possible.
-- Wallets and Issuers MUST support key attestations in the format specified in Annex D of [@!OIDF.OID4VCI].
-- Wallets MUST register for the 'haip-vp://' custom scheme and DC API when they have credentials available, where possible. 
-
-Making these choices maximizes interoperability between the parties in the ecosystem while minimizing the burden on Issuers and Verifiers. This comes at the expense of an increased burden on Wallets as well as the potential privacy and security issues in (#interop-key-attestations).
-
-### Existing Curve Requirements
-
-This ecosystem places importance on maintaining compatibility with already issued cryptographic curves. To achieve this, the ecosystem could define the following:
-
-- Verifiers MUST support all curves from Cipher Suite 1 as listed in table 22 of (@!ISO.18013-5).
-- Verifiers MUST support all hash algorithms in table 21 of (@!ISO.18013-5).
-- Issuers MAY sign credentials using any curve from Cipher Suite 1 as listed in table 22 of (@!ISO.18013-5).
-- Issuers MAY use any hash algorithm in table 21 of (@!ISO.18013-5).
-
-Making these choices ensures interoperability with any existing Issuer, at the cost of an increased burden on the Verifier.
-
 # Security Considerations {#security_considerations}
 
 Note that security considerations for OpenID for Verifiable Credential Issuance are defined in Section 13 of [@!OIDF.OID4VCI] and for OpenID for Verifiable Presentations in Section 14 (for redirect based flows) or Section A.5 (for DC API) of [@!OIDF.OID4VP].
