@@ -676,11 +676,28 @@ The technology described in this specification was made available from contribut
    -05
 
    * mandate support for same device flow for redirect-based OpenID4VP
-   * Add ecosysetm guidance section
-   * change wallet attesation format from mandatory to recommended
+   * add ecosystem guidance section
+   * change wallet attestation format from mandatory to recommended
    * update crypto suites to require at least ECDSA w/ P-256 and SHA-256 for verifying signed artificats; and made ecosystem-specific exceptions for crypto suites and hash algorithms if certain criteria is not met
    * removed intent_to_retain mandatory
    * add small note about signed requests
+   * clarify batch issuance requirements
+   * remove text about `iat` and `exp` in JWT claims
+   * resolve contradictory text about key attestation support requirements
+   * add "Requirements Notation and Conventions" section
+   * remove requirement that SD-JWT `iss` is a https url
+   * add section about the OIDF conformance tests
+   * add implementation considers around browser/OS limitations
+   * combine text about ecosystem profiling of X.509 certifications
+   * add guidance around key sizes
+   * require wallets (that render images from credential metadata) to support png and svg, and data: and https: urls
+   * clarity text around flows that are defined in this specification
+   * add requirement on status list index uniqueness
+   * add recommendation that SD-JWT VC validity period is limited then it must use `exp` or a token status list
+   * explain intent of 'high assurance' in document title
+   * require compliance with (most of) FAPI2 Security Profile for VCI
+   * add requirement that, if implementing mdoc revocation, one of methods defined in 2nd edition draft of ISO 18013-5 must be used
+   * update editors/contributors
 
    -04
 
