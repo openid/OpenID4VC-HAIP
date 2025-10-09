@@ -665,7 +665,7 @@ The technology described in this specification was made available from contribut
 
    -05
 
-   * enforce same device flow for redirect-based OpenID4VP
+   * mandate support for same device flow for redirect-based OpenID4VP
    * change wallet attesation format from mandatory to recommended
    * update crypto suites to require at least ECDSA w/ P-256 and SHA-256 for verifying signed artificats; and made ecosystem-specific exceptions for crypto suites and hash algorithms if certain criteria is not met
    * removed intent_to_retain mandatory
