@@ -121,7 +121,7 @@ Assumptions made are the following:
 
 ## Additional scenarios:
 
-Below is the non-exhaustive list of scenarios that can be realized with this specification:
+Below is a non-exhaustive list of scenarios that can be realized with this specification:
 
 * Combined Issuance of IETF SD-JWT VC and ISO mdoc
 * Both issuer-initiated and wallet-initiated issuance
