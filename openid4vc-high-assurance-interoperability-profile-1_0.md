@@ -81,7 +81,7 @@ The key words "MUST", "MUST NOT", "REQUIRED", "SHALL", "SHALL NOT", "SHOULD", "S
 
 This specification uses the terms "Holder", "Issuer", "Verifier", "Wallet", "Wallet Attestation", "Credential Type" and "Verifiable Credential" as defined in [@!OIDF.OID4VCI] and [@!OIDF.OID4VP].
 
-# Scope
+# Scope {#scope}
 
 This specification enables interoperable implementations of the following flows:
 
@@ -171,7 +171,7 @@ If batch issuance is supported, the Wallet SHOULD use it rather than making cons
 
 Additional requirements for OpenID4VCI are defined in (#crypto-suites) and (#hash-algorithms).
 
-## Issuer Metadata
+## Issuer Metadata {#issuer-metadata}
 
 The Authorization Server MUST support metadata according to [@!RFC8414].
 
@@ -233,7 +233,7 @@ Alternatively, ecosystems MAY choose to rely on other key attestation formats, m
 
 If batch issuance is used and the Credential Issuer has indicated (via `cryptographic_binding_methods_supported` metadata parameter) that cryptographic holder binding is required, all public keys used in Credential Request SHOULD be attested within a single key attestation.
 
-# OpenID for Verifiable Presentations
+# OpenID for Verifiable Presentations {#openid-for-verifiable-presentations}
 
 The following requirements apply to OpenID for Verifiable Presentations, irrespective of the flow and Credential Format:
 
@@ -369,17 +369,17 @@ Wallet implementations using the key attestation format specified in Annex D of 
 
 ## Ecosystem Implementation Considerations
 
-This document intentionally leaves certain extensions for ecosystems to define, in order to enable broad compatibility across differing or even conflicting requirements. These include:
+This document intentionally leaves certain extensions for ecosystems to define, in order to enable broad compatibility across differing or even conflicting requirements. Below are the extension points listed in this specification:
 
-- Whether to adopt the Presentation profile, Issuance profile, or both
-- Which Credential format to support across issuance and presentation
-- Whether to use Signed Issuer Metadata or not
-- How to send Credential Offer
-- Which Key attestation format to use
-- Which Wallet attestation format to use
-- X509 certificate profiles
-- Whether to use DC API, Redirects with custom URL schemes  and/or Redirects with claimed `https` scheme URIs for presentation
-- Support or restriction of additional cryptographic suites and hash algorithms
+- Whether to adopt a presentation profile, issuance profile, or both (see (#scope))
+- Whether to use the W3C Digital Credentials API, Redirects with custom URL schemes and/or Redirects with claimed `https` scheme URIs for presentation (see (#scope))
+- Which Credential format to support across issuance and presentation (see (#scope))
+- Whether to use Signed Issuer Metadata or not (see (#issuer-metadata))
+- How to make a Credential Offer to the Wallet (see (#credential-offer))
+- Which key attestation format to use (see (#key-attestation))
+- Which wallet attestation format to use (see (#wallet-attestation))
+- Which X.509 certificate profile to use (see (#openid-for-verifiable-presentations))
+- Support or restriction of additional cryptographic suites and hash algorithms (see (#crypto-suites))
 
 # Security Considerations {#security_considerations}
 
