@@ -119,7 +119,7 @@ Assumptions made are the following:
 * There are mechanisms in place for Wallets to discover Verifiers' capabilities
 * There are mechanisms in place for Issuers to discover Wallets' capabilities
 
-## Additional scenarios:
+## Additional scenarios
 
 Below is a non-exhaustive list of scenarios that can be realized with this specification:
 
