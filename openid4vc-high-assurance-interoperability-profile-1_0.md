@@ -165,7 +165,8 @@ The following aspects of [@!FAPI2_Security_Profile] do not apply to this specifi
 
 Note that some optional parts of [@!FAPI2_Security_Profile] are not applicable when using only OpenID for Verifiable Credential Issuance, e.g., MTLS or OpenID Connect.
 
-Both Wallet initiated and Issuer initiated issuance are supported.
+Wallets MUST support both Wallet-initiated and Issuer-initiated Credential issuance.
+Credential Issuers MUST support either Wallet-initiated issuance, Issuer-initiated issuance, or both.
 
 If batch issuance is supported, the Wallet SHOULD use it rather than making consecutive requests for a single Credential of the same Credential Dataset. The Issuer MUST indicate whether batch issuance is supported by including or omitting the `batch_credential_issuance` metadata parameter. The Issuer’s decision may be influenced by various factors, including, but not limited to, trust framework requirements, regulatory constraints, applicable laws or internal policies.
 
