@@ -52,22 +52,22 @@ This specification defines a profile of OpenID for Verifiable Credentials in com
 
 # Introduction
 
-This specification defines a set of requirements for the existing specifications to enable interoperability among Issuers, Wallets, and Verifiers of Credentials where a high level of security and privacy is required. This specification is an interoperability profile that can be used by implementations in various contexts, be it a certain industry or a certain regulatory environment. Note that while this profile is aimed at high assurance use-cases, it can also be used for lower assurance use-cases.
+This specification defines a set of requirements for the existing specifications to enable interoperability among Issuers, Wallets, and Verifiers of Credentials where a high level of security and privacy is required. This specification is an interoperability profile that can be used by implementations in various contexts, be it a certain industry or a certain regulatory environment. Note that while this specification is aimed at high assurance use-cases, it can also be used for lower assurance use-cases.
 
-This profile aims to achieve a level of security and privacy that includes the following properties:
+This specification aims to achieve a level of security and privacy that includes the following properties:
 
-* Authenticity of claims: There is strong assurance that the claims within a Credential or Presentation are valid and bound to the correct Holder. This involves the policies and procedures used to collect and maintain the claims, the authentication of the Holder during issuance, and the protection of claim authenticity both at rest (in the wallet) and during presentation. The scope for this profile is: security of the issuance process, protection of issued credentials, and mechanisms for the Verifiers to access trustworthy information about the Issuer.
-* Holder authentication: There is strong assurance that the Credential is presented by its legitimate Holder in a given transaction. This involves proof of Holder binding, which can be validated through several methods. The scope for this profile includes secure presentation of key-bound credentials and supporting Claim-based Binding when built on top of this functionality.
+* Authenticity of claims: There is strong assurance that the claims within a Credential or Presentation are valid and bound to the correct Holder. This involves the policies and procedures used to collect and maintain the claims, the authentication of the Holder during issuance, and the protection of claim authenticity both at rest (in the wallet) and during presentation. The scope for this specification is: security of the issuance process, protection of issued credentials, and mechanisms for the Verifiers to access trustworthy information about the Issuer.
+* Holder authentication: There is strong assurance that the Credential is presented by its legitimate Holder in a given transaction. This involves proof of Holder binding, which can be validated through several methods. The scope for this specification includes secure presentation of key-bound credentials and supporting Claim-based Binding when built on top of this functionality.
 
-Note: This profile defines the technical means by which holder authentication can be proven and claim authenticity can be protected using certain protocol and credential format features. Out of scope are concrete holder authentication mechanisms (which ensure only the holder can sign the presentation) and policies and procedures (as this is a technical interop profile and not a policy definition).
+Note: This specification defines the technical means by which holder authentication can be proven and claim authenticity can be protected using certain protocol and credential format features. Out of scope are concrete holder authentication mechanisms (which ensure only the holder can sign the presentation) and policies and procedures (as this is a technical interoperability profile and not a policy definition).
 
-Note: This specification fulfils some, but not all, of the requirements to meet the "High" Level of Assurance (LoA) as defined in the eIDAS Regulation [@eIDAS2.0]. While this profile defines features intended for scenarios targeting a high level of security, these features must be combined with additional measures outside of the scope of HAIP to achieve LoA High compliance.
+Note: This specification fulfils some, but not all, of the requirements to meet the "High" Level of Assurance (LoA) as defined in the eIDAS Regulation [@eIDAS2.0]. While this specification defines features intended for scenarios targeting a high level of security, these features must be combined with additional measures outside of the scope of HAIP to achieve LoA High compliance.
 
 This specification contains profiles of other specifications. It refers to the specifications required for implementations to interoperate among each other and for the optionalities mentioned in the referenced specifications, defines the set of features to be mandatory to implement.
 
-The profile uses OpenID for Verifiable Credential Issuance [@!OIDF.OID4VCI] and OpenID for Verifiable Presentations [@!OIDF.OID4VP] as the base protocols for issuance and presentation of Credentials, respectively. The credential formats used are IETF SD-JWT VC as specified in [@!I-D.ietf-oauth-sd-jwt-vc] and ISO mdoc [@!ISO.18013-5]. Additionally, considerations are given on how the issuance of Credentials in both IETF SD-JWT VC [@!I-D.ietf-oauth-sd-jwt-vc] and ISO mdoc [@ISO.18013-5] formats can be performed in the same transaction.
+The specification uses OpenID for Verifiable Credential Issuance [@!OIDF.OID4VCI] and OpenID for Verifiable Presentations [@!OIDF.OID4VP] as the base protocols for issuance and presentation of Credentials, respectively. The credential formats used are IETF SD-JWT VC as specified in [@!I-D.ietf-oauth-sd-jwt-vc] and ISO mdoc [@!ISO.18013-5]. Additionally, considerations are given on how the issuance of Credentials in both IETF SD-JWT VC [@!I-D.ietf-oauth-sd-jwt-vc] and ISO mdoc [@ISO.18013-5] formats can be performed in the same transaction.
 
-A full list of the open standards used in this profile can be found in (#standards-requirements).
+A full list of the open standards used in this specification can be found in (#standards-requirements).
 
 ## Target Audience/Usage
 
@@ -113,7 +113,7 @@ Note that when OpenID4VP is used, the Wallet and the Verifier can either be remo
 
 Assumptions made are the following:
 
-* The Issuer uses the Wallet features defined in this profile (via Wallet invocation mechanism)
+* The Issuer uses the Wallet features defined in this specification (via Wallet invocation mechanism)
 * There are mechanisms in place for Verifiers to discover Wallets' and Issuers' capabilities
 * There are mechanisms in place for Wallets to discover Verifiers' capabilities
 * There are mechanisms in place for Issuers to discover Wallets' capabilities
@@ -142,7 +142,7 @@ Note that these standards in turn build upon other underlying standards, and req
 
 The following items are out of scope for the current version of this specification, but might be added in future versions:
 
-* Trust Management refers to authorization of an Issuer to issue certain types of credentials, authorization of the Wallet to be issued certain types of credentials, authorization of the Verifier to receive certain types of credentials. Although X.509 PKI is extensively utilized in this profile, the methods for establishing trust or obtaining root certificates are out of the scope of this specification.
+* Trust Management refers to authorization of an Issuer to issue certain types of credentials, authorization of the Wallet to be issued certain types of credentials, authorization of the Verifier to receive certain types of credentials. Although X.509 PKI is extensively utilized in this specification, the methods for establishing trust or obtaining root certificates are out of the scope of this specification.
 * Protocol for presentation of Verifiable Credentials for offline use-cases, e.g. over BLE.
 
 # OpenID for Verifiable Credential Issuance
@@ -304,11 +304,11 @@ Credential Format Profiles are defined as follows:
 
 ## IETF SD-JWT VC Profile {#sd-jwt-vc}
 
-This profile defines the following additional requirements for IETF SD-JWT VCs as defined in [@!I-D.ietf-oauth-sd-jwt-vc].
+This specification defines the following additional requirements for IETF SD-JWT VCs as defined in [@!I-D.ietf-oauth-sd-jwt-vc].
 
 * Compact serialization MUST be supported as defined in [@!I-D.ietf-oauth-selective-disclosure-jwt]. JSON serialization MAY be supported.
 * It is RECOMMENDED that Issuers limit the validity period when issuing SD-JWT VC. When doing so, the Issuer MUST use an `exp` claim, a `status` claim, or both.
-* The `cnf` claim [@!RFC7800] MUST conform to the definition given in [@!I-D.ietf-oauth-sd-jwt-vc]. Implementations conforming to this profile MUST include the JSON Web Key [@!RFC7517] in the `jwk` member if the corresponding Credential Configuration requires cryptographic holder binding.
+* The `cnf` claim [@!RFC7800] MUST conform to the definition given in [@!I-D.ietf-oauth-sd-jwt-vc]. Implementations conforming to this specification MUST include the JSON Web Key [@!RFC7517] in the `jwk` member if the corresponding Credential Configuration requires cryptographic holder binding.
 * The `status` claim, if present, MUST contain `status_list` as defined in [@!I-D.ietf-oauth-status-list]
 * The public key used to validate the signature on the Status List Token defined in [I-D.ietf-oauth-status-list] MUST be included in the `x5c` JOSE header of the Token. The X.509 certificate of the trust anchor MUST NOT be included in the `x5c` JOSE header of the Status List Token. The X.509 certificate signing the request MUST NOT be self-signed.
 
@@ -316,15 +316,15 @@ Each Credential MUST have its own unique, unpredictable status list index, even 
 
 Note: For guidance on preventing linkability by colluding parties, such as Issuer/Verifier pairs, multiple Verifiers, or repeated interactions with the same Verifier, see Section 15.4.1 of [@!OIDF.OID4VCI] and Section 15.5 of [@!OIDF.OID4VP].
 
-Note: If there is a requirement to communicate information about the verification status and identity assurance data of the claims about the subject, the syntax defined by [@!OIDF.ekyc-ida] SHOULD be used. It is up to each jurisdiction and ecosystem, whether to require it to the implementers of this profile.
+Note: If there is a requirement to communicate information about the verification status and identity assurance data of the claims about the subject, the syntax defined by [@!OIDF.ekyc-ida] SHOULD be used. It is up to each jurisdiction and ecosystem, whether to require it to the implementers of this specification.
 
 Note: If there is a requirement to provide the Subject’s identifier assigned and maintained by the Issuer, the `sub` claim MAY be used. There is no requirement for a binding to exist between the `sub` and `cnf` claims. See the Implementation Considerations section in [@!I-D.ietf-oauth-sd-jwt-vc].
 
-Note: In some Credential Types, it is not desirable to include an expiration date (e.g., diploma attestation). Therefore, this profile leaves its inclusion to the Issuer, or the body defining the respective Credential Type.
+Note: In some Credential Types, it is not desirable to include an expiration date (e.g., diploma attestation). Therefore, this specification leaves its inclusion to the Issuer, or the body defining the respective Credential Type.
 
 ### Issuer identification and key resolution to validate an issued Credential {#issuer-key-resolution}
 
-This profile mandates the support for X.509 certificate-based key resolution to validate the issuer signature of an SD-JWT VC. This MUST be supported by all entities (Issuer, Wallet, Verifier). The SD-JWT VC MUST contain the credential issuer's signing certificate along with a trust chain in the `x5c` JOSE header parameter as described in section 3.5 of [@!I-D.ietf-oauth-sd-jwt-vc]. The X.509 certificate of the trust anchor MUST NOT be included in the `x5c` JOSE header of the SD-JWT VC. The X.509 certificate signing the request MUST NOT be self-signed.
+This specification mandates the support for X.509 certificate-based key resolution to validate the issuer signature of an SD-JWT VC. This MUST be supported by all entities (Issuer, Wallet, Verifier). The SD-JWT VC MUST contain the credential issuer's signing certificate along with a trust chain in the `x5c` JOSE header parameter as described in section 3.5 of [@!I-D.ietf-oauth-sd-jwt-vc]. The X.509 certificate of the trust anchor MUST NOT be included in the `x5c` JOSE header of the SD-JWT VC. The X.509 certificate signing the request MUST NOT be self-signed.
 
 #### Cryptographic Holder Binding between VC and VP
 
@@ -345,17 +345,17 @@ Issuers, Verifiers, and Wallets MUST, at a minimum, support ECDSA with P-256 and
   - signed presentation requests.
   - signed Issuer metadata.
 
-Ecosystem-specific profiles MAY mandate additional cryptographic suites.
+Ecosystem-specific profiles of this specification MAY mandate additional cryptographic suites.
 
-When using this profile alongside other crypto suites, each entity SHOULD make it explicit in its metadata which other algorithms and key types are supported for the cryptographic operations.
+When using this specification alongside other crypto suites, each entity SHOULD make it explicit in its metadata which other algorithms and key types are supported for the cryptographic operations.
 
 # Hash Algorithms {#hash-algorithms}
 
 The hash algorithm SHA-256 MUST be supported by all the entities to generate and validate the digests in the IETF SD-JWT VC and ISO mdoc.
 
-Ecosystem-specific profiles MAY mandate additional hashing algorithms.
+Ecosystem-specific profiles of this specification MAY mandate additional hashing algorithms.
 
-When using this profile alongside other hash algorithms, each entity SHOULD make it explicit in its metadata which other algorithms are supported.
+When using this specification alongside other hash algorithms, each entity SHOULD make it explicit in its metadata which other algorithms are supported.
 
 # Implementation Considerations
 
@@ -645,7 +645,7 @@ This specification registers the following URI schemes in the IANA "Uniform Reso
 
 * Scheme name: haip-vci
 * Status: Permanent
-* Applications/protocols that use this scheme name: Wallets that implement the OIDF HAIP profile to offer a Credential using OpenID for Verifiable Credential Issuance
+* Applications/protocols that use this scheme name: Wallets that implement the OIDF HAIP specification to offer a Credential using OpenID for Verifiable Credential Issuance
 * Contact: OpenID Foundation Digital Credentials Protocols Working Group - openid-specs-digital-credentials-protocols@lists.openid.net
 * Change Controller: OpenID Foundation Digital Credentials Protocols Working Group - openid-specs-digital-credentials-protocols@lists.openid.net
 * Reference: (#credential-offer) of this specification
@@ -654,7 +654,7 @@ This specification registers the following URI schemes in the IANA "Uniform Reso
 
 * Scheme name: haip-vp
 * Status: Permanent
-* Applications/protocols that use this scheme name: Verifiers invoking Wallets that implement the OIDF HAIP profile to request the presentation of Credentials using OpenID for Verifiable Presentations
+* Applications/protocols that use this scheme name: Verifiers invoking Wallets that implement the OIDF HAIP specification to request the presentation of Credentials using OpenID for Verifiable Presentations
 * Contact: OpenID Foundation Digital Credentials Protocols Working Group - openid-specs-digital-credentials-protocols@lists.openid.net
 * Change Controller: OpenID Foundation Digital Credentials Protocols Working Group - openid-specs-digital-credentials-protocols@lists.openid.net
 * Reference: (#oid4vp-redirects) of this specification
@@ -715,7 +715,7 @@ The technology described in this specification was made available from contribut
    * clarify nonce endpoint must be present when cryptographic_binding_methods_supported is
    * remove various requirements around claims present in SD-JWT VC as upstream spec covers them
    * require ephemeral encryption keys in VP
-   * add note that lower assurance credentials can also be conveyed using this profile
+   * add note that lower assurance credentials can also be conveyed using this specification
    * add note on verifier certificate profiling
    * added support for credentials without cryptographic holder binding
    * mandate support for aki trusted_authorities method
