@@ -401,6 +401,8 @@ Implementers need to ensure appropriate key sizes are used. Guidance can be foun
 
 # Privacy Considerations
 
+Note that privacy considerations for OpenID for Verifiable Credential Issuance are defined in Section 15 of [@!OIDF.OID4VCI] and for OpenID for Verifiable Presentations in Section 15 (for redirect based flows) or Section A.6 (for DC API) of [@!OIDF.OID4VP].
+
 ## Interoperable Key Attestations {#interop-key-attestations}
 
 Wallet implementations using the key attestation format specified in Annex D of [@!OIDF.OID4VCI] might need to utilize a transformation (backend) service to create such attestations based on data as provided in other formats by the respective platform or secure key management module. Such a backend service MUST be designed considering the privacy of its users. For example, the service could be stateless and just perform the transformation of the attestation data without binding the process in any way to a unique user identifier.
