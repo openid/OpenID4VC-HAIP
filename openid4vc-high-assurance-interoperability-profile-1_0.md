@@ -279,7 +279,7 @@ Note that unsigned requests depend on the origin information provided by the pla
 
 ### ISO Mobile Documents or mdocs (ISO/IEC 18013 and ISO/IEC 23220 series)
 
-The following requirements apply to all OpenID4VP flows when the mdoc Credential Format is used:
+The following requirements apply to all OpenID4VP flows when the mdoc Credential Format is used, on top of Annex B.2. in [@!OIDF.OID4VP]:
 
 * The Credential Format identifier MUST be `mso_mdoc`.
 * When multiple ISO mdocs are being returned, each ISO mdoc MUST be returned in a separate `DeviceResponse` (as defined in 8.3.2.1.2.2 of [@!ISO.18013-5]), each matching to a respective DCQL query. Therefore, the resulting `vp_token` contains multiple `DeviceResponse` instances.
@@ -527,26 +527,6 @@ Wallet implementations using the key attestation format specified in Annex D of 
             <organization>European Union</organization>
           </author>
           <date year="2024"/>
-        </front>
-</reference>
-
-<reference anchor="ISO.18013-7" target="https://www.iso.org/standard/82772.html">
-        <front>
-          <title>ISO/IEC DTS 18013-7 Personal identification — ISO-compliant driving license — Part 7: Mobile driving license (mDL) add-on functions</title>
-          <author>
-            <organization> ISO/IEC JTC 1/SC 17 Cards and security devices for personal identification</organization>
-          </author>
-          <date year="2024"/>
-        </front>
-</reference>
-
-<reference anchor="ISO.23220-3" target="https://www.iso.org/standard/79125.html">
-        <front>
-          <title>ISO/IEC DTS 23220-3 Cards and security devices for personal identification — Building blocks for identity management via mobile devices</title>
-          <author>
-            <organization> ISO/IEC JTC 1/SC 17 Cards and security devices for personal identification</organization>
-          </author>
-          <date year="2023"/>
         </front>
 </reference>
 
