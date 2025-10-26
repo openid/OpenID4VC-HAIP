@@ -641,7 +641,7 @@ Wallet implementations using the key attestation format specified in Annex D of 
     <author>
         <organization>European Cybersecurity Certification Group, Sub-group on Cryptography</organization>
     </author>
-    <date month="May" year="2025"/>
+    <date month="April" year="2025"/>
   </front>
 </reference>
 
