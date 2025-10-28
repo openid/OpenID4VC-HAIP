@@ -635,7 +635,7 @@ Wallet implementations using the key attestation format specified in Annex D of 
   </front>
 </reference>
 
-<reference anchor="ECCG.ACM2" target="https://certification.enisa.europa.eu/document/download/f4657490-9757-4a97-8deb-fd4d6a1358ee_en?filename=EUCC_guidelines_Agreed%20Cryptographic%20Mechanisms%20v2.pdf">
+<reference anchor="ECCG.ACM2" target="https://certification.enisa.europa.eu/document/download/a845662b-aee0-484e-9191-890c4cfa7aaa_en">
   <front>
     <title>Agreed Cryptographic Mechanisms 2.0</title>
     <author>
