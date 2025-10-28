@@ -371,7 +371,7 @@ Wallet implementations using the key attestation format specified in Annex D of 
 
 This document intentionally leaves certain extensions for ecosystems to define, in order to enable broad compatibility across differing or even conflicting requirements. Below are the extension points listed in this specification:
 
-- Whether to adopt a presentation profile, issuance profile, or both (see (#scope))
+- Which flow(s) to adopt: presentation, issuance, or both (see (#scope))
 - Whether to use the W3C Digital Credentials API, Redirects with custom URL schemes and/or Redirects with claimed `https` scheme URIs for presentation (see (#scope))
 - Which Credential format to support across issuance and presentation (see (#scope))
 - Whether to use Signed Issuer Metadata or not (see (#issuer-metadata))
