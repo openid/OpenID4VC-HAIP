@@ -330,7 +330,7 @@ This profile mandates the support for X.509 certificate-based key resolution to 
 
 * If the credential has cryptographic holder binding, a KB-JWT, as defined in [@!I-D.ietf-oauth-sd-jwt-vc], MUST always be present when presenting an SD-JWT VC.
 
-# Crypto Suites {#crypto-suites}
+# Requirements for Digital Signatures {#crypto-suites}
 
 
 Issuers, Verifiers, and Wallets MUST, at a minimum, support ECDSA with P-256 and SHA-256 (JOSE algorithm identifier `ES256`; COSE algorithm identifier `-7`, as applicable) for the purpose of validating the following:
