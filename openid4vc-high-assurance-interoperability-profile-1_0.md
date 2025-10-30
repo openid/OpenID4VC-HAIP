@@ -375,7 +375,7 @@ This document intentionally leaves certain extensions for ecosystems to define, 
 - Whether to use the W3C Digital Credentials API, Redirects with custom URL schemes and/or Redirects with claimed `https` scheme URIs for presentation (see (#scope))
 - Which Credential format to support across issuance and presentation (see (#scope))
 - Whether to use Signed Issuer Metadata or not (see (#issuer-metadata))
-- How to make a Credential Offer to the Wallet (see (#credential-offer))
+- How to make a Credential Offer available to the Wallet (see (#credential-offer))
 - Which key attestation format to use (see (#key-attestation))
 - Which Wallet Attestation format to use (see (#wallet-attestation))
 - Which X.509 certificate profile to use (see (#openid-for-verifiable-presentations))
