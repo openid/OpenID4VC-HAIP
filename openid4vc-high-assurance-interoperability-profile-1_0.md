@@ -279,7 +279,7 @@ Note that unsigned requests depend on the origin information provided by the pla
 
 ### ISO Mobile Documents or mdocs (ISO/IEC 18013 and ISO/IEC 23220 series)
 
-The following requirements apply to all OpenID4VP flows (defined in Annex B.2. in [@!OIDF.OID4VP]) when the mdoc Credential Format is used, :
+The following requirements apply to all OpenID4VP flows when the mdoc Credential Format is used (as defined in Annex B.2. of [@!OIDF.OID4VP]):
 
 * The Credential Format identifier MUST be `mso_mdoc`.
 * When multiple ISO mdocs are being returned, each ISO mdoc MUST be returned in a separate `DeviceResponse` (as defined in 8.3.2.1.2.2 of [@!ISO.18013-5]), each matching to a respective DCQL query. Therefore, the resulting `vp_token` contains multiple `DeviceResponse` instances.
