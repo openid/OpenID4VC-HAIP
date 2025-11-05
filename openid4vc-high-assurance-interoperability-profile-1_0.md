@@ -397,7 +397,7 @@ https://openid.net/certification/conformance-testing-for-openid-for-verifiable-p
 
 ## Key sizes
 
-Implementers need to ensure appropriate key sizes are used. Guidance can be found in, for example, [@NIST.SP.800-131A], [@NIST.SP.800-57] or [@BSI.TR-02102-1].
+Implementers need to ensure appropriate key sizes are used. Guidance can be found in, for example, [@NIST.SP.800-131A], [@NIST.SP.800-57], [@BSI.TR-02102-1], or [@ECCG.ACM2].
 
 # Privacy Considerations
 
@@ -615,6 +615,17 @@ Wallet implementations using the key attestation format specified in Annex D of 
   </front>
 </reference>
 
+<reference anchor="ECCG.ACM2" target="https://certification.enisa.europa.eu/document/download/a845662b-aee0-484e-9191-890c4cfa7aaa_en">
+  <front>
+    <title>Agreed Cryptographic Mechanisms 2.0</title>
+    <author>
+        <organization>European Cybersecurity Certification Group, Sub-group on Cryptography</organization>
+    </author>
+    <date month="April" year="2025"/>
+  </front>
+</reference>
+
+
 # IANA Considerations
 
 ## Uniform Resource Identifier (URI) Schemes Registry
@@ -657,7 +668,7 @@ The technology described in this specification was made available from contribut
 
    -06
 
-   * TBC
+   * add reference to ECCG Agreed Cryptographic Mechanisms 2.0
 
    -05
 
