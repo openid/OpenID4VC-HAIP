@@ -372,14 +372,50 @@ Wallet implementations using the key attestation format specified in Annex D of 
 This specification intentionally leaves certain extensions for ecosystems to define, in order to enable broad compatibility across differing or even conflicting requirements. Below are the extension points listed in this specification:
 
 - Which flow(s) to adopt: presentation, issuance, or both (see (#scope))
-- Whether to use the W3C Digital Credentials API, Redirects with custom URL schemes and/or Redirects with claimed `https` scheme URIs for presentation (see (#scope))
-- Which Credential format to support across issuance and presentation (see (#scope))
+- For presentation, whether to use the W3C Digital Credentials API, Redirects with custom URL schemes and/or Redirects with claimed `https` scheme URIs for presentation (see (#scope))
+- Which Credential Format to support across issuance and presentation (see (#scope))
 - Whether to use Signed Issuer Metadata or not (see (#issuer-metadata))
 - How to make a Credential Offer available to the Wallet (see (#credential-offer))
-- Which key attestation format to use (see (#key-attestation))
+- Which Key Attestation format to use (see (#key-attestation))
 - Which Wallet Attestation format to use (see (#wallet-attestation))
 - Which X.509 certificate profile to use (see (#openid-for-verifiable-presentations))
 - Support or restriction of additional cryptographic suites and hash algorithms (see (#crypto-suites))
+
+### Non-normative Examples of Ecosystem-specific Extensions of this Specification
+
+Below are two non-normative examples illustrating how an ecosystem may define the above elements to achieve its specific goals and preferences.
+
+#### Example 1: Baseline Interoperability without pre-existing relationships
+
+Ecosystem that prioritizes interoperability among all Wallets, Issuers and Verifiers, without requiring any pre-existing relationships, could define the following ecosystem-specific extensions of this specification:
+
+- Use this specification for both presentation and issuance with the following requirements:
+  - No additional cryptographic suites and hash algorithms are defined.
+- For issuance, the following requirements apply:
+  - For each Credential, Wallets support both mdoc and sd-jwt-vc Credential Formats, Issuers have a choice to issue in either format, and Verifiers accept at least one of the formats.
+  - No use of Signed Issuer Metadata.
+  - Wallets MUST register for the `haip-vci://` custom scheme, where possible. This custom scheme is also used to communicate Credential Offer.
+  - Wallets and Issuers both support Key Attestations in the format specified in Annex D of [@!OIDF.OID4VCI]. Both `jwt` proof type using `key_attestation` and `attestation` proof type are supported.
+  - Wallets and Issuers both support Wallet Attestations in the format specified in Annex E of [@!OIDF.OID4VCI] and (#wallet-attestation) of this specification.
+- for presentation, the following requirements apply:
+  - Wallets use DC API where possible and when they have credentials available. As a fallback mechanism when DC API is not available, Wallets register for the `haip-vp://` custom scheme, where possible.
+  - No additional X.509 certificate profile is defined.
+
+
+Making these choices maximizes interoperability between the parties in the ecosystem while minimizing the burden on Issuers and Verifiers. This comes at the expense of an increased burden on Wallets as well as the potential privacy and security issues in (#interop-key-attestations).
+
+#### Example 2: Achieving Compatibility with Existing Deployments of ISO/IEC 18013-5
+
+Ecosystem that prioritizes achieving compatibility with existing deployments could define the following ecosystem-specific extensions of this specification:
+
+- Use this specification only for presentation with the following requirements:
+  - Wallets and Verifiers support only mdoc Credential Format.
+  - Wallets register and use the `haip-vp://` custom scheme, where possible.
+  - As X.509 certificate profile, Wallets and Verifiers use Reader Authentication Certificate profile defined in Annex B of [@!ISO.18013-5].
+  - Verifiers support all curves from Cipher Suite 1 listed in table 22 of [@!ISO.18013-5].
+  - Verifiers support all hash algorithms listed in table 21 of [@!ISO.18013-5].
+
+Making these choices ensures interoperability with any existing Issuer, at the cost of an increased burden on the Verifier.
 
 # Security Considerations {#security_considerations}
 
