@@ -401,7 +401,6 @@ Ecosystem that prioritizes interoperability among all Wallets, Issuers and Verif
   - Wallets use DC API where possible and when they have credentials available. As a fallback mechanism when DC API is not available, Wallets register for the `haip-vp://` custom scheme, where possible.
   - No additional X.509 certificate profile is defined.
 
-
 Making these choices maximizes interoperability between the parties in the ecosystem while minimizing the burden on Issuers and Verifiers. This comes at the expense of an increased burden on Wallets as well as the potential privacy and security issues in (#interop-key-attestations).
 
 #### Example 2: Achieving Compatibility with Existing Deployments of ISO/IEC 18013-5
