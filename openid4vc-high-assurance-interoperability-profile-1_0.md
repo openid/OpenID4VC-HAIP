@@ -391,8 +391,8 @@ Ecosystem that prioritizes interoperability among all Wallets, Issuers and Verif
 
 - Use this specification for both presentation and issuance with the following requirements:
   - No additional cryptographic suites and hash algorithms are defined.
-- For issuance, the following requirements apply:
   - For each Credential, Wallets support both mdoc and sd-jwt-vc Credential Formats, Issuers have a choice to issue in either format, and Verifiers accept at least one of the formats.
+- For issuance, the following requirements apply:
   - No use of Signed Issuer Metadata.
   - Wallets MUST register for the `haip-vci://` custom scheme, where possible. This custom scheme is also used to communicate Credential Offer.
   - Wallets and Issuers both support Key Attestations in the format specified in Annex D of [@!OIDF.OID4VCI]. Both `jwt` proof type using `key_attestation` and `attestation` proof type are supported.
