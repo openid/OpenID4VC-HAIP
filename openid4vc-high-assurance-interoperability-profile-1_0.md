@@ -229,6 +229,13 @@ Wallets MUST support key attestations. Ecosystems that desire wallet-issuer inte
 * `jwt` proof type using `key_attestation`
 * `attestation` proof type
 
+When using the format specified in Appendix D of [@!OIDF.OID4VCI]:
+
+* The public key used to validate the signature on the key attestation MUST be included in the `x5c` JOSE header of the key attestation
+* The X.509 certificate of the trust anchor MUST NOT be included in the `x5c` JOSE header of the key attestation.
+* The X.509 certificate signing the key attestation MUST NOT be self-signed.
+* The X.509 certificate profiles to be used are out of scope of this specification.
+
 Alternatively, ecosystems MAY choose to rely on other key attestation formats, meaning they would need to use a proof type other than `attestation`, define a new proof type, or expand the `jwt` proof type to support other key attestation formats.
 
 If batch issuance is used and the Credential Issuer has indicated (via `cryptographic_binding_methods_supported` metadata parameter) that cryptographic holder binding is required, all public keys used in Credential Request SHOULD be attested within a single key attestation.
@@ -378,7 +385,7 @@ This specification intentionally leaves certain extensions for ecosystems to def
 - How to make a Credential Offer available to the Wallet (see (#credential-offer))
 - Which key attestation format to use (see (#key-attestation))
 - Which Wallet Attestation format to use (see (#wallet-attestation))
-- Which X.509 certificate profile to use (see (#openid-for-verifiable-presentations))
+- Which X.509 certificate profile to use (see (#openid-for-verifiable-presentations), (#wallet-attestation) and (#key-attestation))
 - Support or restriction of additional cryptographic suites and hash algorithms (see (#crypto-suites))
 
 # Security Considerations {#security_considerations}
@@ -657,7 +664,7 @@ The technology described in this specification was made available from contribut
 
    -06
 
-   * TBC
+   * require x5c header in the OID4VCI Appendix D key attestation
 
    -05
 
