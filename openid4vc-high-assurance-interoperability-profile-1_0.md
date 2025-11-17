@@ -387,11 +387,11 @@ Below are two non-normative examples illustrating how an ecosystem may define th
 
 #### Example 1: Baseline Interoperability without pre-existing relationships
 
-Ecosystem that prioritizes interoperability among all Wallets, Issuers and Verifiers, without requiring any pre-existing relationships, could define the following ecosystem-specific extensions of this specification:
+An Ecosystem that prioritizes interoperability among all Wallets, Issuers and Verifiers, without requiring any pre-existing relationships, could define the following ecosystem-specific extensions of this specification:
 
 - Use this specification for both presentation and issuance with the following requirements:
   - No additional cryptographic suites and hash algorithms are defined.
-  - For each Credential, Wallets support both mdoc and sd-jwt-vc Credential Formats, Issuers have a choice to issue in either format, and Verifiers accept at least one of the formats.
+  - For each Credential, Wallets support both mdoc and sd-jwt-vc Credential Formats, Issuers have a choice to issue in either format, and Verifiers accept the Credential Format that the Issuer of a requested Credential supports.
 - For issuance, the following requirements apply:
   - No use of Signed Issuer Metadata.
   - Wallets MUST register for the `haip-vci://` custom scheme, where possible. This custom scheme is also used to communicate Credential Offer.
@@ -405,16 +405,16 @@ Making these choices maximizes interoperability between the parties in the ecosy
 
 #### Example 2: Achieving Compatibility with Existing Deployments of ISO/IEC 18013-5
 
-Ecosystem that prioritizes achieving compatibility with existing deployments could define the following ecosystem-specific extensions of this specification:
+An Ecosystem that prioritizes achieving compatibility with existing deployments could define the following ecosystem-specific extensions of this specification:
 
 - Use this specification only for presentation with the following requirements:
-  - Wallets and Verifiers support only mdoc Credential Format.
+  - Wallets and Verifiers support only the mdoc Credential Format.
   - Wallets register and use the `haip-vp://` custom scheme, where possible.
-  - As X.509 certificate profile, Wallets and Verifiers use Reader Authentication Certificate profile defined in Annex B of [@!ISO.18013-5].
+  - As X.509 certificate profile, Wallets and Verifiers use the Reader Authentication Certificate profile defined in Annex B of [@!ISO.18013-5].
   - Verifiers support all curves from Cipher Suite 1 listed in table 22 of [@!ISO.18013-5].
   - Verifiers support all hash algorithms listed in table 21 of [@!ISO.18013-5].
 
-Making these choices ensures interoperability with any existing Issuer, at the cost of an increased burden on the Verifier.
+Making these choices ensures interoperability at the increased cost on the Verifier.
 
 # Security Considerations {#security_considerations}
 
