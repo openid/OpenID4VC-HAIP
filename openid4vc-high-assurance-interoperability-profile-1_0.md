@@ -657,7 +657,7 @@ The technology described in this specification was made available from contribut
 
    -06
 
-   * TBC
+   * clarify that DCQL applies in HAIP as defined in OpenID4VP and all REQUIRED and OPTIONAL requirements remain the same
 
    -05
 
