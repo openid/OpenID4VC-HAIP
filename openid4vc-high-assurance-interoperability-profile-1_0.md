@@ -229,6 +229,13 @@ Wallets MUST support key attestations. Ecosystems that desire wallet-issuer inte
 * `jwt` proof type using `key_attestation`
 * `attestation` proof type
 
+When using the format specified in Appendix D of [@!OIDF.OID4VCI]:
+
+* The public key used to validate the signature on the key attestation MUST be included in the `x5c` JOSE header of the key attestation
+* The X.509 certificate of the trust anchor MUST NOT be included in the `x5c` JOSE header of the key attestation.
+* The X.509 certificate signing the key attestation MUST NOT be self-signed.
+* The X.509 certificate profiles to be used are out of scope of this specification.
+
 Alternatively, ecosystems MAY choose to rely on other key attestation formats, meaning they would need to use a proof type other than `attestation`, define a new proof type, or expand the `jwt` proof type to support other key attestation formats.
 
 If batch issuance is used and the Credential Issuer has indicated (via `cryptographic_binding_methods_supported` metadata parameter) that cryptographic holder binding is required, all public keys used in Credential Request SHOULD be attested within a single key attestation.
@@ -378,7 +385,7 @@ This specification intentionally leaves certain extensions for ecosystems to def
 - How to make a Credential Offer available to the Wallet (see (#credential-offer))
 - Which key attestation format to use (see (#key-attestation))
 - Which Wallet Attestation format to use (see (#wallet-attestation))
-- Which X.509 certificate profile to use (see (#openid-for-verifiable-presentations))
+- Which X.509 certificate profile to use (see (#openid-for-verifiable-presentations), (#wallet-attestation) and (#key-attestation))
 - Support or restriction of additional cryptographic suites and hash algorithms (see (#crypto-suites))
 
 # Security Considerations {#security_considerations}
@@ -397,7 +404,7 @@ https://openid.net/certification/conformance-testing-for-openid-for-verifiable-p
 
 ## Key sizes
 
-Implementers need to ensure appropriate key sizes are used. Guidance can be found in, for example, [@NIST.SP.800-131A], [@NIST.SP.800-57] or [@BSI.TR-02102-1].
+Implementers need to ensure appropriate key sizes are used. Guidance can be found in, for example, [@NIST.SP.800-131A], [@NIST.SP.800-57], [@BSI.TR-02102-1], or [@ECCG.ACM2].
 
 # Privacy Considerations
 
@@ -615,6 +622,17 @@ Wallet implementations using the key attestation format specified in Annex D of 
   </front>
 </reference>
 
+<reference anchor="ECCG.ACM2" target="https://certification.enisa.europa.eu/document/download/a845662b-aee0-484e-9191-890c4cfa7aaa_en">
+  <front>
+    <title>Agreed Cryptographic Mechanisms 2.0</title>
+    <author>
+        <organization>European Cybersecurity Certification Group, Sub-group on Cryptography</organization>
+    </author>
+    <date month="April" year="2025"/>
+  </front>
+</reference>
+
+
 # IANA Considerations
 
 ## Uniform Resource Identifier (URI) Schemes Registry
@@ -658,6 +676,8 @@ The technology described in this specification was made available from contribut
    -06
 
    * clarify that DCQL applies in HAIP as defined in OpenID4VP and all REQUIRED and OPTIONAL requirements remain the same
+   * add reference to ECCG Agreed Cryptographic Mechanisms 2.0
+   * require x5c header in the OID4VCI Appendix D key attestation
 
    -05
 
