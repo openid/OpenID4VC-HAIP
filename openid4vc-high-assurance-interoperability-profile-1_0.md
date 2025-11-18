@@ -345,7 +345,7 @@ This specification mandates the support for X.509 certificate-based key resoluti
 # Requirements for Digital Signatures {#crypto-suites}
 
 
-Issuers, Verifiers, and Wallets MUST, at a minimum, support ECDSA with P-256 and SHA-256 (JOSE algorithm identifier `ES256`; COSE algorithm identifier `-7`, as applicable) for the purpose of validating the following:
+Issuers, Verifiers, and Wallets MUST, at a minimum, support ECDSA with P-256 and SHA-256 (JOSE algorithm identifier `ES256`; COSE algorithm identifier `-7` or `-9`, as applicable) for the purpose of validating the following:
 
 - Issuers
   - Wallet Attestations (including PoP) when Annex E of [@!OIDF.OID4VCI] is used;
@@ -680,6 +680,7 @@ The technology described in this specification was made available from contribut
 
    -06
 
+   * add cose alg identifer -9 (fully specified)
    * clarify that DCQL applies in HAIP as defined in OpenID4VP and all REQUIRED and OPTIONAL requirements remain the same
    * add reference to ECCG Agreed Cryptographic Mechanisms 2.0
    * require x5c header in the OID4VCI Appendix D key attestation
