@@ -84,7 +84,7 @@ This specification uses the terms "Holder", "Issuer", "Verifier", "Wallet", "Wal
 This specification also defines the following terms. In the case where a term has a definition that differs, the definition below is authoritative.
 
 Ecosystem:
-: A set of issuers, wallets and verifiers that have a common set of rules by which they operate, for example, set by a regulation, law or domain/sector.
+: A group of Issuers, Wallets and Verifiers that have a common set of rules by which they operate. The rules may be determined, for example, by a regulation, law or domain/sector.
 
 # Scope {#scope}
 
