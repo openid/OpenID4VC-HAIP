@@ -165,7 +165,8 @@ The following aspects of [@!FAPI2_Security_Profile] do not apply to this specifi
 
 Note that some optional parts of [@!FAPI2_Security_Profile] are not applicable when using only OpenID for Verifiable Credential Issuance, e.g., MTLS or OpenID Connect.
 
-It is up to ecosystems to define whether a particular Credential requires the Wallets and the Issuers to support Issuer-initiated, Wallet-initiated Issuance or both, including how to send Credential Offer. 
+Ecosystems SHOULD clearly indicate whether the Wallets and the Issuers need to support Issuer-initiated, Wallet-initiated Issuance or both, including how to send Credential Offer. If Issuer-initiated flows are supported, they MUST use the Credential Offer as defined in Section 4.1 of [@!OIDF.OID4VCI].
+
 Note that ecosystems that aim for a stronger separation between the different Issuers and Wallets are expected to prefer the Issuer-initiated issuance flows and those with stronger integration into wallets (more wallet-centric ecosystems) will likely prefer the Wallet-initiated Issuance.
 
 If batch issuance is supported, the Wallet SHOULD use it rather than making consecutive requests for a single Credential of the same Credential Dataset. The Issuer MUST indicate whether batch issuance is supported by including or omitting the `batch_credential_issuance` metadata parameter. The Issuer’s decision may be influenced by various factors, including, but not limited to, trust framework requirements, regulatory constraints, applicable laws or internal policies.
