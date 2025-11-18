@@ -81,6 +81,11 @@ The key words "MUST", "MUST NOT", "REQUIRED", "SHALL", "SHALL NOT", "SHOULD", "S
 
 This specification uses the terms "Holder", "Issuer", "Verifier", "Wallet", "Wallet Attestation", "Credential Type" and "Verifiable Credential" as defined in [@!OIDF.OID4VCI] and [@!OIDF.OID4VP].
 
+This specification also defines the following term. In the case where a term has a definition that differs, the definition below is authoritative.
+
+Ecosystem:
+: A group of Issuers, Wallets and Verifiers that have a common set of rules by which they operate. The rules may be determined, for example, by a regulation, law or domain/sector.
+
 # Scope {#scope}
 
 This specification enables interoperable implementations of the following flows:
