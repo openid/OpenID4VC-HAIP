@@ -372,7 +372,7 @@ Wallet implementations using the key attestation format specified in Annex D of 
 This specification intentionally leaves certain extensions for ecosystems to define, in order to enable broad compatibility across differing or even conflicting requirements. Below are the extension points listed in this specification:
 
 - Which flow(s) to adopt: presentation, issuance, or both (see (#scope))
-- For presentation, whether to use the W3C Digital Credentials API, Redirects with custom URL schemes and/or Redirects with claimed `https` scheme URIs for presentation (see (#scope))
+- For presentation, whether to use the W3C Digital Credentials API, Redirects with custom URL schemes, and/or Redirects with claimed `https` scheme URIs (see (#scope))
 - Which Credential Format to support across issuance and presentation (see (#scope))
 - Whether to use Signed Issuer Metadata or not (see (#issuer-metadata))
 - How to make a Credential Offer available to the Wallet (see (#credential-offer))
@@ -393,8 +393,8 @@ An Ecosystem that prioritizes interoperability among all Wallets, Issuers and Ve
   - No additional cryptographic suites and hash algorithms are defined.
   - For each Credential, Wallets support both mdoc and sd-jwt-vc Credential Formats, Issuers have a choice to issue in either format, and Verifiers accept the Credential Format that the Issuer of a requested Credential supports.
 - For issuance, the following requirements apply:
-  - No use of Signed Issuer Metadata.
-  - Wallets MUST register for the `haip-vci://` custom scheme, where possible. This custom scheme is also used to communicate Credential Offer.
+  - Issuers use and Wallets support unsigned Issuer Metadata.
+  - Wallets register for the `haip-vci://` custom scheme, where possible. This custom scheme is also used to communicate Credential Offer.
   - Wallets and Issuers both support Key Attestations in the format specified in Annex D of [@!OIDF.OID4VCI]. Both `jwt` proof type using `key_attestation` and `attestation` proof type are supported.
   - Wallets and Issuers both support Wallet Attestations in the format specified in Annex E of [@!OIDF.OID4VCI] and (#wallet-attestation) of this specification.
 - for presentation, the following requirements apply:
