@@ -81,6 +81,11 @@ The key words "MUST", "MUST NOT", "REQUIRED", "SHALL", "SHALL NOT", "SHOULD", "S
 
 This specification uses the terms "Holder", "Issuer", "Verifier", "Wallet", "Wallet Attestation", "Credential Type" and "Verifiable Credential" as defined in [@!OIDF.OID4VCI] and [@!OIDF.OID4VP].
 
+This specification also defines the following term. In the case where a term has a definition that differs, the definition below is authoritative.
+
+Ecosystem:
+: A group of Issuers, Wallets and Verifiers that have a common set of rules by which they operate. The rules may be determined, for example, by a regulation, law or domain/sector.
+
 # Scope {#scope}
 
 This specification enables interoperable implementations of the following flows:
@@ -165,7 +170,9 @@ The following aspects of [@!FAPI2_Security_Profile] do not apply to this specifi
 
 Note that some optional parts of [@!FAPI2_Security_Profile] are not applicable when using only OpenID for Verifiable Credential Issuance, e.g., MTLS or OpenID Connect.
 
-Both Wallet initiated and Issuer initiated issuance are supported.
+Ecosystems SHOULD clearly indicate whether the Wallets and the Issuers need to support Issuer-initiated, Wallet-initiated Issuance or both, including how to send Credential Offer. If Issuer-initiated flows are supported, they MUST use the Credential Offer as defined in Section 4.1 of [@!OIDF.OID4VCI].
+
+Note that ecosystems that aim for a stronger separation between the different Issuers and Wallets are expected to prefer the Issuer-initiated issuance flows and those with stronger integration into wallets (more wallet-centric ecosystems) will likely prefer the Wallet-initiated Issuance.
 
 If batch issuance is supported, the Wallet SHOULD use it rather than making consecutive requests for a single Credential of the same Credential Dataset. The Issuer MUST indicate whether batch issuance is supported by including or omitting the `batch_credential_issuance` metadata parameter. The Issuer’s decision may be influenced by various factors, including, but not limited to, trust framework requirements, regulatory constraints, applicable laws or internal policies.
 
@@ -229,6 +236,13 @@ Wallets MUST support key attestations. Ecosystems that desire wallet-issuer inte
 * `jwt` proof type using `key_attestation`
 * `attestation` proof type
 
+When using the format specified in Appendix D of [@!OIDF.OID4VCI]:
+
+* The public key used to validate the signature on the key attestation MUST be included in the `x5c` JOSE header of the key attestation
+* The X.509 certificate of the trust anchor MUST NOT be included in the `x5c` JOSE header of the key attestation.
+* The X.509 certificate signing the key attestation MUST NOT be self-signed.
+* The X.509 certificate profiles to be used are out of scope of this specification.
+
 Alternatively, ecosystems MAY choose to rely on other key attestation formats, meaning they would need to use a proof type other than `attestation`, define a new proof type, or expand the `jwt` proof type to support other key attestation formats.
 
 If batch issuance is used and the Credential Issuer has indicated (via `cryptographic_binding_methods_supported` metadata parameter) that cryptographic holder binding is required, all public keys used in Credential Request SHOULD be attested within a single key attestation.
@@ -240,7 +254,7 @@ The following requirements apply to OpenID for Verifiable Presentations, irrespe
 * The Wallet and Verifier MUST support at least one of the following Credential Format Profiles defined in (#vc-profiles): IETF SD-JWT VC or ISO mdoc. Ecosystems SHOULD clearly indicate which of these formats, IETF SD-JWT VC, ISO mdoc, or both, are required to be supported.
 * The Response type MUST be `vp_token`.
 * For signed requests, the Verifier MUST use, and the Wallet MUST accept the Client Identifier Prefix `x509_hash` as defined in Section 5.9.3 of [@!OIDF.OID4VP]. The X.509 certificate of the trust anchor MUST NOT be included in the `x5c` JOSE header of the signed request. The X.509 certificate signing the request MUST NOT be self-signed. X.509 certificate profiles to be used with `x509_hash` are out of scope of this specification.
-* The DCQL query and response as defined in Section 6 of [@!OIDF.OID4VP] MUST be used.
+* The DCQL query and response MUST be used as defined in Section 6 of [@!OIDF.OID4VP].
 * Response encryption MUST be performed as specified in [@!OIDF.OID4VP, section 8.3]. The JWE `alg` (algorithm) header parameter (see [@!RFC7516, section 4.1.1])
   value `ECDH-ES` (as defined in [@!RFC7518, section 4.6]), with key agreement utilizing keys on the `P-256` curve (see [@!RFC7518, section 6.2.1.1]) MUST be supported.
   The JWE `enc` (encryption algorithm) header parameter (see [@!RFC7516, section 4.1.2]) value `A128GCM` (as defined in [@!RFC7518, section 5.3]) MUST be supported.
@@ -268,8 +282,8 @@ The following requirements apply to OpenID for Verifiable Presentations via redi
 
 The following requirements apply to OpenID for Verifiable Presentations via the W3C Digital Credentials API:
 
-* Wallet Invocation is done via the W3C Digital Credentials API or an equivalent platform API. Any other mechanism, including Custom URL schemes, MUST NOT be used.
-* The Response Mode MUST be `dc_api.jwt`.
+* The Wallet MUST support Wallet Invocation via the W3C Digital Credentials API or an equivalent platform API. The Verifier MUST use Wallet Invocation via the W3C Digital Credentials API or an equivalent platform API.
+* The Wallet MUST support the Response Mode `dc_api.jwt`. The Verifier MUST use the Response Mode `dc_api.jwt`.
 * The Verifier and Wallet MUST use Annex A in [@!OIDF.OID4VP] that defines how to use OpenID4VP over the W3C Digital Credentials API.
 * The Wallet MUST support both signed and unsigned requests as defined in Annex A.3.1 and A.3.2 of [@!OIDF.OID4VP]. The Verifier MAY support signed requests, unsigned requests, or both.
 
@@ -333,7 +347,7 @@ This specification mandates the support for X.509 certificate-based key resoluti
 # Requirements for Digital Signatures {#crypto-suites}
 
 
-Issuers, Verifiers, and Wallets MUST, at a minimum, support ECDSA with P-256 and SHA-256 (JOSE algorithm identifier `ES256`; COSE algorithm identifier `-7`, as applicable) for the purpose of validating the following:
+Issuers, Verifiers, and Wallets MUST, at a minimum, support ECDSA with P-256 and SHA-256 (JOSE algorithm identifier `ES256`; COSE algorithm identifier `-7` or `-9`, as applicable) for the purpose of validating the following:
 
 - Issuers
   - Wallet Attestations (including PoP) when Annex E of [@!OIDF.OID4VCI] is used;
@@ -378,7 +392,7 @@ This specification intentionally leaves certain extensions for ecosystems to def
 - How to make a Credential Offer available to the Wallet (see (#credential-offer))
 - Which Key Attestation format to use (see (#key-attestation))
 - Which Wallet Attestation format to use (see (#wallet-attestation))
-- Which X.509 certificate profile to use (see (#openid-for-verifiable-presentations))
+- Which X.509 certificate profile to use (see (#openid-for-verifiable-presentations), (#wallet-attestation) and (#key-attestation))
 - Support or restriction of additional cryptographic suites and hash algorithms (see (#crypto-suites))
 
 ### Non-normative Examples of Ecosystem-specific Extensions of this Specification
@@ -432,7 +446,7 @@ https://openid.net/certification/conformance-testing-for-openid-for-verifiable-p
 
 ## Key sizes
 
-Implementers need to ensure appropriate key sizes are used. Guidance can be found in, for example, [@NIST.SP.800-131A], [@NIST.SP.800-57] or [@BSI.TR-02102-1].
+Implementers need to ensure appropriate key sizes are used. Guidance can be found in, for example, [@NIST.SP.800-131A], [@NIST.SP.800-57], [@BSI.TR-02102-1], or [@ECCG.ACM2].
 
 # Privacy Considerations
 
@@ -650,6 +664,17 @@ Wallet implementations using the key attestation format specified in Annex D of 
   </front>
 </reference>
 
+<reference anchor="ECCG.ACM2" target="https://certification.enisa.europa.eu/document/download/a845662b-aee0-484e-9191-890c4cfa7aaa_en">
+  <front>
+    <title>Agreed Cryptographic Mechanisms 2.0</title>
+    <author>
+        <organization>European Cybersecurity Certification Group, Sub-group on Cryptography</organization>
+    </author>
+    <date month="April" year="2025"/>
+  </front>
+</reference>
+
+
 # IANA Considerations
 
 ## Uniform Resource Identifier (URI) Schemes Registry
@@ -676,7 +701,7 @@ This specification registers the following URI schemes in the IANA "Uniform Reso
 
 # Acknowledgements {#Acknowledgements}
 
-We would like to thank Patrick Amrein, Paul Bastian, Brian Campbell, Lee Campbell, Tim Cappalli, Stefan Charsley, Gabe Cohen, Andrii Deinega,  Rajvardhan Deshmukh, Daniel Fett, Pedro Felix, Ryan Galluzzo, Timo Glastra, Martijn Haring, Bjorn Hjelm, Alen Horvat, Łukasz Jaromin, Mike Jones, Markus Kreusch, Philipp Lehwalder, Tobias Looker, Hicham Lozi, Mirko Mollik, Andres Olave, Gareth Oliver, Oliver Terbu, Giuseppe De Marco, Mikel Pintor, Joel Posti, Dima Postnikov, Andreea Prian, Bob Reynders, Samuel Rinnetmäki, Peter Sorotokin, Jan Vereecken, Jin Wen and David Zeuthen for their valuable feedback and contributions to this specification.
+We would like to thank Patrick Amrein, Paul Bastian, Brian Campbell, Lee Campbell, Tim Cappalli, Stefan Charsley, Gabe Cohen, Andrii Deinega,  Rajvardhan Deshmukh, Daniel Fett, Pedro Felix, Ryan Galluzzo, Timo Glastra, Martijn Haring, Bjorn Hjelm, Alen Horvat, Łukasz Jaromin, Mike Jones, Markus Kreusch, Philipp Lehwalder, Tobias Looker, Hicham Lozi, Mirko Mollik, Andres Olave, Gareth Oliver, Oliver Terbu, Giuseppe De Marco, Mikel Pintor, Joel Posti, Dima Postnikov, Andreea Prian, Bob Reynders, Samuel Rinnetmäki, Peter Sorotokin, Jan Vereecken, Jin Wen, Hakan Yildiz and David Zeuthen for their valuable feedback and contributions to this specification.
 
 # Notices
 
@@ -692,7 +717,10 @@ The technology described in this specification was made available from contribut
 
    -06
 
-   * TBC
+   * add cose alg identifer -9 (fully specified)
+   * clarify that DCQL applies in HAIP as defined in OpenID4VP and all REQUIRED and OPTIONAL requirements remain the same
+   * add reference to ECCG Agreed Cryptographic Mechanisms 2.0
+   * require x5c header in the OID4VCI Appendix D key attestation
 
    -05
 
