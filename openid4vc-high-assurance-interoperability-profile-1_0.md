@@ -285,7 +285,7 @@ The following requirements apply to OpenID for Verifiable Presentations via the 
 * The Wallet MUST support Wallet Invocation via the W3C Digital Credentials API or an equivalent platform API. The Verifier MUST use Wallet Invocation via the W3C Digital Credentials API or an equivalent platform API.
 * The Wallet MUST support the Response Mode `dc_api.jwt`. The Verifier MUST use the Response Mode `dc_api.jwt`.
 * The Verifier and Wallet MUST use Appendix A in [@!OIDF.OID4VP] that defines how to use OpenID4VP over the W3C Digital Credentials API.
-* The Wallet MUST support both signed and unsigned requests as defined in Appendix A.3.1 and A.3.2 of [@!OIDF.OID4VP]. The Verifier MAY support signed requests, unsigned requests, or both.
+* The Wallet MUST support both signed and unsigned requests as defined in Appendices A.3.1 and A.3.2 of [@!OIDF.OID4VP]. The Verifier MAY support signed requests, unsigned requests, or both.
 
 Note that unsigned requests depend on the origin information provided by the platform and the web PKI for request integrity protection and to authenticate the Verifier. Signed requests introduce a separate layer for request integrity protection and Verifier authentication that can be validated by the Wallet.
 
