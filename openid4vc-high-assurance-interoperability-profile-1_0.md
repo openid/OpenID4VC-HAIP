@@ -172,7 +172,7 @@ Note that some optional parts of [@!FAPI2_Security_Profile] are not applicable w
 
 Ecosystems SHOULD clearly indicate whether the Wallets and the Issuers need to support Issuer-initiated, Wallet-initiated Issuance or both, including how to send Credential Offer. If Issuer-initiated flows are supported, they MUST use the Credential Offer as defined in Section 4.1 of [@!OIDF.OID4VCI].
 
-Note that ecosystems that aim for a stronger separation between the different Issuers and Wallets are expected to prefer the Issuer-initiated issuance flows and those with stronger integration into wallets (more wallet-centric ecosystems) will likely prefer the Wallet-initiated Issuance.
+Note that Ecosystems that aim for a stronger separation between the different Issuers and Wallets are expected to prefer the Issuer-initiated issuance flows and those with stronger integration into wallets (more wallet-centric Ecosystems) will likely prefer the Wallet-initiated Issuance.
 
 If batch issuance is supported, the Wallet SHOULD use it rather than making consecutive requests for a single Credential of the same Credential Dataset. The Issuer MUST indicate whether batch issuance is supported by including or omitting the `batch_credential_issuance` metadata parameter. The Issuer’s decision may be influenced by various factors, including, but not limited to, trust framework requirements, regulatory constraints, applicable laws or internal policies.
 
@@ -185,7 +185,7 @@ The Authorization Server MUST support metadata according to [@!RFC8414].
 The Credential Issuer MUST support metadata retrieval according to Section 12.2.2 of [@!OIDF.OID4VCI].
 The Credential Issuer metadata MUST include a scope for every Credential Configuration it supports.
 
-When ecosystem policies require Issuer Authentication to a higher level than possible with TLS alone, signed Credential Issuer Metadata as specified in Section 11.2.3 in [@!OIDF.OID4VCI]
+When Ecosystem policies require Issuer Authentication to a higher level than possible with TLS alone, signed Credential Issuer Metadata as specified in Section 11.2.3 in [@!OIDF.OID4VCI]
 MUST be supported by both the Wallet and the Issuer. Key resolution to validate the signed Issuer
 Metadata MUST be supported using the `x5c` JOSE header parameter as defined in [@!RFC7515]. In this case, the X.509 certificate of the trust anchor MUST NOT be included in the `x5c` JOSE header of the signed request. The X.509 certificate signing the request MUST NOT be self-signed.
 
@@ -197,7 +197,7 @@ If the Issuer supports Credential Configurations that require key binding, as in
 
 * The Grant Type `authorization_code` MUST be supported as defined in Section 4.1.1 in [@!OIDF.OID4VCI]
 * For Grant Type `authorization_code`, the Issuer MUST include a scope value in order to allow the Wallet to identify the desired Credential Type. The Wallet MUST use that value in the `scope` Authorization parameter.
-* As a way to invoke the Wallet the custom URL scheme `haip-vci://` MAY be supported. Implementations MAY support other ways to invoke Wallets as agreed upon by trust frameworks/ecosystems/jurisdictions, including but not limited to using other custom URL schemes or claimed "https" scheme URIs.
+* As a way to invoke the Wallet the custom URL scheme `haip-vci://` MAY be supported. Implementations MAY support other ways to invoke Wallets as agreed upon by trust frameworks/Ecosystems/jurisdictions, including but not limited to using other custom URL schemes or claimed "https" scheme URIs.
 
 Note: The Authorization Code flow does not require a Credential Offer from the Issuer to the Wallet. However, it is included in the feature set to allow for Issuer initiated Credential issuance.
 
@@ -218,7 +218,7 @@ Note: Issuers SHOULD consider how long a refresh token is allowed to be used to 
 
 Wallets MUST use, and Issuers MUST require, an OAuth2 Client authentication mechanism at OAuth2 Endpoints that support client authentication (such as the PAR and Token Endpoints).
 
-Ecosystems that desire wallet-issuer interoperability on the level of Wallet Attestations SHOULD require Wallets to support the authentication mechanism and Wallet Attestation format specified in Annex E of [@!OIDF.OID4VCI]. When doing so, they might need to define additional ecosystem-specific claims contained in the attestation. Alternatively, ecosystems MAY choose to rely on other Wallet Attestation formats.
+Ecosystems that desire wallet-issuer interoperability on the level of Wallet Attestations SHOULD require Wallets to support the authentication mechanism and Wallet Attestation format specified in Annex E of [@!OIDF.OID4VCI]. When doing so, they might need to define additional Ecosystem-specific claims contained in the attestation. Alternatively, Ecosystems MAY choose to rely on other Wallet Attestation formats.
 
  Additional rules apply when using the format defined in Annex E of [@!OIDF.OID4VCI]:
 
@@ -243,7 +243,7 @@ When using the format specified in Appendix D of [@!OIDF.OID4VCI]:
 * The X.509 certificate signing the key attestation MUST NOT be self-signed.
 * The X.509 certificate profiles to be used are out of scope of this specification.
 
-Alternatively, ecosystems MAY choose to rely on other key attestation formats, meaning they would need to use a proof type other than `attestation`, define a new proof type, or expand the `jwt` proof type to support other key attestation formats.
+Alternatively, Ecosystems MAY choose to rely on other key attestation formats, meaning they would need to use a proof type other than `attestation`, define a new proof type, or expand the `jwt` proof type to support other key attestation formats.
 
 If batch issuance is used and the Credential Issuer has indicated (via `cryptographic_binding_methods_supported` metadata parameter) that cryptographic holder binding is required, all public keys used in Credential Request SHOULD be attested within a single key attestation.
 
@@ -263,13 +263,13 @@ The following requirements apply to OpenID for Verifiable Presentations, irrespe
 
 Additional requirements for OpenID4VP are defined in (#oid4vp-redirects), (#oid4vp-dc-api), (#oid4vp-credential-formats), (#crypto-suites) and (#hash-algorithms).
 
-Note that while this specification does not define profiles for X.509 certificates used in Verifier authentication (e.g., with the `x509_hash` Client Identifier Prefix), ecosystems are encouraged to select suitable certificate issuing policies and certificate profiles (for example, an mDL ecosystem can use the Reader Authentication Certificate profile defined in Annex B of ISO/IEC 18013-5 with `x509_hash`), or define new ones if there is a good reason to do so. Such policies and profiles MAY specify how information in the certificate corresponds to information in the presentation flows. For example, an ecosystem might require that the Wallet verifies that the `redirect_uri`, `response_uri`, `origin`, or `expected_origin` request parameters match with information contained in the Verifier's end-entity certificate (e.g., its DNS name).
+Note that while this specification does not define profiles for X.509 certificates used in Verifier authentication (e.g., with the `x509_hash` Client Identifier Prefix), Ecosystems are encouraged to select suitable certificate issuing policies and certificate profiles (for example, an mDL Ecosystem can use the Reader Authentication Certificate profile defined in Annex B of ISO/IEC 18013-5 with `x509_hash`), or define new ones if there is a good reason to do so. Such policies and profiles MAY specify how information in the certificate corresponds to information in the presentation flows. For example, an Ecosystem might require that the Wallet verifies that the `redirect_uri`, `response_uri`, `origin`, or `expected_origin` request parameters match with information contained in the Verifier's end-entity certificate (e.g., its DNS name).
 
 ## OpenID for Verifiable Presentations via Redirects {#oid4vp-redirects}
 
 The following requirements apply to OpenID for Verifiable Presentations via redirects:
 
-* As a way to invoke the Wallet, the custom URL scheme `haip-vp://` MAY be supported by the Wallet and the Verifier. Implementations MAY support other ways to invoke the Wallets as agreed upon by trust frameworks/ecosystems/jurisdictions, including but not limited to using other custom URL schemes or claimed "https" scheme URIs.
+* As a way to invoke the Wallet, the custom URL scheme `haip-vp://` MAY be supported by the Wallet and the Verifier. Implementations MAY support other ways to invoke the Wallets as agreed upon by trust frameworks/Ecosystems/jurisdictions, including but not limited to using other custom URL schemes or claimed "https" scheme URIs.
 * Signed Authorization Requests MUST be used by utilizing JWT-Secured Authorization Request (JAR) [@!RFC9101] with the `request_uri` parameter.
 * Response encryption MUST be used by utilizing response mode `direct_post.jwt`, as defined in Section 8.3 of [@!OIDF.OID4VP]. Security considerations in Section 14.3 of [@!OIDF.OID4VP] MUST be applied.
 * Verifiers and Wallets MUST support the "same-device" flow. Verifiers are RECOMMENDED to use only the "same-device" flow unless the Verifier does not rely on session binding for phishing resistance, e.g. in a proximity scenario. If "same-device" flow is used, then:
@@ -330,7 +330,7 @@ Each Credential MUST have its own unique, unpredictable status list index, even 
 
 Note: For guidance on preventing linkability by colluding parties, such as Issuer/Verifier pairs, multiple Verifiers, or repeated interactions with the same Verifier, see Section 15.4.1 of [@!OIDF.OID4VCI] and Section 15.5 of [@!OIDF.OID4VP].
 
-Note: If there is a requirement to communicate information about the verification status and identity assurance data of the claims about the subject, the syntax defined by [@!OIDF.ekyc-ida] SHOULD be used. It is up to each jurisdiction and ecosystem, whether to require it to the implementers of this specification.
+Note: If there is a requirement to communicate information about the verification status and identity assurance data of the claims about the subject, the syntax defined by [@!OIDF.ekyc-ida] SHOULD be used. It is up to each jurisdiction and Ecosystem, whether to require it to the implementers of this specification.
 
 Note: If there is a requirement to provide the Subject’s identifier assigned and maintained by the Issuer, the `sub` claim MAY be used. There is no requirement for a binding to exist between the `sub` and `cnf` claims. See the Implementation Considerations section in [@!I-D.ietf-oauth-sd-jwt-vc].
 
@@ -353,7 +353,7 @@ Issuers, Verifiers, and Wallets MUST, at a minimum, support ECDSA with P-256 and
   - Wallet Attestations (including PoP) when Annex E of [@!OIDF.OID4VCI] is used;
   - Key Attestations when Annex D of [@!OIDF.OID4VCI] is used.
 - Verifiers
-  - the signature of the Verifiable Presentation, e.g., KB-JWT of an SD-JWT VC, or `deviceSignature` CBOR structure in case of ISO mdocs. Verifiers are assumed to determine in advance the cryptographic suites supported by the ecosystem, e.g. mDL Issuers/Verifiers implementing ISO mdocs.
+  - the signature of the Verifiable Presentation, e.g., KB-JWT of an SD-JWT VC, or `deviceSignature` CBOR structure in case of ISO mdocs. Verifiers are assumed to determine in advance the cryptographic suites supported by the Ecosystem, e.g. mDL Issuers/Verifiers implementing ISO mdocs.
   - the status information of the Verifiable Credential or Wallet Attestation.
 - Wallets
   - signed presentation requests.
@@ -383,7 +383,7 @@ Wallet implementations using the key attestation format specified in Annex D of 
 
 ## Ecosystem Implementation Considerations
 
-This specification intentionally leaves certain extensions for ecosystems to define, in order to enable broad compatibility across differing or even conflicting requirements. Below are the extension points listed in this specification:
+This specification intentionally leaves certain extensions for Ecosystems to define, in order to enable broad compatibility across differing or even conflicting requirements. Below are the extension points listed in this specification:
 
 - Which flow(s) to adopt: presentation, issuance, or both (see (#scope))
 - For presentation, whether to use the W3C Digital Credentials API, Redirects with custom URL schemes, and/or Redirects with claimed `https` scheme URIs (see (#scope))
@@ -397,11 +397,11 @@ This specification intentionally leaves certain extensions for ecosystems to def
 
 ### Non-normative Examples of Ecosystem-specific Extensions of this Specification
 
-Below are two non-normative examples illustrating how an ecosystem may define the above elements to achieve its specific goals and preferences.
+Below are two non-normative examples illustrating how an Ecosystem may define the above elements to achieve its specific goals and preferences.
 
 #### Example 1: Baseline Interoperability without pre-existing relationships
 
-An Ecosystem that prioritizes interoperability among all Wallets, Issuers and Verifiers, without requiring any pre-existing relationships, could define the following ecosystem-specific extensions of this specification:
+An Ecosystem that prioritizes interoperability among all Wallets, Issuers and Verifiers, without requiring any pre-existing relationships, could define the following Ecosystem-specific extensions of this specification:
 
 - Use this specification for both presentation and issuance with the following requirements:
   - No additional cryptographic suites and hash algorithms are defined.
@@ -415,11 +415,11 @@ An Ecosystem that prioritizes interoperability among all Wallets, Issuers and Ve
   - Wallets use DC API where possible and when they have credentials available. As a fallback mechanism when DC API is not available, Wallets register for the `haip-vp://` custom scheme, where possible.
   - No additional X.509 certificate profile is defined.
 
-Making these choices maximizes interoperability between the parties in the ecosystem while minimizing the burden on Issuers and Verifiers. This comes at the expense of an increased burden on Wallets as well as the potential privacy and security issues in (#interop-key-attestations).
+Making these choices maximizes interoperability between the parties in the Ecosystem while minimizing the burden on Issuers and Verifiers. This comes at the expense of an increased burden on Wallets as well as the potential privacy and security issues in (#interop-key-attestations).
 
 #### Example 2: Achieving Compatibility with Existing Deployments of ISO/IEC 18013-5
 
-An Ecosystem that prioritizes achieving compatibility with existing deployments could define the following ecosystem-specific extensions of this specification:
+An Ecosystem that prioritizes achieving compatibility with existing deployments could define the following Ecosystem-specific extensions of this specification:
 
 - Use this specification only for presentation with the following requirements:
   - Wallets and Verifiers support only the mdoc Credential Format.
@@ -726,9 +726,9 @@ The technology described in this specification was made available from contribut
    -05
 
    * mandate support for same device flow for redirect-based OpenID4VP
-   * add ecosystem guidance section
+   * add Ecosystem guidance section
    * change wallet attestation format from mandatory to recommended
-   * update crypto suites to require at least ECDSA w/ P-256 and SHA-256 for verifying signed artificats; and made ecosystem-specific exceptions for crypto suites and hash algorithms if certain criteria is not met
+   * update crypto suites to require at least ECDSA w/ P-256 and SHA-256 for verifying signed artificats; and made Ecosystem-specific exceptions for crypto suites and hash algorithms if certain criteria is not met
    * removed intent_to_retain mandatory
    * add small note about signed requests
    * clarify batch issuance requirements
@@ -738,7 +738,7 @@ The technology described in this specification was made available from contribut
    * remove requirement that SD-JWT `iss` is a https url
    * add section about the OIDF conformance tests
    * add implementation considers around browser/OS limitations
-   * combine text about ecosystem profiling of X.509 certifications
+   * combine text about Ecosystem profiling of X.509 certifications
    * add guidance around key sizes
    * require wallets (that render images from credential metadata) to support png and svg, and data: and https: urls
    * clarity text around flows that are defined in this specification
@@ -754,8 +754,8 @@ The technology described in this specification was made available from contribut
    * update etsi tl and DC API references
    * update VP & VCI references to be to 1.0 Final
    * add separate custom url schemes for issuance and presentation to replace the haip:// scheme
-   * support for haip-vp:// and haip-vci:// custom url schemes is now an ecosystem decision
-   * allow ecosystems the option to use key attestations other than those defined in Annex D of [@!OIDF.OID4VCI] in some cases
+   * support for haip-vp:// and haip-vci:// custom url schemes is now an Ecosystem decision
+   * allow Ecosystems the option to use key attestations other than those defined in Annex D of [@!OIDF.OID4VCI] in some cases
    * clarify nonce endpoint must be present when cryptographic_binding_methods_supported is
    * remove various requirements around claims present in SD-JWT VC as upstream spec covers them
    * require ephemeral encryption keys in VP
