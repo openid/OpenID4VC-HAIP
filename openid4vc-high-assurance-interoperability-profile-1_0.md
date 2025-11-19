@@ -721,6 +721,7 @@ The technology described in this specification was made available from contribut
    * clarify that DCQL applies in HAIP as defined in OpenID4VP and all REQUIRED and OPTIONAL requirements remain the same
    * add reference to ECCG Agreed Cryptographic Mechanisms 2.0
    * require x5c header in the OID4VCI Appendix D key attestation
+   * add "Non-normative Examples of Ecosystem-specific Extensions of this Specification" section
 
    -05
 
