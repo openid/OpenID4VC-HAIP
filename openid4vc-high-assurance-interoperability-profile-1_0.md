@@ -352,6 +352,7 @@ Issuers, Verifiers, and Wallets MUST, at a minimum, support ECDSA with P-256 and
 - Issuers
   - Wallet Attestations (including PoP) when Annex E of [@!OIDF.OID4VCI] is used;
   - Key Attestations when Annex D of [@!OIDF.OID4VCI] is used.
+  - `jwt` proof type as specified in Annex E of [@!OIDF.OID4VCI]
 - Verifiers
   - the signature of the Verifiable Presentation, e.g., KB-JWT of an SD-JWT VC, or `deviceSignature` CBOR structure in case of ISO mdocs. Verifiers are assumed to determine in advance the cryptographic suites supported by the ecosystem, e.g. mDL Issuers/Verifiers implementing ISO mdocs.
   - the status information of the Verifiable Credential or Wallet Attestation.
