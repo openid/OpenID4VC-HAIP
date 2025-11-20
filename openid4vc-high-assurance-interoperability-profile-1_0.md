@@ -218,9 +218,9 @@ Note: Issuers SHOULD consider how long a refresh token is allowed to be used to 
 
 Wallets MUST use, and Issuers MUST require, an OAuth2 Client authentication mechanism at OAuth2 Endpoints that support client authentication (such as the PAR and Token Endpoints).
 
-Ecosystems that desire wallet-issuer interoperability on the level of Wallet Attestations SHOULD require Wallets to support the authentication mechanism and Wallet Attestation format specified in Annex E of [@!OIDF.OID4VCI]. When doing so, they might need to define additional ecosystem-specific claims contained in the attestation. Alternatively, ecosystems MAY choose to rely on other Wallet Attestation formats.
+Ecosystems that desire wallet-issuer interoperability on the level of Wallet Attestations SHOULD require Wallets to support the authentication mechanism and Wallet Attestation format specified in Appendix E of [@!OIDF.OID4VCI]. When doing so, they might need to define additional ecosystem-specific claims contained in the attestation. Alternatively, ecosystems MAY choose to rely on other Wallet Attestation formats.
 
- Additional rules apply when using the format defined in Annex E of [@!OIDF.OID4VCI]:
+ Additional rules apply when using the format defined in Appendix E of [@!OIDF.OID4VCI]:
 
 * the public key certificate, and optionally a trust certificate chain excluding the trust anchor, used to validate the signature on the Wallet Attestation MUST be included in the `x5c` JOSE header of the Client Attestation JWT
 * Wallet Attestations MUST NOT be reused across different Issuers. They MUST NOT introduce a unique identifier specific to a single Wallet instance. The subject claim for the Wallet Attestation MUST be a value that is shared by all Wallet instances using the present type of wallet implementation. See section 15.4.4 of [@!OIDF.OID4VCI] for details on the Wallet Attestation subject.
@@ -231,7 +231,7 @@ Ecosystems that desire wallet-issuer interoperability on the level of Wallet Att
 
 ### Key Attestation {#key-attestation}
 
-Wallets MUST support key attestations. Ecosystems that desire wallet-issuer interoperability on the level of key attestations SHOULD require Wallets to support the format specified in Annex D of [@!OIDF.OID4VCI], in combination with the following proof types:
+Wallets MUST support key attestations. Ecosystems that desire wallet-issuer interoperability on the level of key attestations SHOULD require Wallets to support the format specified in Appendix D of [@!OIDF.OID4VCI], in combination with the following proof types:
 
 * `jwt` proof type using `key_attestation`
 * `attestation` proof type
@@ -284,7 +284,7 @@ The following requirements apply to OpenID for Verifiable Presentations via the 
 
 * The Wallet MUST support Wallet Invocation via the W3C Digital Credentials API or an equivalent platform API. The Verifier MUST use Wallet Invocation via the W3C Digital Credentials API or an equivalent platform API.
 * The Wallet MUST support the Response Mode `dc_api.jwt`. The Verifier MUST use the Response Mode `dc_api.jwt`.
-* The Verifier and Wallet MUST use Annex A in [@!OIDF.OID4VP] that defines how to use OpenID4VP over the W3C Digital Credentials API.
+* The Verifier and Wallet MUST use Appendix A in [@!OIDF.OID4VP] that defines how to use OpenID4VP over the W3C Digital Credentials API.
 * The Wallet MUST support unsigned, signed, and multi-signed requests as defined in Appendices A.3.1 and A.3.2 of [@!OIDF.OID4VP]. The Verifier MUST support at least one of these options.
 
 Note that unsigned requests depend on the origin information provided by the platform and the web PKI for request integrity protection and to authenticate the Verifier. Signed requests introduce a separate layer for request integrity protection and Verifier authentication that can be validated by the Wallet.
@@ -293,7 +293,7 @@ Note that unsigned requests depend on the origin information provided by the pla
 
 ### ISO Mobile Documents or mdocs (ISO/IEC 18013 and ISO/IEC 23220 series)
 
-The following requirements apply to all OpenID4VP flows when the mdoc Credential Format is used (as defined in Annex B.2. of [@!OIDF.OID4VP]):
+The following requirements apply to all OpenID4VP flows when the mdoc Credential Format is used (as defined in Appendix B.2. of [@!OIDF.OID4VP]):
 
 * The Credential Format identifier MUST be `mso_mdoc`.
 * When multiple ISO mdocs are being returned, each ISO mdoc MUST be returned in a separate `DeviceResponse` (as defined in 8.3.2.1.2.2 of [@!ISO.18013-5]), each matching to a respective DCQL query. Therefore, the resulting `vp_token` contains multiple `DeviceResponse` instances.
@@ -310,11 +310,11 @@ The following requirements apply to all OpenID4VP flows when the SD-JWT VC Crede
 Credential Format Profiles are defined as follows:
 
 - IETF SD-JWT VCs (as specified in [@!I-D.ietf-oauth-sd-jwt-vc]), subject to the additional requirements defined in (#sd-jwt-vc):
-  - [@!OIDF.OID4VCI] – Annex A.3
-  - [@!OIDF.OID4VP] – Annex B.3
+  - [@!OIDF.OID4VCI] – Appendix A.3
+  - [@!OIDF.OID4VP] – Appendix B.3
 - ISO mdocs:
-  - [@!OIDF.OID4VCI] – Annex A.2
-  - [@!OIDF.OID4VP] – Annex B.2
+  - [@!OIDF.OID4VCI] – Appendix A.2
+  - [@!OIDF.OID4VP] – Appendix B.2
 
 ## IETF SD-JWT VC Profile {#sd-jwt-vc}
 
@@ -350,8 +350,8 @@ This specification mandates the support for X.509 certificate-based key resoluti
 Issuers, Verifiers, and Wallets MUST, at a minimum, support ECDSA with P-256 and SHA-256 (JOSE algorithm identifier `ES256`; COSE algorithm identifier `-7` or `-9`, as applicable) for the purpose of validating the following:
 
 - Issuers
-  - Wallet Attestations (including PoP) when Annex E of [@!OIDF.OID4VCI] is used.
-  - Key Attestations when Annex D of [@!OIDF.OID4VCI] is used.
+  - Wallet Attestations (including PoP) when Appendix E of [@!OIDF.OID4VCI] is used.
+  - Key Attestations when Appendix D of [@!OIDF.OID4VCI] is used.
   - `jwt` proof type as specified in Appendix E of [@!OIDF.OID4VCI].
 - Verifiers
   - the signature of the Verifiable Presentation, e.g., KB-JWT of an SD-JWT VC, or `deviceSignature` CBOR structure in case of ISO mdocs. Verifiers are assumed to determine in advance the cryptographic suites supported by the ecosystem, e.g. mDL Issuers/Verifiers implementing ISO mdocs.
@@ -380,7 +380,7 @@ This specification relies on certain prerequisites, such as browser or operating
 
 ## Interoperable Key Attestations
 
-Wallet implementations using the key attestation format specified in Annex D of [@!OIDF.OID4VCI] might need to utilize a transformation (backend) service to create such attestations based on data as provided in other formats by the respective platform or secure key management module. The dependency on such a service might impact the availability of the wallet app as well as the performance of the issuance process. This could be mitigated by creating keys and obtaining the respective key attestations in advance.
+Wallet implementations using the key attestation format specified in Appendix D of [@!OIDF.OID4VCI] might need to utilize a transformation (backend) service to create such attestations based on data as provided in other formats by the respective platform or secure key management module. The dependency on such a service might impact the availability of the wallet app as well as the performance of the issuance process. This could be mitigated by creating keys and obtaining the respective key attestations in advance.
 
 ## Ecosystem Implementation Considerations
 
@@ -410,8 +410,8 @@ An Ecosystem that prioritizes interoperability among all Wallets, Issuers and Ve
 - For issuance, the following requirements apply:
   - Issuers use and Wallets support unsigned Issuer Metadata.
   - Wallets register for the `haip-vci://` custom scheme, where possible. This custom scheme is also used to communicate Credential Offer.
-  - Wallets and Issuers both support Key Attestations in the format specified in Annex D of [@!OIDF.OID4VCI]. Both `jwt` proof type using `key_attestation` and `attestation` proof type are supported.
-  - Wallets and Issuers both support Wallet Attestations in the format specified in Annex E of [@!OIDF.OID4VCI] and (#wallet-attestation) of this specification.
+  - Wallets and Issuers both support Key Attestations in the format specified in Appendix D of [@!OIDF.OID4VCI]. Both `jwt` proof type using `key_attestation` and `attestation` proof type are supported.
+  - Wallets and Issuers both support Wallet Attestations in the format specified in Appendix E of [@!OIDF.OID4VCI] and (#wallet-attestation) of this specification.
 - for presentation, the following requirements apply:
   - Wallets use DC API where possible and when they have credentials available. As a fallback mechanism when DC API is not available, Wallets register for the `haip-vp://` custom scheme, where possible.
   - No additional X.509 certificate profile is defined.
@@ -455,7 +455,7 @@ Note that privacy considerations for OpenID for Verifiable Credential Issuance a
 
 ## Interoperable Key Attestations {#interop-key-attestations}
 
-Wallet implementations using the key attestation format specified in Annex D of [@!OIDF.OID4VCI] might need to utilize a transformation (backend) service to create such attestations based on data as provided in other formats by the respective platform or secure key management module. Such a backend service MUST be designed considering the privacy of its users. For example, the service could be stateless and just perform the transformation of the attestation data without binding the process in any way to a unique user identifier.
+Wallet implementations using the key attestation format specified in Appendix D of [@!OIDF.OID4VCI] might need to utilize a transformation (backend) service to create such attestations based on data as provided in other formats by the respective platform or secure key management module. Such a backend service MUST be designed considering the privacy of its users. For example, the service could be stateless and just perform the transformation of the attestation data without binding the process in any way to a unique user identifier.
 
 {backmatter}
 
@@ -758,7 +758,7 @@ The technology described in this specification was made available from contribut
    * update VP & VCI references to be to 1.0 Final
    * add separate custom url schemes for issuance and presentation to replace the haip:// scheme
    * support for haip-vp:// and haip-vci:// custom url schemes is now an ecosystem decision
-   * allow ecosystems the option to use key attestations other than those defined in Annex D of [@!OIDF.OID4VCI] in some cases
+   * allow ecosystems the option to use key attestations other than those defined in Appendix D of [@!OIDF.OID4VCI] in some cases
    * clarify nonce endpoint must be present when cryptographic_binding_methods_supported is
    * remove various requirements around claims present in SD-JWT VC as upstream spec covers them
    * require ephemeral encryption keys in VP
