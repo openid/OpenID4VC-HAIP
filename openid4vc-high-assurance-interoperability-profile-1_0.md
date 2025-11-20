@@ -718,6 +718,7 @@ The technology described in this specification was made available from contribut
 
    -06
 
+   * updates to assumptions
    * add the multi-signed option to the DC API variants
    * add cose alg identifer -9 (fully specified)
    * clarify that DCQL applies in HAIP as defined in OpenID4VP and all REQUIRED and OPTIONAL requirements remain the same
@@ -725,6 +726,19 @@ The technology described in this specification was made available from contribut
    * require x5c header in the OID4VCI Appendix D key attestation
    * require A256GCM and A128GCM for verifiers
    * add "Non-normative Examples of Ecosystem-specific Extensions of this Specification" section
+   * remove EU ARF bullet from scenario section as that's already better explained in scope section
+   * add additional acknowledgements
+   * add reference to VP & VCI privacy considerations
+   * improve wording about ephemeral encryption keys
+   * clarify how combined issuance of SD-JWT and mdoc is supported
+   * rename 'Cryto Suites' section to 'Requirements for Digital Signatures'
+   * consistently use 'this specification' rather than 'document' or 'profile'
+   * include links to the relevant sections in the ecosystems considerations section
+   * clarify which requirements apply to wallet or verifier in W3C Digital Credentials API section
+   * make 'Ecosystem' a defined term
+   * clarify requirements for issuer-initiated / wallet-initiated issuance support
+   * clarify that digital sig section applies to jwt proof type too
+   * replace 'Annex' with 'Appendix' when referring to VCI/VP
 
    -05
 
