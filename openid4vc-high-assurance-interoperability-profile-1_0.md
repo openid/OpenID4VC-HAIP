@@ -257,7 +257,7 @@ The following requirements apply to OpenID for Verifiable Presentations, irrespe
 * The DCQL query and response MUST be used as defined in Section 6 of [@!OIDF.OID4VP].
 * Response encryption MUST be performed as specified in [@!OIDF.OID4VP, section 8.3]. The JWE `alg` (algorithm) header parameter (see [@!RFC7516, section 4.1.1])
   value `ECDH-ES` (as defined in [@!RFC7518, section 4.6]), with key agreement utilizing keys on the `P-256` curve (see [@!RFC7518, section 6.2.1.1]) MUST be supported.
-  The JWE `enc` (encryption algorithm) header parameter (see [@!RFC7516, section 4.1.2]) value `A128GCM` (as defined in [@!RFC7518, section 5.3]) MUST be supported.
+  The JWE `enc` (encryption algorithm) header parameter (see [@!RFC7516, section 4.1.2]) values `A128GCM` and `A256GCM` (as defined in [@!RFC7518, section 5.3]) MUST be supported by Verifiers. Wallets MUST support `A128GCM` or `A256GCM`, or both. If both are supported, the Wallet SHOULD use `A256GCM` for the JWE `enc`. Verifiers MUST list both `A128GCM` and `A256GCM` in `encrypted_response_enc_values_supported` in their client metadata.
 * Verifiers MUST supply ephemeral encryption public keys specific to each Authorization Request passed via client metadata as specified in Section 8.3 of [@!OIDF.OID4VP].
 * The Authority Key Identifier (`aki`)-based Trusted Authority Query (`trusted_authorities`) for DCQL, as defined in section 6.1.1.1 of [@!OIDF.OID4VP], MUST be supported. Note that the Authority Key Identifiers mechanism can be used to support multiple X.509-based trust mechanisms, such as ISO mDL VICAL (as introduced in [@ISO.18013-5]) or ETSI Trusted Lists [@ETSI.TL]. This is achieved by collecting the relevant X.509 certificates for the trusted Issuers and including the encoded Key Identifiers from the certificates in the `aki` array .
 
@@ -285,7 +285,7 @@ The following requirements apply to OpenID for Verifiable Presentations via the 
 * The Wallet MUST support Wallet Invocation via the W3C Digital Credentials API or an equivalent platform API. The Verifier MUST use Wallet Invocation via the W3C Digital Credentials API or an equivalent platform API.
 * The Wallet MUST support the Response Mode `dc_api.jwt`. The Verifier MUST use the Response Mode `dc_api.jwt`.
 * The Verifier and Wallet MUST use Appendix A in [@!OIDF.OID4VP] that defines how to use OpenID4VP over the W3C Digital Credentials API.
-* The Wallet MUST support both signed and unsigned requests as defined in Annex A.3.1 and A.3.2 of [@!OIDF.OID4VP]. The Verifier MAY support signed requests, unsigned requests, or both.
+* The Wallet MUST support unsigned, signed, and multi-signed requests as defined in Appendices A.3.1 and A.3.2 of [@!OIDF.OID4VP]. The Verifier MUST support at least one of these options.
 
 Note that unsigned requests depend on the origin information provided by the platform and the web PKI for request integrity protection and to authenticate the Verifier. Signed requests introduce a separate layer for request integrity protection and Verifier authentication that can be validated by the Wallet.
 
@@ -350,8 +350,9 @@ This specification mandates the support for X.509 certificate-based key resoluti
 Issuers, Verifiers, and Wallets MUST, at a minimum, support ECDSA with P-256 and SHA-256 (JOSE algorithm identifier `ES256`; COSE algorithm identifier `-7` or `-9`, as applicable) for the purpose of validating the following:
 
 - Issuers
-  - Wallet Attestations (including PoP) when Appendix E of [@!OIDF.OID4VCI] is used;
+  - Wallet Attestations (including PoP) when Appendix E of [@!OIDF.OID4VCI] is used.
   - Key Attestations when Appendix D of [@!OIDF.OID4VCI] is used.
+  - `jwt` proof type as specified in Appendix E of [@!OIDF.OID4VCI].
 - Verifiers
   - the signature of the Verifiable Presentation, e.g., KB-JWT of an SD-JWT VC, or `deviceSignature` CBOR structure in case of ISO mdocs. Verifiers are assumed to determine in advance the cryptographic suites supported by the ecosystem, e.g. mDL Issuers/Verifiers implementing ISO mdocs.
   - the status information of the Verifiable Credential or Wallet Attestation.
@@ -717,10 +718,12 @@ The technology described in this specification was made available from contribut
 
    -06
 
+   * add the multi-signed option to the DC API variants
    * add cose alg identifer -9 (fully specified)
    * clarify that DCQL applies in HAIP as defined in OpenID4VP and all REQUIRED and OPTIONAL requirements remain the same
    * add reference to ECCG Agreed Cryptographic Mechanisms 2.0
    * require x5c header in the OID4VCI Appendix D key attestation
+   * require A256GCM and A128GCM for verifiers
    * add "Non-normative Examples of Ecosystem-specific Extensions of this Specification" section
 
    -05
