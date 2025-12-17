@@ -320,7 +320,7 @@ Credential Format Profiles are defined as follows:
 
 This specification defines the following additional requirements for IETF SD-JWT VCs as defined in [@!I-D.ietf-oauth-sd-jwt-vc].
 
-* Compact serialization MUST be supported as defined in [@!I-D.ietf-oauth-selective-disclosure-jwt]. JSON serialization MAY be supported.
+* Compact serialization MUST be supported as defined in [@!RFC9901]. JSON serialization MAY be supported.
 * It is RECOMMENDED that Issuers limit the validity period when issuing SD-JWT VC. When doing so, the Issuer MUST use an `exp` claim, a `status` claim, or both.
 * The `cnf` claim [@!RFC7800] MUST conform to the definition given in [@!I-D.ietf-oauth-sd-jwt-vc]. Implementations conforming to this specification MUST include the JSON Web Key [@!RFC7517] in the `jwk` member if the corresponding Credential Configuration requires cryptographic holder binding.
 * The `status` claim, if present, MUST contain `status_list` as defined in [@!I-D.ietf-oauth-status-list]
@@ -431,6 +431,17 @@ An Ecosystem that prioritizes achieving compatibility with existing deployments 
 
 Making these choices ensures interoperability at the increased cost on the Verifier.
 
+## Pre-Final Specifications
+
+Implementers should be aware that this specification uses several specifications that are not yet final specifications. Those specifications are:
+
+* SD-JWT-based Verifiable Credentials (SD-JWT VC) draft -13 [@!I-D.ietf-oauth-sd-jwt-vc]
+* Token Status List draft -14 [@!I-D.ietf-oauth-status-list]
+
+While breaking changes to the specifications referenced in this specification are not expected, should they occur, implementations compliant with this specification should continue to use the specifically referenced versions above in preference to the final versions, unless updated by a profile or new version of this specification.
+
+Note that specification versions mentioned in this specification overwrite the versions previously mentioned in [@!OIDF.OID4VCI] and  [@!OIDF.OID4VP].
+
 # Security Considerations {#security_considerations}
 
 Note that security considerations for OpenID for Verifiable Credential Issuance are defined in Section 13 of [@!OIDF.OID4VCI] and for OpenID for Verifiable Presentations in Section 14 (for redirect based flows) or Section A.5 (for DC API) of [@!OIDF.OID4VP].
@@ -500,7 +511,7 @@ Wallet implementations using the key attestation format specified in Appendix D 
       </front>
 </reference>
 
-<reference anchor="OIDF.ekyc-ida" target="https://openid.net/specs/openid-connect-4-identity-assurance-1_0-ID4.html">
+<reference anchor="OIDF.ekyc-ida" target="https://openid.net/specs/openid-connect-4-identity-assurance-1_0.html">
   <front>
     <title>OpenID Connect for Identity Assurance 1.0</title>
     <author ullname="Torsten Lodderstedt ">
@@ -521,7 +532,7 @@ Wallet implementations using the key attestation format specified in Appendix D 
      <author fullname="Kosuke Koiwai">
       <organization>KDDI Corporation</organization>
     </author>
-   <date day="19" month="August" year="2022"/>
+   <date day="1" month="October" year="2024"/>
   </front>
 </reference>
 
@@ -553,7 +564,7 @@ Wallet implementations using the key attestation format specified in Appendix D 
 
 <reference anchor="ISO.18013-5.second.edition" target="https://www.iso.org/standard/91081.html">
         <front>
-          <title>ISO/IEC 18013-5:xxxx Personal identification — ISO-compliant driving license — Part 5: Mobile driving license (mDL)  application edition 2</title>
+          <title>ISO/IEC 18013-5:xxxx Personal identification — ISO-compliant drving license — Part 5: Mobile driving license (mDL)  application edition 2</title>
           <author>
             <organization>ISO/IEC JTC 1/SC 17 Cards and security devices for personal identification</organization>
           </author>
@@ -580,7 +591,7 @@ Wallet implementations using the key attestation format specified in Appendix D 
         </front>
 </reference>
 
-<reference anchor="w3c.digital_credentials_api" target="https://www.w3.org/TR/digital-credentials/">
+<reference anchor="w3c.digital_credentials_api" target="https://www.w3.org/TR/2025/WD-digital-credentials-20251208/">
         <front>
           <title>Digital Credentials API</title>
           <author fullname="Marcos Caceres">
@@ -592,7 +603,7 @@ Wallet implementations using the key attestation format specified in Appendix D 
           <author fullname="Mohamed Amir Yosef">
             <organization>Google Inc.</organization>
           </author>
-          <date day="17" month="Sep" year="2025"/>
+          <date day="8" month="Dec" year="2025"/>
         </front>
 </reference>
 
@@ -715,6 +726,11 @@ The technology described in this specification was made available from contribut
 # Document History
 
    [[ To be removed from the final specification ]]
+
+   -07
+
+   * add pre-final draft note
+   * update references to sd-jwt, ekyc-ida, dc api
 
    -06
 
