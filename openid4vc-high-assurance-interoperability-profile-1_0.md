@@ -564,7 +564,7 @@ Wallet implementations using the key attestation format specified in Appendix D 
 
 <reference anchor="ISO.18013-5.second.edition" target="https://www.iso.org/standard/91081.html">
         <front>
-          <title>ISO/IEC 18013-5:xxxx Personal identification — ISO-compliant drving license — Part 5: Mobile driving license (mDL)  application edition 2</title>
+          <title>ISO/IEC 18013-5:xxxx Personal identification — ISO-compliant driving license — Part 5: Mobile driving license (mDL)  application edition 2</title>
           <author>
             <organization>ISO/IEC JTC 1/SC 17 Cards and security devices for personal identification</organization>
           </author>
