@@ -1,5 +1,5 @@
 %%%
-title = "OpenID4VC High Assurance Interoperability Profile 1.0 - Editor's draft"
+title = "OpenID4VC High Assurance Interoperability Profile 1.0"
 abbrev = "openid4vc-high-assurance-interoperability-profile"
 ipr = "none"
 workgroup = "Digital Credentials Protocols"
@@ -7,7 +7,7 @@ keyword = ["security", "openid4vc", "sd-jwt", "sd-jwt-vc", "mdoc"]
 
 [seriesInfo]
 name = "Internet-Draft"
-value = "openid4vc-high-assurance-interoperability-profile-1_0-06"
+value = "openid4vc-high-assurance-interoperability-profile-1_0-07"
 status = "standard"
 
 [[author]]
@@ -72,6 +72,10 @@ A full list of the open standards used in this specification can be found in (#s
 ## Target Audience/Usage
 
 The target audience of this specification is implementers who require a high level of security and privacy for their solutions. A non-exhaustive list of the interested parties includes anyone implementing [eIDAS 2.0](https://eur-lex.europa.eu/legal-content/EN/TXT/HTML/?uri=OJ:L_202401183), [California Department of Motor Vehicles](https://www.dmv.ca.gov/portal/), [Open Wallet Foundation (OWF)](https://openwallet.foundation/), [IDunion](https://idunion.org/?lang=en), [GAIN](https://gainforum.org/), and [the Trusted Web project of the Japanese government](https://trustedweb.go.jp/en), but is expected to grow to include other jurisdictions and private sector companies.
+
+## Errata Revisions
+
+The latest revision of this specification, incorporating any errata updates, is published at [openid4vc-high-assurance-interoperability-profile-1_0](https://openid.net/specs/openid4vc-high-assurance-interoperability-profile-1_0.html). The text of the final specification as approved will always be available at [openid4vc-high-assurance-interoperability-profile-1_0-final](https://openid.net/specs/openid4vc-high-assurance-interoperability-profile-1_0-final.html). When referring to this specification from other documents, it is recommended to reference [openid4vc-high-assurance-interoperability-profile-1_0](https://openid.net/specs/openid4vc-high-assurance-interoperability-profile-1_0.html).
 
 ## Requirements Notation and Conventions
 
@@ -722,125 +726,3 @@ Copyright (c) 2025 The OpenID Foundation.
 The OpenID Foundation (OIDF) grants to any Contributor, developer, implementer, or other interested party a non-exclusive, royalty free, worldwide copyright license to reproduce, prepare derivative works from, distribute, perform and display, this Implementers Draft, Final Specification, or Final Specification Incorporating Errata Corrections solely for the purposes of (i) developing specifications, and (ii) implementing Implementers Drafts, Final Specifications, and Final Specification Incorporating Errata Corrections based on such documents, provided that attribution be made to the OIDF as the source of the material, but that such attribution does not indicate an endorsement by the OIDF.
 
 The technology described in this specification was made available from contributions from various sources, including members of the OpenID Foundation and others. Although the OpenID Foundation has taken steps to help ensure that the technology is available for distribution, it takes no position regarding the validity or scope of any intellectual property or other rights that might be claimed to pertain to the implementation or use of the technology described in this specification or the extent to which any license under such rights might or might not be available; neither does it represent that it has made any independent effort to identify any such rights. The OpenID Foundation and the contributors to this specification make no (and hereby expressly disclaim any) warranties (express, implied, or otherwise), including implied warranties of merchantability, non-infringement, fitness for a particular purpose, or title, related to this specification, and the entire risk as to implementing this specification is assumed by the implementer. The OpenID Intellectual Property Rights policy (found at openid.net) requires contributors to offer a patent promise not to assert certain patent claims against other contributors and against implementers. OpenID invites any interested party to bring to its attention any copyrights, patents, patent applications, or other proprietary rights that may cover technology that may be required to practice this specification.
-
-# Document History
-
-   [[ To be removed from the final specification ]]
-
-   -07
-
-   * add pre-final draft note
-   * update references to sd-jwt, ekyc-ida, dc api
-
-   -06
-
-   * updates to assumptions
-   * add the multi-signed option to the DC API variants
-   * add cose alg identifer -9 (fully specified)
-   * clarify that DCQL applies in HAIP as defined in OpenID4VP and all REQUIRED and OPTIONAL requirements remain the same
-   * add reference to ECCG Agreed Cryptographic Mechanisms 2.0
-   * require x5c header in the OID4VCI Appendix D key attestation
-   * require A256GCM and A128GCM for verifiers
-   * add "Non-normative Examples of Ecosystem-specific Extensions of this Specification" section
-   * remove EU ARF bullet from scenario section as that's already better explained in scope section
-   * add additional acknowledgements
-   * add reference to VP & VCI privacy considerations
-   * improve wording about ephemeral encryption keys
-   * clarify how combined issuance of SD-JWT and mdoc is supported
-   * rename 'Cryto Suites' section to 'Requirements for Digital Signatures'
-   * consistently use 'this specification' rather than 'document' or 'profile'
-   * include links to the relevant sections in the ecosystems considerations section
-   * clarify which requirements apply to wallet or verifier in W3C Digital Credentials API section
-   * make 'Ecosystem' a defined term
-   * clarify requirements for issuer-initiated / wallet-initiated issuance support
-   * clarify that digital sig section applies to jwt proof type too
-   * replace 'Annex' with 'Appendix' when referring to VCI/VP
-
-   -05
-
-   * mandate support for same device flow for redirect-based OpenID4VP
-   * add Ecosystem guidance section
-   * change wallet attestation format from mandatory to recommended
-   * update crypto suites to require at least ECDSA w/ P-256 and SHA-256 for verifying signed artificats; and made Ecosystem-specific exceptions for crypto suites and hash algorithms if certain criteria is not met
-   * removed intent_to_retain mandatory
-   * add small note about signed requests
-   * clarify batch issuance requirements
-   * remove text about `iat` and `exp` in JWT claims
-   * resolve contradictory text about key attestation support requirements
-   * add "Requirements Notation and Conventions" section
-   * remove requirement that SD-JWT `iss` is a https url
-   * add section about the OIDF conformance tests
-   * add implementation considers around browser/OS limitations
-   * combine text about Ecosystem profiling of X.509 certifications
-   * add guidance around key sizes
-   * require wallets (that render images from credential metadata) to support png and svg, and data: and https: urls
-   * clarity text around flows that are defined in this specification
-   * add requirement on status list index uniqueness
-   * add recommendation that SD-JWT VC validity period is limited then it must use `exp` or a token status list
-   * explain intent of 'high assurance' in document title
-   * require compliance with (most of) FAPI2 Security Profile for VCI
-   * add requirement that, if implementing mdoc revocation, one of methods defined in 2nd edition draft of ISO 18013-5 must be used
-   * update editors/contributors
-
-   -04
-
-   * update etsi tl and DC API references
-   * update VP & VCI references to be to 1.0 Final
-   * add separate custom url schemes for issuance and presentation to replace the haip:// scheme
-   * support for haip-vp:// and haip-vci:// custom url schemes is now an Ecosystem decision
-   * allow Ecosystems the option to use key attestations other than those defined in Appendix D of [@!OIDF.OID4VCI] in some cases
-   * clarify nonce endpoint must be present when cryptographic_binding_methods_supported is
-   * remove various requirements around claims present in SD-JWT VC as upstream spec covers them
-   * require ephemeral encryption keys in VP
-   * add note that lower assurance credentials can also be conveyed using this specification
-   * add note on verifier certificate profiling
-   * added support for credentials without cryptographic holder binding
-   * mandate support for aki trusted_authorities method
-   * remove presentation exchange reference since it was removed in openid4vp
-   * Authorization Server and Credential Issuer must support metadata
-   * x509_san_dns & verifier_attestations client id prefixes are no longer permitted, x509_hash must be used
-   * x.509 certificates are now the mandatory mechanism for SD-JWT VC issuer key resolution
-   * `x5c` header in Status List Token must be present
-   * clarify that Wallet Attestations must not contain linkable information.
-   * add signed Issuer Metadata
-   * require key attestation for OpenID4VCI
-   * clarify text regarding mdoc specific parameters
-   * add small note that establishing trust in and retrieving root certs is out scope
-   * update wording from Client Identifier Scheme to Client Identifier Prefix #182
-   * fix reference to ARF #177
-   * remove old link in section 8 & clarify a note on claim based binding in OpenID4VP in HAIP #183
-   * Clarify clause 4.1 statement #169
-   * add a list of all specifications being profiled #145
-   * say something about DPoP nonces
-   * refactor to separate generic and SD-JWT clauses
-   * add support for ISO mdoc isssuance
-   * add support for ISO mdoc when using redirect-based OID4VP
-   * remove requirement to support batch endpoint (it was removed from OID4VP)
-   * remove SIOPv2 (webauthn is now the recommended way to handle pseudonymous login)
-   * prohibit self-signed certificates for signing with `x509_hash`
-   * trust anchor certificates must not be included in `x5c` headers
-
-   -03
-
-   * Add initial security considerations section
-   * Update notices section to match latest OIDF process document
-
-   -02
-
-   * Mandate DCQL instead of presentation exchange
-   * Refactor HAIP and add details for mdoc profile over DC API
-   * Add specific requirements for response encryption
-   * Add SessionTranscript requirements
-   * Update OID4VP reference to draft 24
-
-   -01
-
-   * Remove the Wallet Attestation Schema and point to OpenID4VCI instead
-   * Rename specification to enable non-SD-JWT credential formats to be included
-   * Require encrypted responses
-   * Remove reference to `client_id_scheme` parameter that no longer exists in OpenID4VP
-   * Refresh tokens are now optional
-
-   -00
-
-   *  initial revision
