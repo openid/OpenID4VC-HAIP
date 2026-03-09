@@ -281,7 +281,7 @@ Response encryption MUST be performed as specified in [@!OIDF.OID4VP, section 8.
 
 ### Response Encryption using HPKE with JWE
 
-Response encryption MUST be performed as specified in [@!OIDF.OID4VP, section 8.3.1]. The JWE `alg` (algorithm) header parameter (see [@!RFC7516, section 4.1.1]) value `HPKE-0` (as defined in [@I-D.ietf-jose-hpke-encrypt]). The JWE `enc` (encryption algorithm) header parameter (see [@!RFC7516, section 4.1.2]) value `A128GCM` (as defined in [@!RFC7518, section 5.3]) MUST be supported by Verifiers and Wallets.
+Response encryption MUST be performed as specified in [@!OIDF.OID4VP, section 8.3.1]. The JWE `alg` (algorithm) header parameter (see [@!RFC7516, section 4.1.1]) value `HPKE-0` (as defined in [@I-D.ietf-jose-hpke-encrypt]). `psk_id` (pre-shared key id) header parameter MUST NOT be present. The JWE `enc` (encryption algorithm) header parameter (see [@!RFC7516, section 4.1.2]) value `A128GCM` (as defined in [@!RFC7518, section 5.3]) MUST be supported by Verifiers and Wallets.
 
 ## Wallet Invocation
 
