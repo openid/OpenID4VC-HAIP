@@ -7,7 +7,7 @@ keyword = ["security", "openid4vc", "sd-jwt", "sd-jwt-vc", "mdoc"]
 
 [seriesInfo]
 name = "Internet-Draft"
-value = "openid4vc-high-assurance-interoperability-profile-1_0-08"
+value = "openid4vc-high-assurance-interoperability-profile-1_0-09"
 status = "standard"
 
 [[author]]
@@ -731,7 +731,7 @@ The technology described in this specification was made available from contribut
 
    [[ To be removed from the final specification ]]
 
--08
+-09
 
    * TBD 
    
