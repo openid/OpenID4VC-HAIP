@@ -1,0 +1,7 @@
+[
+    {
+        "type": "openid_credential",
+        "format": "vc+sd-jwt",
+        "vct": "IdentityCredential"
+    }
+]

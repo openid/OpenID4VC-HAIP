@@ -2,8 +2,15 @@
 
 This is the working area for the High Assurance Interoperability Profile of OpenID4VC with SD-JWT VC or ISO mdoc.
 
-* [Editor's Copy](https://openid.github.io/OpenID4VC-HAIP/openid4vc-high-assurance-interoperability-profile-wg-draft.html)
+version 1.0
+
+* [Editor's Copy](https://openid.github.io/OpenID4VC-HAIP/openid4vc-high-assurance-interoperability-profile-1_0-wg-draft.html)
 * [Working Group Draft](https://openid.net/specs/openid4vc-high-assurance-interoperability-profile-1_0.html)
+
+version 1.1
+
+* [Editor's Copy](https://openid.github.io/OpenID4VC-HAIP/openid4vc-high-assurance-interoperability-profile-1_1-wg-draft.html)
+* [Working Group Draft](https://openid.net/specs/openid4vc-high-assurance-interoperability-profile-1_1.html)
 
 ## Contributing
 
@@ -15,8 +22,18 @@ The GitHub interface supports creating pull requests using the Edit (✏) button
 
 ### Building the HTML
 
+version 1.0
+
 ```
+cd 1.0
 docker run -v `pwd`:/data danielfett/markdown2rfc openid4vc-high-assurance-interoperability-profile-1_0.md
+```
+
+version 1.1
+
+```
+cd 1.1
+docker run -v `pwd`:/data danielfett/markdown2rfc openid-4-verifiable-presentations-1_1.md
 ```
 
 ### Who do I talk to?
