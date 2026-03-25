@@ -2,7 +2,8 @@ name: openid4vc-high-assurance-interoperability-profile document push
 on:
   push:
     paths:
-      - 'openid4vc*.md'
+      - '1.0/**'
+      - '1.1/**'
 
 jobs:
     compile-openid4vc-high-assurance-interoperability-profile:
