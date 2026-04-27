@@ -255,9 +255,6 @@ The following requirements apply to OpenID for Verifiable Presentations, irrespe
 * The Response type MUST be `vp_token`.
 * For signed requests, the Verifier MUST use, and the Wallet MUST accept the Client Identifier Prefix `x509_hash` as defined in Section 5.9.3 of [@!OIDF.OID4VP]. The X.509 certificate of the trust anchor MUST NOT be included in the `x5c` JOSE header of the signed request. The X.509 certificate signing the request MUST NOT be self-signed. X.509 certificate profiles to be used with `x509_hash` are out of scope of this specification.
 * The DCQL query and response MUST be used as defined in Section 6 of [@!OIDF.OID4VP].
-* Response encryption MUST be performed as specified in [@!OIDF.OID4VP, section 8.3]. The JWE `alg` (algorithm) header parameter (see [@!RFC7516, section 4.1.1])
-  value `ECDH-ES` (as defined in [@!RFC7518, section 4.6]), with key agreement utilizing keys on the `P-256` curve (see [@!RFC7518, section 6.2.1.1]) MUST be supported.
-  The JWE `enc` (encryption algorithm) header parameter (see [@!RFC7516, section 4.1.2]) values `A128GCM` and `A256GCM` (as defined in [@!RFC7518, section 5.3]) MUST be supported by Verifiers. Wallets MUST support `A128GCM` or `A256GCM`, or both. If both are supported, the Wallet SHOULD use `A256GCM` for the JWE `enc`. Verifiers MUST list both `A128GCM` and `A256GCM` in `encrypted_response_enc_values_supported` in their client metadata.
 * Verifiers MUST supply ephemeral encryption public keys specific to each Authorization Request passed via client metadata as specified in Section 8.3 of [@!OIDF.OID4VP].
 * The Authority Key Identifier (`aki`)-based Trusted Authority Query (`trusted_authorities`) for DCQL, as defined in section 6.1.1.1 of [@!OIDF.OID4VP], MUST be supported. Note that the Authority Key Identifiers mechanism can be used to support multiple X.509-based trust mechanisms, such as ISO mDL VICAL (as introduced in [@ISO.18013-5]) or ETSI Trusted Lists [@ETSI.TL]. This is achieved by collecting the relevant X.509 certificates for the trusted Issuers and including the encoded Key Identifiers from the certificates in the `aki` array .
 
@@ -265,7 +262,32 @@ Additional requirements for OpenID4VP are defined in (#oid4vp-redirects), (#oid4
 
 Note that while this specification does not define profiles for X.509 certificates used in Verifier authentication (e.g., with the `x509_hash` Client Identifier Prefix), Ecosystems are encouraged to select suitable certificate issuing policies and certificate profiles (for example, an mDL Ecosystem can use the Reader Authentication Certificate profile defined in Annex B of ISO/IEC 18013-5 with `x509_hash`), or define new ones if there is a good reason to do so. Such policies and profiles MAY specify how information in the certificate corresponds to information in the presentation flows. For example, an Ecosystem might require that the Wallet verifies that the `redirect_uri`, `response_uri`, `origin`, or `expected_origin` request parameters match with information contained in the Verifier's end-entity certificate (e.g., its DNS name).
 
-## OpenID for Verifiable Presentations via Redirects {#oid4vp-redirects}
+The following combinations of flows are supported by this specification:
+
+* OpenID for Verifiable Presentations via Redirects & Response Encryption using ECDH-ES with JWE
+* OpenID for Verifiable Presentations via Redirects & Response Encryption using HPKE with JWE
+* OpenID for Verifiable Presentations via W3C Digital Credentials API & Response Encryption using ECDH-ES with JWE
+* OpenID for Verifiable Presentations via W3C Digital Credentials API & Response Encryption using HPKE with JWE
+
+## Response Encryption
+
+Response encryption is done using JWE with either ECDH-ES or HPKE.
+
+The Wallet MUST determine the `alg` header parameter for each JWK in the `jwks` client metadata parameter and return an `invalid_request` error if it does not support any of the algorithms supplied by the verifier.
+
+### Response Encryption using ECDH-ES with JWE
+
+Response encryption MUST be performed as specified in [@!OIDF.OID4VP, section 8.3]. The JWE `alg` (algorithm) header parameter (see [@!RFC7516, section 4.1.1]) value `ECDH-ES` (as defined in [@!RFC7518, section 4.6]), with key agreement utilizing keys on the `P-256` curve (see [@!RFC7518, section 6.2.1.1]) MUST be supported. The JWE `enc` (encryption algorithm) header parameter (see [@!RFC7516, section 4.1.2]) values `A128GCM` and `A256GCM` (as defined in [@!RFC7518, section 5.3]) MUST be supported by Verifiers. Wallets MUST support `A128GCM` or `A256GCM`, or both. If both are supported, the Wallet SHOULD use `A256GCM` for the JWE `enc`. Verifiers MUST list both `A128GCM` and `A256GCM` in `encrypted_response_enc_values_supported` in their client metadata.
+
+### Response Encryption using HPKE with JWE
+
+Response encryption MUST be performed as specified in [@!OIDF.OID4VP, section 8.3.1] using JOSE HPKE integrated encryption. The JWE `alg` (algorithm) header parameter (see [@!RFC7516, section 4.1.1]) value `HPKE-0` (as defined in [@I-D.ietf-jose-hpke-encrypt]) MUST be supported by Wallets and Verifiers. `psk_id` (pre-shared key id) header parameter MUST NOT be present. The JWE `enc` (encryption algorithm) header parameter (see [@!RFC7516, section 4.1.2]) MUST NOT be present.
+
+## Wallet Invocation
+
+Either redirects or W3C Digital Credentials API (or an equivalent platform API) can be used by the Verifiers as defined in this section.
+
+### OpenID for Verifiable Presentations via Redirects {#oid4vp-redirects}
 
 The following requirements apply to OpenID for Verifiable Presentations via redirects:
 
@@ -278,7 +300,7 @@ The following requirements apply to OpenID for Verifiable Presentations via redi
   * Verifiers MUST reject presentations if Wallets do not follow the redirect back or the redirect back arrives in a different user session to the one the request was initiated in.
   * Implementation considerations can be found in Section 13.3 of [@!OIDF.OID4VP] and security considerations in Section 14.2 of [@!OIDF.OID4VP].
 
-## OpenID for Verifiable Presentations via W3C Digital Credentials API {#oid4vp-dc-api}
+### OpenID for Verifiable Presentations via W3C Digital Credentials API {#oid4vp-dc-api}
 
 The following requirements apply to OpenID for Verifiable Presentations via the W3C Digital Credentials API:
 
