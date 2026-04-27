@@ -262,7 +262,7 @@ Additional requirements for OpenID4VP are defined in (#oid4vp-redirects), (#oid4
 
 Note that while this specification does not define profiles for X.509 certificates used in Verifier authentication (e.g., with the `x509_hash` Client Identifier Prefix), Ecosystems are encouraged to select suitable certificate issuing policies and certificate profiles (for example, an mDL Ecosystem can use the Reader Authentication Certificate profile defined in Annex B of ISO/IEC 18013-5 with `x509_hash`), or define new ones if there is a good reason to do so. Such policies and profiles MAY specify how information in the certificate corresponds to information in the presentation flows. For example, an Ecosystem might require that the Wallet verifies that the `redirect_uri`, `response_uri`, `origin`, or `expected_origin` request parameters match with information contained in the Verifier's end-entity certificate (e.g., its DNS name).
 
-The following combinations of the flows are supported by this specification:
+The following combinations of flows are supported by this specification:
 
 * OpenID for Verifiable Presentations via Redirects & Response Encryption using ECDH-ES with JWE
 * OpenID for Verifiable Presentations via Redirects & Response Encryption using HPKE with JWE
@@ -271,9 +271,9 @@ The following combinations of the flows are supported by this specification:
 
 ## Response Encryption
 
-Response encryption can be done using JWE with either ECDH-ES or HPKE.
+Response encryption is done using JWE with either ECDH-ES or HPKE.
 
-The Wallet MUST determine `alg` header parameter in the `jwks` client metadata parameter and return an `invelid_request` error if it does not support algorithm indicated by the verifier.
+The Wallet MUST determine the `alg` header parameter for each JWK in the `jwks` client metadata parameter and return an `invalid_request` error if it does not support any of the algorithms supplied by the verifier.
 
 ### Response Encryption using ECDH-ES with JWE
 
@@ -281,11 +281,11 @@ Response encryption MUST be performed as specified in [@!OIDF.OID4VP, section 8.
 
 ### Response Encryption using HPKE with JWE
 
-Response encryption MUST be performed as specified in [@!OIDF.OID4VP, section 8.3.1] using Integrated Encryption. The JWE `alg` (algorithm) header parameter (see [@!RFC7516, section 4.1.1]) value `HPKE-0` (as defined in [@I-D.ietf-jose-hpke-encrypt]) MUST be supported by Wallets and Verifiers. `psk_id` (pre-shared key id) header parameter MUST NOT be present. The JWE `enc` (encryption algorithm) header parameter (see [@!RFC7516, section 4.1.2]) MUST NOT be present.
+Response encryption MUST be performed as specified in [@!OIDF.OID4VP, section 8.3.1] using JOSE HPKE integrated encryption. The JWE `alg` (algorithm) header parameter (see [@!RFC7516, section 4.1.1]) value `HPKE-0` (as defined in [@I-D.ietf-jose-hpke-encrypt]) MUST be supported by Wallets and Verifiers. `psk_id` (pre-shared key id) header parameter MUST NOT be present. The JWE `enc` (encryption algorithm) header parameter (see [@!RFC7516, section 4.1.2]) MUST NOT be present.
 
 ## Wallet Invocation
 
-Either redirects or W3C Digital Credentials API can be used by the Verifiers.
+Either redirects or W3C Digital Credentials API (or an equivalent platform API) can be used by the Verifiers as defined in this section.
 
 ### OpenID for Verifiable Presentations via Redirects {#oid4vp-redirects}
 
