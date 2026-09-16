@@ -277,15 +277,15 @@ The Wallet MUST determine the `alg` header parameter for each JWK in the `jwks` 
 
 ### Response Encryption using ECDH-ES with JWE
 
-Response encryption MUST be performed as specified in [@!OIDF.OID4VP, section 8.3]. The JWE `alg` (algorithm) header parameter (see [@!RFC7516, section 4.1.1]) value `ECDH-ES` (as defined in [@!RFC7518, section 4.6]), with key agreement utilizing keys on the `P-256` curve (see [@!RFC7518, section 6.2.1.1]) MUST be supported. The JWE `enc` (encryption algorithm) header parameter (see [@!RFC7516, section 4.1.2]) values `A128GCM` and `A256GCM` (as defined in [@!RFC7518, section 5.3]) MUST be supported by Verifiers. Wallets MUST support `A128GCM` or `A256GCM`, or both. If both are supported, the Wallet SHOULD use `A256GCM` for the JWE `enc`. Verifiers MUST list both `A128GCM` and `A256GCM` in `encrypted_response_enc_values_supported` in their client metadata.
+Response encryption MUST be performed as specified in [@!OIDF.OID4VP, section 8.3]. The JWE `alg` (algorithm) header parameter (see [@!RFC7516, section 4.1.1]) value `ECDH-ES` (as defined in [@!RFC7518, section 4.6]), with key agreement utilizing keys on the `P-256` curve (see [@!RFC7518, section 6.2.1.1]) MUST be supported. The JWE `enc` (encryption algorithm) header parameter (see [@!RFC7516, section 4.1.2]) values `A128GCM` and `A256GCM` (as defined in [@!RFC7518, section 5.3]) MUST be supported by Verifiers. Wallets MUST support `A128GCM` or `A256GCM` or both. If the Wallet supports both, it SHOULD use `A256GCM` for the JWE `enc`. Verifiers MUST list both `A128GCM` and `A256GCM` in `encrypted_response_enc_values_supported` in their client metadata.
 
 ### Response Encryption using HPKE with JWE
 
-Response encryption MUST be performed as specified in [@!OIDF.OID4VP, section 8.3.1] using JOSE HPKE integrated encryption. The JWE `alg` (algorithm) header parameter (see [@!RFC7516, section 4.1.1]) value `HPKE-0` (as defined in [@I-D.ietf-jose-hpke-encrypt]) MUST be supported by Wallets and Verifiers. `psk_id` (pre-shared key id) header parameter MUST NOT be present. The JWE `enc` (encryption algorithm) header parameter (see [@!RFC7516, section 4.1.2]) MUST NOT be present.
+Response encryption MUST be performed as specified in [@!OIDF.OID4VP, section 8.3.1] using JOSE HPKE integrated encryption. The JWE `alg` (algorithm) header parameter (see [@!RFC7516, section 4.1.1]) value `HPKE-0` (as defined in [@I-D.ietf-jose-hpke-encrypt]) MUST be supported by Wallets and Verifiers. The `psk_id` (pre-shared key id) header parameter MUST NOT be present. The JWE `enc` (encryption algorithm) header parameter (see [@!RFC7516, section 4.1.2]) MUST NOT be present.
 
 ## Wallet Invocation
 
-Either redirects or W3C Digital Credentials API (or an equivalent platform API) can be used by the Verifiers as defined in this section.
+Either redirects or W3C Digital Credentials API (or an equivalent platform API) can be used by the Verifiers to invoke the Wallet.
 
 ### OpenID for Verifiable Presentations via Redirects {#oid4vp-redirects}
 
