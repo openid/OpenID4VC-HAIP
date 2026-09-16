@@ -254,7 +254,7 @@ The following requirements apply to OpenID for Verifiable Presentations, irrespe
 * The Wallet and Verifier MUST support at least one of the following Credential Format Profiles defined in (#vc-profiles): IETF SD-JWT VC or ISO mdoc. Ecosystems SHOULD clearly indicate which of these formats, IETF SD-JWT VC, ISO mdoc, or both, are required to be supported.
 * The Response type MUST be `vp_token`.
 * For signed requests, the Verifier MUST use, and the Wallet MUST accept the Client Identifier Prefix `x509_hash` as defined in Section 5.9.3 of [@!OIDF.OID4VP]. The X.509 certificate of the trust anchor MUST NOT be included in the `x5c` JOSE header of the signed request. The X.509 certificate signing the request MUST NOT be self-signed. X.509 certificate profiles to be used with `x509_hash` are out of scope of this specification.
-* The DCQL query and response MUST be used as defined in Section 6 of [@!OIDF.OID4VP].
+* The `dcql_query` parameter MUST be used as defined in Section 5.1 of [@!OIDF.OID4VP].
 * Verifiers MUST supply ephemeral encryption public keys specific to each Authorization Request passed via client metadata as specified in Section 8.3 of [@!OIDF.OID4VP].
 * The Authority Key Identifier (`aki`)-based Trusted Authority Query (`trusted_authorities`) for DCQL, as defined in section 6.1.1.1 of [@!OIDF.OID4VP], MUST be supported. Note that the Authority Key Identifiers mechanism can be used to support multiple X.509-based trust mechanisms, such as ISO mDL VICAL (as introduced in [@ISO.18013-5]) or ETSI Trusted Lists [@ETSI.TL]. This is achieved by collecting the relevant X.509 certificates for the trusted Issuers and including the encoded Key Identifiers from the certificates in the `aki` array .
 
@@ -751,4 +751,4 @@ The technology described in this specification was made available from contribut
 
    -01
 
-   * TBD
+   * Clarify DCQL query is `dcql_query` parameter
