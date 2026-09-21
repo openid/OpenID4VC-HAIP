@@ -751,4 +751,5 @@ The technology described in this specification was made available from contribut
 
    -01
 
+- add HPKE profile
    * Clarify DCQL query is `dcql_query` parameter
